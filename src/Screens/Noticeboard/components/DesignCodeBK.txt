@@ -1,0 +1,54 @@
+<View style={{ width: "100%", flex: 1, alignItems: "flex-start" }}>
+<CustomText
+                paddingHorizontal={10}
+                size={16}
+                font='AvenirLTStd-Heavy'
+                style={styles.msgTitle}
+                color={Colors.black}
+                text="TODAY"
+              />
+              <Grid style={styles.grid}>
+                <Row style={styles.row}>
+                  <Col style={[styles.gridCol]}>
+                    <NoticeMsgBox text="Date sheet out for mid sessional Exams for EngineeringCourse" />
+                  </Col>
+                  <Col style={styles.gridCol}>
+                    <NoticeMsgBox text="TED Talk on  Industrial Design  Registration Starts on  24 May 2019" />
+                  </Col>
+                </Row>
+                <Row style={styles.row}>
+                  <Col style={styles.gridCol}>
+                    <NoticeMsgBox text="Alumni meet on 30 May" />
+                  </Col>
+                </Row>
+              </Grid>
+
+
+const styles = EStyleSheet.create({
+  $columnWidth: "100%",
+  $rem: global.rem,
+
+  categoryScroller: {
+    marginTop: "22rem",
+    paddingBottom: 10
+  },
+
+  grid: {
+    width: "100%"
+  },
+  gridCol: {
+    marginHorizontal: "8rem",
+    justifyContent: "space-between"
+  },
+
+  row: {
+    flex: 0
+  },
+
+  msgTitle:{
+    marginTop:'15rem',
+    
+    fontSize:15,
+    
+  }
+});
