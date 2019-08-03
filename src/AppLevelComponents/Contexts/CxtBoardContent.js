@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { LayoutAnimation, UIManager, Platform } from "react-native";
 import Constants from "Helpers/Constants";
-import Events from "Screens/Noticeboard/CategoryContents/Student/Events";
+import Events from "Screens/Noticeboard/CategoryContents/Student/Events/Events";
 import { Categories } from "Screens/Noticeboard/Categories/Student";
 export const BoardContext = React.createContext();
 export const ContentConsumer = BoardContext.Consumer;

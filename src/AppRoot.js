@@ -130,10 +130,7 @@ const AppStudent = createMaterialBottomTabNavigator(
     shifting: false,
     barStyle: { elevation: 0 },
     transitionConfig: nav => handleCustomTransition(nav),
-    defaultNavigationOptions: {
-      headerStyle: appHeaderBlack,
-      headerTintColor: appHeaderBlack.tintColor
-    }
+    
   }
 );
 

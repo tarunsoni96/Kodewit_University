@@ -6,6 +6,8 @@ import android.util.Log;
 import com.facebook.react.PackageList;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;
 import com.facebook.react.ReactApplication;
+import com.rnnestedscrollview.RNNestedScrollViewPackage;
+import com.bottomsheetbehavior.BottomSheetBehaviorPackage;
 import com.horcrux.svg.SvgPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;

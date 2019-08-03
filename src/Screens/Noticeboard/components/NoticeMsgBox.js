@@ -25,8 +25,6 @@ const styles = EStyleSheet.create({
     backgroundColor:Colors.noticeMsgBox,
     marginTop:'15rem',
     padding:'10rem',
-    
-    
     borderRadius: '5rem',
   }
 

@@ -31,8 +31,8 @@ export default class CustomText extends Component {
     let rem = global.rem;
     switch (type) {
       case "title":
-        font = Fonts.bold;
-        size = !size ? 20 : size;
+        font = Fonts.heavy;
+        size = !size ? 21 : size;
         break;
 
       default:

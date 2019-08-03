@@ -57,9 +57,12 @@ export const inputContainerStyle = {
   
 };
 
-export const appHeaderBlack = {
-  backgroundColor:'#000',
-  tintColor:'#fff',
+export const cardStyle = {
+  backgroundColor:Colors.noticeMsgBox,
+      alignItems: "flex-start",
+      margin:0,
+      borderRadius: 5,
+      marginVertical: 10,
 }
 
 export const stepIndicator = {

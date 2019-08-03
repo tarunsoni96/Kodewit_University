@@ -28,8 +28,8 @@ class InfoItem extends Component {
       let {title,info} = this.props
     return (
       <View style={{alignSelf:'flex-start',marginVertical:10,}}>
-        <CustomText textAlign="left" text={title} size={16} color='#707071' font={Fonts.heavy}  />
-        <CustomText textAlign="left" text={info} size= {14} color='#000'  font={Fonts.heavy}  />
+        <CustomText textAlign="left" style={{marginTop:5}} text={title} size={14} color='#707071' font={Fonts.heavy}  />
+        <CustomText textAlign="left" style={{marginTop:5}} text={info} size= {15} color='#000'  font={Fonts.heavy}  />
       </View>
     );
   }

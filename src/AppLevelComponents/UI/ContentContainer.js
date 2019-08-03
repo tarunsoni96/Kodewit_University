@@ -7,7 +7,7 @@ export class ContentContainer extends Component {
   render() {
     return (
       <View style={styles.card}>
-        <ScrollView contentContainerStyle={{ width: "100%",padding:10,paddingTop:0 }}>
+        <ScrollView contentContainerStyle={{flex:1, width: "100%",padding:10,paddingTop:0,paddingBottom: 0, }}>
           {this.props.children}
         </ScrollView>
       </View>
@@ -22,6 +22,7 @@ const styles = EStyleSheet.create({
 
   card: {
     flex: 1,
+    
     backgroundColor: Colors.contentCard,
     marginBottom: "8rem",
     borderBottomLeftRadius: "$borderRadius",

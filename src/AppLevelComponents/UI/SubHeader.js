@@ -73,9 +73,9 @@ class SubHeader extends Component {
     let { screenTitle } = this.props;
     return (
       <>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ flexDirection: "row", alignItems: "center", }}>
           <TouchableOpacity onPress={() => this.goBack()}>
-            <View style={{padding:10}}>
+            <View>
               <Entypo name="chevron-thin-left" size={22} color="#fff" />
             </View>
           </TouchableOpacity>

@@ -107,12 +107,7 @@ const styles = EStyleSheet.create({
   infoContainer: {
     flex: 0,
     width: "100%",
-    alignItems: "center"
-
-    //   backgroundColor:'red',
-    // padding: "70rem",
-    // justifyContent:'center',
-    // alignItems: "center"
+    alignItems: "center",
   },
 
   colRight: {
