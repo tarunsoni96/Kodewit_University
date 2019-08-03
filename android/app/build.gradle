@@ -189,6 +189,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-firebase')
     implementation project(':react-native-nested-scroll-view')
     implementation project(':react-native-bottom-sheet-behavior')
     implementation project(':react-native-svg')
@@ -198,6 +199,13 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
        implementation 'com.android.support:appcompat-v7:27.1.1'
        implementation 'com.android.support:design:27.1.1'
+implementation 'com.google.android.gms:play-services-gcm:16.0.0'
+       implementation "com.google.android.gms:play-services-base:16.1.0"
+    
+    implementation "com.google.firebase:firebase-core:17.0.1"
+    implementation "com.google.firebase:firebase-messaging:19.0.1"
+
+    
     if (enableHermes) {
       def hermesPath = "../../node_modules/hermesvm/android/";
       debugImplementation files(hermesPath + "hermes-debug.aar")
@@ -215,3 +223,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+apply plugin: 'com.google.gms.google-services'

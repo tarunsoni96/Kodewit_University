@@ -36,7 +36,7 @@ import { withNavigation } from "react-navigation";
       <StatusBar backgroundColor={Colors.accent} barStyle="light-content" />
       <ScrollView
       scrollEnabled={scroll}
-      style={[styles.container,{padding:padding*global.rem || 0*global.rem,...style,backgroundColor:Colors.contentCard, }]}
+      style={[styles.container,{padding:padding*global.rem || 0*global.rem,...style,backgroundColor:'#fff', }]}
       contentContainerStyle={{flex:1,alignItems: "center",...style,padding:padding == 0 ? 0 : 15*global.rem, }}
       keyboardShouldPersistTaps="always"
       >
@@ -71,6 +71,7 @@ const styles = EStyleSheet.create({
 
   contentContainerStyle:{
     alignItems: "center",flexGrow:1, paddingBottom:'10rem',
+    
     
   }
 });

@@ -31,7 +31,7 @@ const styles = EStyleSheet.create({
     shadowOffset: { height: 1, width: 0 },
     shadowOpacity: 0.15,
     shadowRadius: 2,
-    elevation:3,
+    elevation:1,
   }
 });
 export default withNavigation(ContentContainer);

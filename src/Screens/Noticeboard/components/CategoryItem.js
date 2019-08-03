@@ -5,6 +5,8 @@ import CustomText from "AppLevelComponents/UI/CustomText";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { Colors } from "UIProps/Colors";
 import { ContentConsumer } from "../../../AppLevelComponents/Contexts/CxtBoardContent";
+import Icons from "../../../AppLevelComponents/UI/Icons";
+import AnimatedTap from "../../../AppLevelComponents/UI/AnimatedTap";
 
 
 let currentContext
@@ -18,7 +20,7 @@ export class CategoryItem extends Component {
   }
 
   render() {
-    let { name, isSelected } = this.props;
+    let { name,icon, isSelected } = this.props;
     
     return (
       <ContentConsumer>
@@ -29,26 +31,25 @@ export class CategoryItem extends Component {
           }
           
           return (
-            <TouchableWithoutFeedback
-              onPress={() => context.setContentView(name)}
-            >
+            <AnimatedTap onPress={()=>context.setContentView(name)}>
+
+            
+            
               <Card containerStyle={styles.container}>
                 <View style={{ alignItems: "center" }}>
-                  <View style={styles.circle}>
-                    <Image
-                      style={styles.image}
-                      source={require("assets/img/job.png")}
-                    />
+                  <View style={[styles.circle,{backgroundColor:isSelected ? 'rgba(39, 164, 255, 0.2)' : '#E1E1E1' }]}>
+                    <Icons lib='AntDesign' name={icon} size={20} color={isSelected ? Colors.accent : '#999999' } />
                   </View>
                   <CustomText
                     font={"AvenirLTStd-Heavy"}
                     text={name}
                     size={12}
-                    color={isSelected ? Colors.accent : Colors.black}
+                    color={Colors.black}
                   />
                 </View>
               </Card>
-            </TouchableWithoutFeedback>
+              </AnimatedTap>
+            
           );
         }}
       </ContentConsumer>
@@ -61,7 +62,7 @@ const styles = EStyleSheet.create({
   $rem: global.rem,
 
   container: {
-    width: "103rem",
+    width: "110rem",
     height: "88rem",
     borderRadius: "6rem",
     alignItems: "center",

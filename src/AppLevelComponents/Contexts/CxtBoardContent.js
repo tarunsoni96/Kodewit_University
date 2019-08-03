@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { LayoutAnimation, UIManager, Platform } from "react-native";
+import { LayoutAnimation, UIManager, Platform,View } from "react-native";
+import HelperMethods from 'Helpers/Methods'
 import Constants from "Helpers/Constants";
 import Events from "Screens/Noticeboard/CategoryContents/Student/Events/Events";
 import { Categories } from "Screens/Noticeboard/Categories/Student";
@@ -18,8 +19,10 @@ export class BoardContentProvider extends Component {
   }
 
   setContentView = category => {
+
     switch (category) {
       case Constants.categoryEvents:
+        HelperMethods.animateLayout()
         this.setState({ contentView: <Events /> });
         break;
 

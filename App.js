@@ -16,6 +16,7 @@ import {
 import AppRoot from './src/AppRoot'
 import SplashScreen from "react-native-splash-screen";
 import { BoardContentProvider } from './src/AppLevelComponents/Contexts/CxtBoardContent';
+import PushNotification from './src/ServiceProviders/PushNotfication';
 class App extends Component {
 
   componentDidMount(){
@@ -28,6 +29,7 @@ class App extends Component {
       <BoardContentProvider>
 
       <AppRoot />
+      <PushNotification />
       </BoardContentProvider>
       );
     }

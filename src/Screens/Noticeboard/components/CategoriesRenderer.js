@@ -2,18 +2,24 @@ import React, { Component } from "react";
 import { View, Text, FlatList } from "react-native";
 import CategoryItem from "./CategoryItem";
 import EStyleSheet from "react-native-extended-stylesheet";
+import * as Animatable from 'react-native-animatable';
 
 let isSelected = undefined
+let delay = 0
 export class CategoriesRenderer extends Component {
 
+  componentWillMount() {
+    delay = 0
+  }
+  
     renderCategories = ({ item, index }) => {
-        
+        delay+=200
         isSelected = isSelected === undefined ? true : ''
         
         return (
-          <View style={{ paddingBottom: 4 }}>
-            <CategoryItem isSelected={isSelected} name={item} />
-          </View>
+          <Animatable.View animation='fadeIn' useNativeDriver={true} duration={700} delay={delay} style={{ paddingBottom: 4 }}>
+            <CategoryItem isSelected={isSelected} icon={item.icon} name={item.name} />
+          </Animatable.View>
         );
       };
 

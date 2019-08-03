@@ -13,6 +13,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
 import Constants from "Helpers/Constants";
 import Fonts from "UIProps/Fonts";
+import "Helpers/global";
 import ProfilePic from "./ProfilePic";
 class SubHeader extends Component {
   constructor(props) {
@@ -32,31 +33,30 @@ class SubHeader extends Component {
     }
   }
 
-  navigateProfile(){
-    this.props.navigation.navigate('Profile')
+  navigateProfile() {
+    this.props.navigation.navigate("Profile");
   }
 
-  goBack(){
-    this.props.navigation.pop()
+  goBack() {
+    this.props.navigation.pop();
   }
 
   main() {
     return (
       <>
         <View style={styles.container}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <TouchableOpacity onPress={() => this.navigateProfile()}>
-              <View>
-                <View style={styles.holoCirlce_small}>
-                  <ProfilePic size={30} pic="https://images.pexels.com/photos/1877913/pexels-photo-1877913.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
-                </View>
-                <CustomText
-                  font="AvenirLTStd-Heavy"
-                  paddingHorizontal={40}
-                  text="Hi, Winnie"
-                />
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between"
+            }}
+          >
+            <TouchableWithoutFeedback onPress={() => this.navigateProfile()}>
+              <View style={styles.holoCirlce_large}>
+                <View style={styles.holoCirlce_small} />
               </View>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
             {/* <View style={styles.holoCirlce_large} ></View> */}
           </View>
           <TouchableOpacity onPress={() => alert("Go to Notifications")}>
@@ -64,6 +64,20 @@ class SubHeader extends Component {
               <FontAwesome name="bell-o" size={20} color="#fff" />
             </View>
           </TouchableOpacity>
+          <TouchableWithoutFeedback onPress={() => this.navigateProfile()}>
+          <View style={styles.absProfilePic}>
+            <ProfilePic
+              size={25}
+              pic="https://images.pexels.com/photos/1877913/pexels-photo-1877913.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            />
+
+            <CustomText
+              font="AvenirLTStd-Heavy"
+              size={17}
+              text="   Hi, Winnie"
+            />
+          </View>
+          </TouchableWithoutFeedback>
         </View>
       </>
     );
@@ -73,7 +87,7 @@ class SubHeader extends Component {
     let { screenTitle } = this.props;
     return (
       <>
-        <View style={{ flexDirection: "row", alignItems: "center", }}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity onPress={() => this.goBack()}>
             <View>
               <Entypo name="chevron-thin-left" size={22} color="#fff" />
@@ -107,8 +121,8 @@ class SubHeader extends Component {
 const styles = EStyleSheet.create({
   $columnWidth: "100%",
   $rem: global.rem,
-  $smallCircle: 80,
-  $largeCircle: 250,
+  $smallCircle: 103,
+  $largeCircle: 210,
   $borderRadius: 20,
 
   container: {
@@ -117,7 +131,17 @@ const styles = EStyleSheet.create({
     height: "50rem",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: "13rem",
+    paddingHorizontal: "5rem",
+    flexDirection: "row"
+  },
+
+  absProfilePic: {
+    alignItems: "center",
+    top: 0,
+    left: 0,
+    marginTop: 12,
+    marginLeft: 12,
+    position: "absolute",
     flexDirection: "row"
   },
 
@@ -129,31 +153,27 @@ const styles = EStyleSheet.create({
 
   holoCirlce_small: {
     width: "$smallCircle",
-    position: "absolute",
     height: "$smallCircle",
-    flexDirection: "row",
-    borderRadius: 50,
-    alignItems: "center",
+
+    borderRadius: 100,
+    alignItems: "flex-end",
     justifyContent: "center",
-    borderWidth: 10,
-    borderColor: "rgba(109, 193, 254, 0.6)",
-    left: "-25rem",
-    top: "-30rem"
+    borderWidth: 17,
+    borderColor: "rgba(109, 193, 254, 0.5)"
   },
 
   holoCirlce_large: {
     width: "$largeCircle",
-    position: "absolute",
+
     height: "$largeCircle",
-    flexDirection: "row",
+
     borderRadius: 300,
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 20,
-    borderColor: "rgba(109, 193, 254, 0.6)",
-    left: "-135rem",
-    top: "-50rem",
-    transform: [{ rotate: "320deg" }]
+    borderWidth: 26,
+    borderColor: "rgba(109, 193, 254, 0.5)",
+
+    marginLeft: -85
   }
 });
 

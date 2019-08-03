@@ -81,7 +81,7 @@ export default class BottomsheetEvents extends Component {
           </View>
           <CustomButton
             onPress={this.downloadAttachment}
-            text="Download Attachment"
+            text="DOWNLOAD ATTACHMENT"
             isApiCall={this.state.isApiCall}
           />
         </View>

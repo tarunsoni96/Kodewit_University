@@ -1,9 +1,9 @@
 import Constants from "Helpers/Constants";
 
 export const Categories = [
-  Constants.categoryEvents,
-  Constants.categorySyllabus,
-  Constants.categoryTimeTable,
-  Constants.categoryResults,
-  Constants.categoryFees
+  {name:Constants.categoryEvents, icon : 'calendar' }, //antdesigns icons
+  {name:Constants.categorySyllabus, icon : 'book' },
+  {name:Constants.categoryTimeTable, icon : 'table' },
+  {name:Constants.categoryResults, icon : 'filetext1' },
+  {name:Constants.categoryFees, icon : 'creditcard' },
 ];
