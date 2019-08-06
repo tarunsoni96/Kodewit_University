@@ -37,7 +37,7 @@ import { withNavigation } from "react-navigation";
       <ScrollView
       scrollEnabled={scroll}
       style={[styles.container,{padding:padding*global.rem || 0*global.rem,...style,backgroundColor:'#fff', }]}
-      contentContainerStyle={{flex:1,alignItems: "center",...style,padding:padding == 0 ? 0 : 15*global.rem, }}
+      contentContainerStyle={{alignItems: "center",...style,padding:padding == 0 ? 0 : 15*global.rem, }}
       keyboardShouldPersistTaps="always"
       >
         {this.props.children}

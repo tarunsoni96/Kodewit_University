@@ -23,12 +23,12 @@ class Dashboard extends Component {
         <ContentConsumer>
           {context => {
             return (
-              <Container scroll={false} padding={0}>
+              <Container style={{flex:1}} scroll={false} padding={0}>
                 <Header>
                   <SubHeader />
                   <CategoriesRenderer data={context.categoriesData} />
                 </Header>
-                <View style={{ width: "100%", flex: 1, }}>
+                <View style={{ width: "100%", flex: 1 }}>
                   <ContentContainer>{context.contentView}</ContentContainer>
                 </View>
               </Container>

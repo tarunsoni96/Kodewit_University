@@ -9,6 +9,8 @@ import {
   createSwitchNavigator
 } from "react-navigation";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import Entypo from "react-native-vector-icons/Entypo";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import "Helpers/global";
 import EStyleSheet from "react-native-extended-stylesheet";
@@ -26,9 +28,10 @@ import Profile from "./Screens/Profile/Profile";
 import MyCourse from "./Screens/MyCourse/MyCourse";
 import Chat from "./Screens/Chat/Chat";
 import Login from "Screens/Login/Login";
+import BuddyChat from "./Screens/BuddyChat/BuddyChat";
 
 let transitionSpeed = 700;
-
+let tabIconSize = 18
 const handleCustomTransition = ({ scenes }) => {
   const prevScene = scenes[scenes.length - 2];
   const nextScene = scenes[scenes.length - 1];
@@ -88,7 +91,7 @@ const AppStudent = createMaterialBottomTabNavigator(
           <MaterialCommunityIcons
             name="view-dashboard"
             color={tintColor}
-            size={20}
+            size={tabIconSize}
           />
         )
       }
@@ -100,7 +103,7 @@ const AppStudent = createMaterialBottomTabNavigator(
         header: null,
         tabBarLabel: "Chat",
         tabBarIcon: ({ tintColor }) => (
-          <MaterialCommunityIcons name="chat" color={tintColor} size={20} />
+          <AntDesign name="message1" color={tintColor} size={20} />
         )
       }
     },
@@ -111,10 +114,25 @@ const AppStudent = createMaterialBottomTabNavigator(
         header: null,
         tabBarLabel: "My Course",
         tabBarIcon: ({ tintColor }) => (
-          <MaterialCommunityIcons
-            name="book-open-variant"
+          <Entypo
+            name="open-book"
             color={tintColor}
-            size={20}
+            size={tabIconSize}
+          />
+        )
+      }
+    },
+
+    buddyChat: {
+      screen: BuddyChat,
+      navigationOptions: {
+        header: null,
+        tabBarLabel: "Buddy",
+        tabBarIcon: ({ tintColor }) => (
+          <MaterialCommunityIcons
+            name="robot"
+            color={tintColor}
+            size={tabIconSize}
           />
         )
       }
@@ -136,8 +154,8 @@ const AppStudent = createMaterialBottomTabNavigator(
 
 const TopLevelNavigator = createAnimatedSwitchNavigator(
   {
+    LoginStack,
     AppStudent,
-    LoginStack
     // AppTeacher,
     // AppParent,
   },

@@ -46,7 +46,8 @@ export class Profile extends Component {
           <Grid
             style={{
               alignItems: "center",
-              padding: 40,
+              // padding: 40,
+              paddingTop:30,
               flex: 1,
               width: "100%"
             }}
@@ -62,8 +63,8 @@ export class Profile extends Component {
                 <InfoItem title="Batch" info="2016-2020" />
               </Col>
             </Row>
-            <Row style={[styles.infoContainer,]}>
-              <Divider style={{marginVertical:20}}  color="#E8E8EA" />
+            <Row style={[styles.infoContainer,{paddingRight:40}]}>
+              <Divider style={{marginVertical:13}}  color="#E8E8EA" />
             </Row>
 
             <Row style={styles.infoContainer}>
@@ -106,12 +107,14 @@ const styles = EStyleSheet.create({
 
   infoContainer: {
     flex: 0,
+    paddingLeft:40,
     width: "100%",
     alignItems: "center",
   },
 
   colRight: {
-    paddingLeft: 60,
+    paddingLeft: 20,
+    paddingRight:10,
     height: "100%"
   },
 

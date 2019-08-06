@@ -33,9 +33,10 @@ target 'University' do
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
-
-  pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
-
+  
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
   target 'UniversityTests' do
     inherit! :search_paths
     # Pods for testing

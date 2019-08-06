@@ -11,17 +11,19 @@ import {
   
   StyleSheet,
   View,
+  
   UIManager
 } from 'react-native';
 import AppRoot from './src/AppRoot'
 import SplashScreen from "react-native-splash-screen";
 import { BoardContentProvider } from './src/AppLevelComponents/Contexts/CxtBoardContent';
 import PushNotification from './src/ServiceProviders/PushNotfication';
+import HelperMethods from 'Helpers/Methods'
 class App extends Component {
 
   componentDidMount(){
     SplashScreen.hide()
-    UIManager.setLayoutAnimationEnabledExperimental(true)
+    HelperMethods.isPlatformAndroid() &&  UIManager.setLayoutAnimationEnabledExperimental(true)
   }
   render(){
 
@@ -29,7 +31,7 @@ class App extends Component {
       <BoardContentProvider>
 
       <AppRoot />
-      <PushNotification />
+      {/* <PushNotification /> */}
       </BoardContentProvider>
       );
     }

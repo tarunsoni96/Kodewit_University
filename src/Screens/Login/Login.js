@@ -75,15 +75,14 @@ const styles = EStyleSheet.create({
     alignItems: "center",
     flex:1,
     width: "100%",
-    // padding: "20rem"
-    marginBottom: "30rem"
+    
   },
 
   containerInputs: {
     // alignSelf:'flex-start',
     width: "100%",
     alignItems: "flex-start",
-
+    marginTop:20,
     flex: 1
   }
 });

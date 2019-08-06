@@ -6,8 +6,10 @@
  */
 
 #import "AppDelegate.h"
-
+#import <Firebase.h>
+#import "RNFirebaseNotifications.h"
 #import <React/RCTBridge.h>
+
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
@@ -15,6 +17,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+   [FIRApp configure]; //Add This Line
+  [RNFirebaseNotifications configure];  //Add This Line
+
+  // [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
+  // [RNFirebaseNotifications configure];
+
+
+
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"University"
@@ -27,6 +38,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
   return YES;
 }
 
@@ -38,5 +50,25 @@
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+  [[RNFirebaseNotifications instance] didReceiveLocalNotification:notification];
+}
+
+
+// - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo
+// fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler{
+//   [[RNFirebaseNotifications instance] didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+// }
+
+// - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+//   [[RNFirebaseMessaging instance] didRegisterUserNotificationSettings:notificationSettings];
+// }
+
+// -(void) userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+ 
+//   [[RNFirebaseMessaging instance] didReceiveRemoteNotification:response.notification.request.content.userInfo];
+//   completionHandler();
+// }
 
 @end

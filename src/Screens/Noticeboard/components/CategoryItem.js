@@ -8,37 +8,60 @@ import { ContentConsumer } from "../../../AppLevelComponents/Contexts/CxtBoardCo
 import Icons from "../../../AppLevelComponents/UI/Icons";
 import AnimatedTap from "../../../AppLevelComponents/UI/AnimatedTap";
 
+let currentContext;
+let isFirstViewSet = false;
+class CategoryItem extends Component {
+  state = {
+    isSelected: false
+  };
 
-let currentContext
-let isFirstViewSet = false
-export class CategoryItem extends Component {
-  
+  setSelectedView(category) {
+    isFirstViewSet = true; // to prevent infinite state calls
+    currentContext.setContentView(category);
+  }
 
-  setSelectedView(category){
-    isFirstViewSet = true // to prevent infinite state calls
-    currentContext.setContentView(category)
+  componentDidMount() {
+    const { isSelected, name } = this.props;
+    if (isSelected == "Events" && !isFirstViewSet) {
+      this.setSelectedView(name);
+    }
+  }
+
+  handlePress() {
+    const { categorySelectionHandler, name } = this.props;
+    categorySelectionHandler(name);
+    currentContext.setContentView(name);
   }
 
   render() {
-    let { name,icon, isSelected } = this.props;
-    
+    let { name, icon, isSelected } = this.props;
+    isSelected = isSelected == name;
+
     return (
       <ContentConsumer>
         {context => {
-          currentContext = context
-          if(isSelected && !isFirstViewSet){
-            this.setSelectedView(name)
-          }
-          
-          return (
-            <AnimatedTap onPress={()=>context.setContentView(name)}>
+          currentContext = context;
 
-            
-            
+          return (
+            <AnimatedTap isSelected={isSelected} onPress={() => this.handlePress()}>
               <Card containerStyle={styles.container}>
                 <View style={{ alignItems: "center" }}>
-                  <View style={[styles.circle,{backgroundColor:isSelected ? 'rgba(39, 164, 255, 0.2)' : '#E1E1E1' }]}>
-                    <Icons lib='AntDesign' name={icon} size={20} color={isSelected ? Colors.accent : '#999999' } />
+                  <View
+                    style={[
+                      styles.circle,
+                      {
+                        backgroundColor: isSelected
+                          ? "rgba(39, 164, 255, 0.2)"
+                          : "#E1E1E1"
+                      }
+                    ]}
+                  >
+                    <Icons
+                      lib="AntDesign"
+                      name={icon}
+                      size={20}
+                      color={isSelected ? Colors.accent : "#999999"}
+                    />
                   </View>
                   <CustomText
                     font={"AvenirLTStd-Heavy"}
@@ -48,8 +71,7 @@ export class CategoryItem extends Component {
                   />
                 </View>
               </Card>
-              </AnimatedTap>
-            
+            </AnimatedTap>
           );
         }}
       </ContentConsumer>

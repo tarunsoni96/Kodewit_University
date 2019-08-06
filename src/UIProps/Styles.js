@@ -10,7 +10,7 @@ export const inputStyles = EStyleSheet.create({
   fontSize:17*global.rem,
   
   color: Colors.black,
-  paddingHorizontal:10,
+  // paddingHorizontal:10,
   backgroundColor:'#fff'
 });
 
@@ -49,11 +49,12 @@ export const inputErrors = {
 };
 
 export const inputContainerStyle = {
-  borderRadius: 3,
+  borderRadius: 4,
   borderWidth:1,
   borderColor: Colors.inputBorderColor,
   width:'100%',
-  marginVertical:3
+  marginVertical:3,
+  margin:0,
   
 };
 

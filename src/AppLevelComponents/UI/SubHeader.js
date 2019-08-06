@@ -67,6 +67,7 @@ class SubHeader extends Component {
           <TouchableWithoutFeedback onPress={() => this.navigateProfile()}>
           <View style={styles.absProfilePic}>
             <ProfilePic
+            canNavigateToProfile
               size={25}
               pic="https://images.pexels.com/photos/1877913/pexels-photo-1877913.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
             />
@@ -87,7 +88,7 @@ class SubHeader extends Component {
     let { screenTitle } = this.props;
     return (
       <>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ flexDirection: "row", alignItems: "center", }}>
           <TouchableOpacity onPress={() => this.goBack()}>
             <View>
               <Entypo name="chevron-thin-left" size={22} color="#fff" />
