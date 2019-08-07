@@ -3,6 +3,7 @@ import { LayoutAnimation, UIManager, Platform,View } from "react-native";
 import HelperMethods from 'Helpers/Methods'
 import Constants from "Helpers/Constants";
 import Events from "Screens/Noticeboard/CategoryContents/Events/Events";
+import TimeTable from "Screens/Noticeboard/CategoryContents/TimeTable/TimeTable";
 import Syllabus from "Screens/Noticeboard/CategoryContents/Syllabus/Syllabus";
 import { Categories } from "Screens/Noticeboard/Categories/Student";
 export const BoardContext = React.createContext();
@@ -31,7 +32,7 @@ export class BoardContentProvider extends Component {
     switch (category) {
       case Constants.categoryEvents:
         
-        this.setState({ contentView: <Events /> });
+        this.setState({ contentView: <TimeTable /> });
         break;
 
       case Constants.categorySyllabus:

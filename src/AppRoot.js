@@ -154,8 +154,8 @@ const AppStudent = createMaterialBottomTabNavigator(
 
 const TopLevelNavigator = createAnimatedSwitchNavigator(
   {
-    LoginStack,
     AppStudent,
+    LoginStack,
     // AppTeacher,
     // AppParent,
   },

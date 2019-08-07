@@ -39,9 +39,9 @@ export class ContentContainer extends Component {
               <Animatable.View animation={this.state.animation} onAnimationEnd={()=>this.resetAnimation()}  useNativeDriver={true} duration={600}  style={{ flex:1,width:'100%'}}>
               <ScrollView
                 contentContainerStyle={{
-                  flex: 1,
+                  // flex: 1,
                   width: "100%",
-                  padding: 14,
+                  // padding: 14,
                   paddingTop: 0,
                   paddingBottom: 0
                 }}

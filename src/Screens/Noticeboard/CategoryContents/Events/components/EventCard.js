@@ -24,7 +24,6 @@ export default class EventCard extends Component {
   render() {
     const {title,desc} = this.props
     return (
-        
 
         <Card
         dividerStyle={{ height: 0 }}
