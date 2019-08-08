@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { withNavigation } from "react-navigation";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
@@ -32,6 +33,12 @@ class Icons extends Component {
         return (
           <Entypo name={name} size={size || iconSize} color={color || "#000"} />
         );
+
+        case 'Ionicons':
+            return (
+              <Ionicons name={name} size={size || iconSize} color={color || "#000"} />
+            );
+          break
     }
   }
 

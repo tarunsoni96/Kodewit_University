@@ -39,12 +39,14 @@
     "react-native-step-indicator": "0.0.11",
     "react-native-svg": "^9.5.3",
     "react-native-svg-uri": "^1.2.3",
+    "react-native-swiper": "^1.6.0-nightly.3",
     "react-native-vector-icons": "6.6.0",
     "react-navigation": "3.11.0",
     "react-navigation-animated-switch": "^0.2.1",
     "react-navigation-material-bottom-tabs": "^0.1.2",
     "react-navigation-transitions": "^1.0.11",
-    "rn-sliding-up-panel": "^2.3.1"
+    "rn-sliding-up-panel": "^2.3.1",
+    "rn-viewpager": "^1.2.9"
   },
   "devDependencies": {
     "@babel/core": "7.5.0",

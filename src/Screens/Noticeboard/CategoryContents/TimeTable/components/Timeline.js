@@ -15,25 +15,29 @@ export default class Timeline extends Component {
 
     let times = [];
     let view = [];
-    let lastTime 
+    let lastTime;
+    let lectureLength
+    let subject
     let time = timelineData[0].time;
     for (let i = 0, len = timelineData.length; i < len; i++) {
-      let lectureLength = timelineData[i].lectureLength;
-      let subject = timelineData[i].subject;
+      lectureLength = timelineData[i].lectureLength;
+      subject = timelineData[i].subject;
       for (let j = 0, len = lectureLength; j < len; j++) {
         times.push(
           <View style={styles.time}>
-            
             <CustomText
-            padding={0}
-            paddingHorizontal={horizSpacing}
-            font={Fonts.heavy}
-            size={13}
-            
-            text={
-              time != lastTime ? time.charAt(1) == ":" ? `0${time.toString()}` : time.toString() : '               '
-            }
-            color="#707270"
+              padding={0}
+              paddingHorizontal={horizSpacing}
+              font={Fonts.heavy}
+              size={13}
+              text={
+                time != lastTime
+                  ? time.charAt(1) == ":"
+                    ? `0${time.toString()}`
+                    : time.toString()
+                  : "               "
+              }
+              color="#707270"
             />
             {j < 1 && (
               <View style={{ flex: 1 }}>
@@ -43,7 +47,7 @@ export default class Timeline extends Component {
                 <View
                   style={[
                     styles.lectureBlock,
-                    { height: hourHeight * lectureLength-10 }
+                    { height: hourHeight * lectureLength - 10 }
                   ]}
                 >
                   <CustomText
@@ -58,21 +62,41 @@ export default class Timeline extends Component {
           </View>
         );
 
-        lastTime = time
+        lastTime = time;
 
-        time = moment(time, "HH:mm")
-          .add(lectureLength, "hours")
+        time = moment(
+          time,
+          "HH:mm"
+        )
+          .add(lectureLength == 2 ? lectureLength : 1, "hours")
           .format("HH:mm A");
-
-          
       }
-      if(i > 0 && lectureLength > 2 ){
-
+      if (lectureLength >= 2) {
         time = moment(time, "HH:mm")
-        .subtract(60, "minutes")
+        .subtract(lectureLength == 2 ? lectureLength : 1, "hours")
         .format("HH:mm A");
       }
-
+        if(i == timelineData.length - 1 && lectureLength == 1){
+          times.push(
+            <View style={[styles.time,{alignItems:'center',marginTop:38}]}>
+              <CustomText
+                padding={0}
+                paddingHorizontal={horizSpacing}
+                font={Fonts.heavy}
+                size={13}
+                text={
+                  time
+                }
+                color="#707270"
+              />
+                <View style={{ flex: 1 }}>
+                  <Divider
+                    style={{ marginRight: horizSpacing - 10, height: 1, flex: 0 }}
+                  />
+                  </View>
+                  </View>
+          )
+        }
       view.push(
         <View
           style={[
@@ -108,15 +132,13 @@ const styles = EStyleSheet.create({
 
   time: {
     flexDirection: "row",
-    // alignItems: 'center',
     justifyContent: "space-between"
   },
 
   lectureBlock: {
-    // flex:1,
     width: "97%",
     position: "absolute",
-top:5,
+    top: 5,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,

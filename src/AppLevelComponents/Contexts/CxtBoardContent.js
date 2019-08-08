@@ -6,6 +6,7 @@ import Events from "Screens/Noticeboard/CategoryContents/Events/Events";
 import TimeTable from "Screens/Noticeboard/CategoryContents/TimeTable/TimeTable";
 import Syllabus from "Screens/Noticeboard/CategoryContents/Syllabus/Syllabus";
 import { Categories } from "Screens/Noticeboard/Categories/Student";
+import Fees from "Screens/Noticeboard/CategoryContents/Fees/Fees";
 export const BoardContext = React.createContext();
 export const ContentConsumer = BoardContext.Consumer;
 
@@ -32,7 +33,7 @@ export class BoardContentProvider extends Component {
     switch (category) {
       case Constants.categoryEvents:
         
-        this.setState({ contentView: <TimeTable /> });
+        this.setState({ contentView: <Events /> });
         break;
 
       case Constants.categorySyllabus:
@@ -40,12 +41,14 @@ export class BoardContentProvider extends Component {
         break;
 
       case Constants.categoryTimeTable:
+          this.setState({ contentView: <TimeTable /> });
         break;
 
       case Constants.categoryResults:
         break;
 
-      case Constants.categoryFee:
+      case Constants.categoryFees:
+          this.setState({ contentView: <Fees /> });
         break;
     }
 
