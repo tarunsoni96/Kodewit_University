@@ -8,7 +8,6 @@ import HelperMethods from 'Helpers/Methods'
 import DayItem from "./components/DayItem";
 import Timeline from "./components/Timeline";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import Swiper from "react-native-swiper";
 
 let data = [
   { day: "Mo", data: [] },

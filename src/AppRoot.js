@@ -29,6 +29,7 @@ import MyCourse from "./Screens/MyCourse/MyCourse";
 import Chat from "./Screens/Chat/Chat";
 import Login from "Screens/Login/Login";
 import BuddyChat from "./Screens/BuddyChat/BuddyChat";
+import  UserSelection  from "Screens/UserSelection/UserSelection";
 
 let transitionSpeed = 700;
 let tabIconSize = 18
@@ -52,6 +53,18 @@ const handleCustomTransition = ({ scenes }) => {
   }
   return fromRight(transitionSpeed);
 };
+
+
+const BuildPersona = createStackNavigator({
+  userSelection: {
+    screen: UserSelection,
+    navigationOptions: {
+      header: null
+    }
+  }
+});
+
+
 
 const LoginStack = createStackNavigator({
   login: {
@@ -154,6 +167,7 @@ const AppStudent = createMaterialBottomTabNavigator(
 
 const TopLevelNavigator = createAnimatedSwitchNavigator(
   {
+    BuildPersona,
     AppStudent,
     LoginStack,
     // AppTeacher,

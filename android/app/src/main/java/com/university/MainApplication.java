@@ -12,7 +12,6 @@ import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage; // <-
 
 import com.rnnestedscrollview.RNNestedScrollViewPackage;
 import com.bottomsheetbehavior.BottomSheetBehaviorPackage;
-import com.horcrux.svg.SvgPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.facebook.react.ReactNativeHost;
