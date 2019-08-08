@@ -15,22 +15,25 @@ export default class Timeline extends Component {
 
     let times = [];
     let view = [];
+    let lastTime 
     let time = timelineData[0].time;
     for (let i = 0, len = timelineData.length; i < len; i++) {
       let lectureLength = timelineData[i].lectureLength;
       let subject = timelineData[i].subject;
-      for (let j = 0; j < lectureLength; j++) {
+      for (let j = 0, len = lectureLength; j < len; j++) {
         times.push(
           <View style={styles.time}>
+            
             <CustomText
-              padding={0}
-              paddingHorizontal={horizSpacing}
-              font={Fonts.heavy}
-              size={13}
-              text={
-                time.charAt(1) == ":" ? `0${time.toString()}` : time.toString()
-              }
-              color="#707270"
+            padding={0}
+            paddingHorizontal={horizSpacing}
+            font={Fonts.heavy}
+            size={13}
+            
+            text={
+              time != lastTime ? time.charAt(1) == ":" ? `0${time.toString()}` : time.toString() : '               '
+            }
+            color="#707270"
             />
             {j < 1 && (
               <View style={{ flex: 1 }}>
@@ -40,7 +43,7 @@ export default class Timeline extends Component {
                 <View
                   style={[
                     styles.lectureBlock,
-                    { height: hourHeight * lectureLength }
+                    { height: hourHeight * lectureLength-10 }
                   ]}
                 >
                   <CustomText
@@ -54,14 +57,21 @@ export default class Timeline extends Component {
             )}
           </View>
         );
-        time = moment(time, "HH:mm")
-          .add(60, "minutes")
-          .format("HH:mm A");
-      }
 
-      // time = moment(time, "HH:mm")
-      // .subtract(60, "minutes")
-      // .format("HH:mm A");
+        lastTime = time
+
+        time = moment(time, "HH:mm")
+          .add(lectureLength, "hours")
+          .format("HH:mm A");
+
+          
+      }
+      if(i > 0 && lectureLength > 2 ){
+
+        time = moment(time, "HH:mm")
+        .subtract(60, "minutes")
+        .format("HH:mm A");
+      }
 
       view.push(
         <View
@@ -98,6 +108,7 @@ const styles = EStyleSheet.create({
 
   time: {
     flexDirection: "row",
+    // alignItems: 'center',
     justifyContent: "space-between"
   },
 
@@ -105,10 +116,10 @@ const styles = EStyleSheet.create({
     // flex:1,
     width: "97%",
     position: "absolute",
-
+top:5,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
-    backgroundColor: "red"
+    backgroundColor: "#dedede"
   }
 });

@@ -6,6 +6,7 @@ import { Colors } from "UIProps/Colors";
 import Fonts from "UIProps/Fonts";
 import DayItem from "./components/DayItem";
 import Timeline from "./components/Timeline";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 let data=[
     {day:'Mo',data:[]},
@@ -19,10 +20,12 @@ let data=[
 ]
 
 let timelineData = [
-  {time:'09:00 AM',lectureLength:1,subject:'Design Thinking'},
+  {time:'09:00 AM',lectureLength:2,subject:'Design Thinking'},
   {lectureLength:3,subject:'Lab'},
   { lectureLength:1,subject:'Break'},
   { lectureLength:1,subject:'Physics'},
+  { lectureLength:2,subject:'Physics'},
+  
   
 ]
 class TimeTable extends Component {
@@ -36,10 +39,10 @@ class TimeTable extends Component {
   renderItem = ({item,index}) => {
     return(
 
-        <TouchableOpacity onPress={()=>this.setDay(item.day)}>
+        <TouchableWithoutFeedback onPress={()=>this.setDay(item.day)}>
 
         <DayItem selected={this.state.selectedDay == item.day} day={item.day} />
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
     )
   }
 
@@ -51,7 +54,7 @@ class TimeTable extends Component {
     return (
       <View style={{ width: "100%",  }}>
         
-<View style={{alignItems: 'center',paddingBottom:40}}>
+<View style={{alignItems: 'center',paddingBottom:40,}}>
 
         <FlatList 
         data={data}
