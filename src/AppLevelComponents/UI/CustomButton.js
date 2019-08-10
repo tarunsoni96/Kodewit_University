@@ -22,7 +22,7 @@ export default class CustomButton extends Component {
   }
 
   render() {
-    let { text, isApiCall,font, width,isRightIcon,borderRadius, containerStyle, textColor } = this.props;
+    let { text, isApiCall,font, width,isRightIcon,icon,borderRadius, containerStyle, textColor } = this.props;
 
     return (
       <Button
@@ -33,10 +33,10 @@ export default class CustomButton extends Component {
         icon={
           isRightIcon && (
             <AntDesign
-              name="arrowright"
-              size={30 * global.rem}
+              name={icon}
+              size={30}
               color="white"
-              style={{ paddingHorizontal: 8 }}
+              // style={{ paddingHorizontal: 8 }}
             />
           )
         }
@@ -62,7 +62,8 @@ const styles = EStyleSheet.create({
 
   button: {
     
-    height: "47rem",
+    height: "41rem",
+    justifyContent: 'center',
     backgroundColor: Colors.accent,
     borderRadius: 4
   }

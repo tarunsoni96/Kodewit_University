@@ -95,15 +95,12 @@ export const stepsStyle={
   currentStepLabelColor: '#fe7013'
 
 }
-
-export const register_ViewPager = {
-  flex:1,
-  height:'100%'
-}
-
-export const registerSubTitle = {
-  marginTop:25,
-  
+ 
+export const personaContainer = {
+    
+    flex:1,
+    width: "100%",
+    backgroundColor: '#f7f7f9',
 }
 
 export const containerStyle = {

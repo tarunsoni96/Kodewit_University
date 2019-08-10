@@ -29,7 +29,7 @@ import MyCourse from "./Screens/MyCourse/MyCourse";
 import Chat from "./Screens/Chat/Chat";
 import Login from "Screens/Login/Login";
 import BuddyChat from "./Screens/BuddyChat/BuddyChat";
-import  UserSelection  from "Screens/UserSelection/UserSelection";
+import Root from "Screens/BuildPersona/Root";
 
 let transitionSpeed = 700;
 let tabIconSize = 18
@@ -56,8 +56,8 @@ const handleCustomTransition = ({ scenes }) => {
 
 
 const BuildPersona = createStackNavigator({
-  userSelection: {
-    screen: UserSelection,
+  root: {
+    screen: Root,
     navigationOptions: {
       header: null
     }

@@ -5,6 +5,9 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import Fontisto from "react-native-vector-icons/Fontisto";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 
 let iconSize = 23;
 class Icons extends Component {
@@ -38,7 +41,24 @@ class Icons extends Component {
             return (
               <Ionicons name={name} size={size || iconSize} color={color || "#000"} />
             );
-          break
+          
+            case 'Fontisto':
+              return (
+                <Fontisto name={name} size={size || iconSize} color={color || "#000"} />
+              );
+
+              case 'Material':
+              return (
+                <MaterialCommunityIcons name={name} size={size || iconSize} color={color || "#000"} />
+              );
+
+              case 'SimpleLine':
+              return (
+                <SimpleLineIcons name={name} size={size || iconSize} color={color || "#000"} />
+              );
+
+          
+              
     }
   }
 
