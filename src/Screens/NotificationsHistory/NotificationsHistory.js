@@ -17,12 +17,12 @@ let data = [
   },
   {
     title: "Bacha ponch gya h",
-    description: "A good descripton looks good to read and see, A good descripton looks good to read and see"
+    description: "A good descripton looks good to read and see, A good descripton looks good to read and see,,descripton looks good to read and see,descripton looks good to read and see"
   },
 
   {
     title: "New title animation test",
-    description: "A good descripton looks good to read and see, A good descripton looks good to read and see"
+    description: "A good descripton looks good to read and see, A good descripton looks good to read and see,A good descripton looks good to read and see, A good descripton looks good to read and see,A good descripton looks good to read and see, A good descripton looks good to read and see"
   }
 ];
 

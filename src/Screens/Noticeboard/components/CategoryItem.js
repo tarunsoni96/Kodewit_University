@@ -27,9 +27,14 @@ class CategoryItem extends Component {
     }
   }
 
+  componentWillUnmount() {
+    isFirstViewSet = false
+  }
+  
   handlePress() {
     const { categorySelectionHandler, name } = this.props;
     categorySelectionHandler(name);
+    
     currentContext.setContentView(name);
   }
 

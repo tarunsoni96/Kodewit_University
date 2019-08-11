@@ -54,6 +54,10 @@ export class BoardContentProvider extends Component {
 
     currentCategory = category
   };
+
+  pauseContentContainerAnimation = (animationState) => {
+    this.setState({animateContentContainer:animationState})
+  }
   render() {
     return (
       <BoardContext.Provider
@@ -61,6 +65,7 @@ export class BoardContentProvider extends Component {
           contentView: this.state.contentView,
           categoriesData: this.state.categoriesData,
           animateContentContainer:this.state.animateContentContainer,
+          pauseContentContainerAnimation:this.pauseContentContainerAnimation,
           setContentView: this.setContentView
         }}
       >

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Text, View, ScrollView } from "react-native";
 import * as Animatable from 'react-native-animatable';
 import { withNavigation } from "react-navigation";
@@ -8,7 +8,7 @@ import { Colors } from "UIProps/Colors";
 
 let animationToPlay = 'flash'
 let isPlaying = false
- class ContentContainerAnimated extends Component {
+ class ContentContainerAnimated extends PureComponent {
 
   state = {
     animation:''
@@ -29,13 +29,21 @@ let isPlaying = false
     this.setState({animation:''})
     isPlaying = false
   }
+
+  handleAnimations(context){
+    if(context.animateContentContainer == undefined){
+      return 
+    }else {
+      context.animateContentContainer ? this.animateContainer(true) : this.animateContainer(false)
+    }
+  }
   render() {
     const {animation,style} = this.props
     return (
       <View style={styles.card}>
         <ContentConsumer>
           {context => {
-            context.animateContentContainer ? this.animateContainer(true) : this.animateContainer(false)
+            this.handleAnimations(context)
             return (
               <Animatable.View animation={this.state.animation} onAnimationEnd={()=>this.resetAnimation()}  useNativeDriver={true} duration={600}  style={{ flex:1,width:'100%',...style}}>
               <ScrollView
@@ -73,7 +81,7 @@ const styles = EStyleSheet.create({
     shadowOffset: { height: 1, width: 0 },
     shadowOpacity: 0.15,
     shadowRadius: 2,
-    elevation: 1
+    elevation: 1,
   }
 });
 export default withNavigation(ContentContainerAnimated);
