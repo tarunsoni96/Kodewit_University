@@ -6,7 +6,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import {Colors} from "UIProps/Colors";
 import BackHandlerSingleton from "ServiceProviders/BackHandlerSingleton";
 import { withNavigation } from "react-navigation";
- class Container extends Component {
+ export default class Container extends Component {
 
   renderForIOS() {
     let {padding,style,contentPadding,scroll} = this.props
@@ -50,7 +50,7 @@ import { withNavigation } from "react-navigation";
     
     return (
       <>
-      {<BackHandlerSingleton navigation={this.props.navigation} onBackPress={this.props.onBackPress} />}
+      {<BackHandlerSingleton  onBackPress={this.props.onBackPress} />}
         {HelperMethods.isPlatformAndroid()
           ? this.renderForAndroid()
           : this.renderForIOS()}
@@ -75,5 +75,3 @@ const styles = EStyleSheet.create({
     
   }
 });
-
-export default withNavigation(Container)

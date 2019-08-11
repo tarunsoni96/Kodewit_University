@@ -4,6 +4,7 @@ import { withNavigation } from "react-navigation";
 import Container from "AppLevelComponents/UI/Container";
 import Logo from "AppLevelComponents/UI/Logo";
 import { Colors } from "UIProps/Colors";
+import { personaContainer } from "UIProps/Styles";
 import EStyleSheet from "react-native-extended-stylesheet";
 import CustomText from "AppLevelComponents/UI/CustomText";
 import CustomButton from "AppLevelComponents/UI/CustomButton";
@@ -16,52 +17,61 @@ let valObj = {
   email: "dummy@g.com",
   password: "dummy"
 };
- class Login extends Component {
+class Login extends Component {
   state = {
     isApiCall: undefined
   };
 
   login = () => {
-    this.props.navigation.navigate('AppStudent')
-  }
+    this.props.navigation.navigate("AppStudent");
+  };
   render() {
     return (
-      <Container scroll={true}>
-        <StatusBar backgroundColor={Colors.contentCard} barStyle="dark-content" />
-        {/* <View style={{flex:1,width:'100%',backgroundColor:'green',alignItems:'center'}}> */}
-            
-        <View style={styles.subContainer}>
-          <Logo />
-          <CustomText
-            text="University"
-            color={Colors.black}
-            size={17}
-            style={{ paddingTop: 10, marginBottom: 30 }}
-            font={Fonts.heavy}
-          />
-          <Divider />
-        </View>
-
-        <View style={styles.containerInputs}>
-          <CustomText
-            text="Welcome"
-            color={Colors.accent}
-            size={22}
-            font={Fonts.heavy}
+      <Container padding={0} contentPadding={0} scroll={true}>
+        <StatusBar
+          backgroundColor={Colors.contentCard}
+          barStyle="dark-content"
+        />
+        <View style={[personaContainer, { padding: 15 }]}>
+          <View style={styles.subContainer}>
+            <Logo />
+            <CustomText
+              text="University"
+              color={Colors.black}
+              size={17}
+              style={{ marginTop: 10, marginBottom: 30 }}
+              font={Fonts.heavy}
             />
-          <Divider width={20} />
-          <Email inputValueGetter={text => (valObj.email = text)} />
-          <Password inputValueGetter={text => (valObj.password = text)} />
+            <Divider style={{ width: "100%" }} />
+          </View>
 
-            <CustomText text="Forgot password?" color={Colors.accent} font={Fonts.regular} style={{alignSelf:'flex-end',marginVertical:10}} />
-          <CustomButton
-            onPress={this.login}
-            text="SIGN IN"
-            containerStyle={{marginVertical: 30,}}
-            isApiCall={this.state.isApiCall}
+          <View style={styles.containerInputs}>
+            <View style={{ marginTop: 15,marginBottom:13 }}>
+              <CustomText
+                text="Welcome"
+                color={Colors.accent}
+                size={22}
+                font={Fonts.heavy}
+              />
+              <Divider style={{ width: 21 }} />
+            </View>
+            <Email marginBottom={7} inputValueGetter={text => (valObj.email = text)} />
+            <Password inputValueGetter={text => (valObj.password = text)} />
+
+            <CustomText
+              text="Forgot password?"
+              color={Colors.accent}
+              font={Fonts.regular}
+              style={{ alignSelf: "flex-end", marginVertical: 10 }}
             />
+            <CustomButton
+              onPress={this.login}
+              text="Sign in"
+              containerStyle={{ marginVertical: 20 }}
+              isApiCall={this.state.isApiCall}
+            />
+          </View>
         </View>
-            {/* </View> */}
       </Container>
     );
   }
@@ -72,19 +82,9 @@ const styles = EStyleSheet.create({
   $rem: global.rem,
 
   subContainer: {
-    alignItems: "center",
-    flex:1,
-    width: "100%",
-    
+    alignItems: "center"
   },
 
-  containerInputs: {
-    // alignSelf:'flex-start',
-    width: "100%",
-    alignItems: "flex-start",
-    marginTop:20,
-    flex: 1
-  }
 });
 
-export default  withNavigation(Login);
+export default withNavigation(Login);

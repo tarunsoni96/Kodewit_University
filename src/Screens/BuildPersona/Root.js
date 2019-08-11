@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator,Keyboard } from "react-native";
 import Swiper from "react-native-swiper";
 import { Colors } from "UIProps/Colors";
 import CustomText from "AppLevelComponents/UI/CustomText";
@@ -8,7 +8,6 @@ import "Helpers/global";
 import { personaContainer } from "UIProps/Styles";
 import HelperMethods from "Helpers/Methods";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
-
 import EStyleSheet from "react-native-extended-stylesheet";
 import {
   PersonaBuildConsumer,
@@ -20,18 +19,36 @@ import NextBtn from "./components/NextBtn";
 
 let currentContext
 let steps = 4
-let toIncrease = 100 / steps
+let stepsNames = ['Select User type','Your professional details','Upload Profile Picture','Your Personal Details','Review Profile']
 export default class Root extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      renderSwiper: false
+      renderSwiper: false,
+      showNxtBtn:true
     };
   }
 
   componentWillMount = () => {
     this.renderSwiper();
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow.bind(this));
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide.bind(this));
   };
+
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow () {
+    HelperMethods.animateLayout()
+    this.setState({showNxtBtn:false})
+  }
+
+  _keyboardDidHide () {
+    HelperMethods.animateLayout()
+    this.setState({showNxtBtn:true})
+  }
 
   renderSwiper() {
     setTimeout(() => {
@@ -40,8 +57,9 @@ export default class Root extends Component {
   }
 
   swipeTo(btn){
-    index = btn == 'next' ?  currentContext.step+1 : currentContext.step-1
-    this.swiper.scrollBy(index - currentContext.step, true);
+    // index = btn == 'next' ?  currentContext.step+1 : currentContext.step-1
+    // this.swiper.scrollBy(index - currentContext.step, true);
+    this.props.navigation('notice')
   }
 
   render() {
@@ -84,7 +102,7 @@ export default class Root extends Component {
 
                       <CustomText
                         paddingHorizontal={14}
-                        text="Select User type"
+                        text={stepsNames[context.step]}
                         color={Colors.black}
                         style={{  marginBottom: 0 }}
                         size={17}
@@ -99,15 +117,9 @@ export default class Root extends Component {
 
                       showsButtons={false}
                     >
-                      <View style={{flex:1}}>
 
+                      {/* <UserDetail /> */}
                       <UserSelection />
-                      </View>
-
-                      <View>
-
-                      <UserDetail />
-                      </View>
                     </Swiper>
                   </View>
                 ) : (
@@ -121,10 +133,11 @@ export default class Root extends Component {
                     <ActivityIndicator size="large" />
                   </View>
                 )}
-
+{this.state.showNxtBtn && 
 <View style={[styles.containerNxtBtn,{position:'absolute',bottom:0}]}>
 <NextBtn swipe={(btn)=>this.swipeTo(btn)} />
   </View>
+}
 
               </>
             );

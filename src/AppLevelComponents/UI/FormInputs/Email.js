@@ -4,7 +4,6 @@ import { Input } from "react-native-elements";
 import {Colors} from "UIProps/Colors";
 import InputValidations from "Helpers/InputValidations";
 import {
-  inputStyles,
   inputStylesContainer,
   labelStyle,
   inputsError,
@@ -42,20 +41,16 @@ HelperMethods.animateLayout()
   }
 
   render() {
-    let {width,value,textLabel,showLabel,style,labelStyleAdditional} = this.props
+    let {width,value,textLabel,marginBottom,labelStyleAdditional} = this.props
     let label = {...labelStyle,...labelStyleAdditional}
     return (
       <Input
         label={textLabel || "Email Address"}
-        placeholder={textLabel || "Enter Email address"}
-        labelStyle={label}
-        containerStyle={[inputStylesContainer,{width:width*global.rem || undefined,...style}]}
+        labelStyle={labelStyle}
+        inputContainerStyle={{...inputContainerStyle,marginBottom: marginBottom,}}
         onChangeText={text => this.setText(text)}
         value={this.state.wantToEdit ? this.state.text : value}
         placeholderTextColor={Colors.inputs_placeholders}
-        inputContainerStyle={inputContainerStyle}
-        inputStyle={inputStyles}
-        
         errorStyle={inputsError}
         errorMessage={this.state.error}
       />

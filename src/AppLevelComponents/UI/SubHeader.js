@@ -14,6 +14,8 @@ import Entypo from "react-native-vector-icons/Entypo";
 import Constants from "Helpers/Constants";
 import Fonts from "UIProps/Fonts";
 import "Helpers/global";
+import * as Animatable from "react-native-animatable";
+
 import ProfilePic from "./ProfilePic";
 class SubHeader extends Component {
   constructor(props) {
@@ -27,6 +29,9 @@ class SubHeader extends Component {
     switch (type) {
       case Constants.header_back_middle_right:
         return this.header_back_middle_right();
+
+      case Constants.header_back:
+        return this.header_back();
 
       default:
         return this.main();
@@ -42,6 +47,7 @@ class SubHeader extends Component {
   }
 
   main() {
+    const { unreadNotifications } = this.props;
     return (
       <>
         <View style={styles.container}>
@@ -57,27 +63,37 @@ class SubHeader extends Component {
                 <View style={styles.holoCirlce_small} />
               </View>
             </TouchableWithoutFeedback>
-            {/* <View style={styles.holoCirlce_large} ></View> */}
           </View>
-          <TouchableOpacity onPress={() => alert("Go to Notifications")}>
-            <View>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationsHistory')}>
+            <Animatable.View
+              animation="swing"
+              iterationCount={1}
+              delay={600}
+              duration={1000}
+            >
               <FontAwesome name="bell-o" size={20} color="#fff" />
-            </View>
+
+              {unreadNotifications && (
+                <View style={{ position: "absolute", right: 1, top: 2 }}>
+                  <View style={styles.bellCircle} />
+                </View>
+              )}
+            </Animatable.View>
           </TouchableOpacity>
           <TouchableWithoutFeedback onPress={() => this.navigateProfile()}>
-          <View style={styles.absProfilePic}>
-            <ProfilePic
-            canNavigateToProfile
-              size={25}
-              pic="https://images.pexels.com/photos/1877913/pexels-photo-1877913.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-            />
+            <View style={styles.absProfilePic}>
+              <ProfilePic
+                canNavigateToProfile
+                size={25}
+                pic="https://images.pexels.com/photos/1877913/pexels-photo-1877913.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+              />
 
-            <CustomText
-              font="AvenirLTStd-Heavy"
-              size={17}
-              text="   Hi, Winnie"
-            />
-          </View>
+              <CustomText
+                font="AvenirLTStd-Heavy"
+                size={17}
+                text="   Hi, Winnie"
+              />
+            </View>
           </TouchableWithoutFeedback>
         </View>
       </>
@@ -85,10 +101,10 @@ class SubHeader extends Component {
   }
 
   header_back_middle_right() {
-    let { screenTitle } = this.props;
+    let { title } = this.props;
     return (
       <>
-        <View style={{ flexDirection: "row", alignItems: "center", }}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity onPress={() => this.goBack()}>
             <View>
               <Entypo name="chevron-thin-left" size={22} color="#fff" />
@@ -97,18 +113,33 @@ class SubHeader extends Component {
         </View>
 
         <View>
-          <CustomText
-            text="My Profile"
-            font={Fonts.heavy}
-            size={17}
-            color="#fff"
-          />
+          <CustomText text={title} font={Fonts.heavy} size={17} color="#fff" />
         </View>
         <TouchableOpacity onPress={() => alert("Go to Notifications")}>
           <View>
             <FontAwesome name="cog" size={20} color="#fff" />
           </View>
         </TouchableOpacity>
+      </>
+    );
+  }
+
+  header_back() {
+    let { title } = this.props;
+    return (
+      <>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <TouchableOpacity onPress={() => this.goBack()}>
+            <View>
+              <Entypo name="chevron-thin-left" size={22} color="#fff" />
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        <View>
+          <CustomText text={title} style={{paddingRight: 13,}} font={Fonts.heavy} size={17} color="#fff" />
+        </View>
+        <View />
       </>
     );
   }
@@ -175,6 +206,17 @@ const styles = EStyleSheet.create({
     borderColor: "rgba(109, 193, 254, 0.5)",
 
     marginLeft: -85
+  },
+
+  bellCircle: {
+    width: 8,
+    height: 8,
+    borderRadius: 100 / 2,
+    borderWidth: 1,
+    borderColor: "#ffffff",
+    backgroundColor: "#ff8341",
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 

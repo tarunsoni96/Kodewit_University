@@ -24,7 +24,7 @@ export class Profile extends Component {
       <Container padding={0}>
         <Header>
           <View>
-            <SubHeader type={Constants.header_back_middle_right} />
+            <SubHeader title="My Profile" type={Constants.header_back_middle_right} />
             <View style={styles.headerContent}>
               <ProfilePic
               showCameraIcon

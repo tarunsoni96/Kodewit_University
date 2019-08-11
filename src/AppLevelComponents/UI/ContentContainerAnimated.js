@@ -1,20 +1,43 @@
 import React, { Component } from "react";
 import { Text, View, ScrollView } from "react-native";
+import * as Animatable from 'react-native-animatable';
 import { withNavigation } from "react-navigation";
 import { ContentConsumer } from "AppLevelComponents/Contexts/CxtBoardContent";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { Colors } from "UIProps/Colors";
 
-class ContentContainer extends Component {
+let animationToPlay = 'flash'
+let isPlaying = false
+ class ContentContainerAnimated extends Component {
 
+  state = {
+    animation:''
+  }
+
+
+  animateContainer (play) {
+    if(!isPlaying && play){
+      this.setState({animation:'flash'})
+      isPlaying = true
+    } else if(!isPlaying && !play) {
+      this.setState({animation:'pulse'})
+      isPlaying = true
+    }
+  }
+
+  resetAnimation(){
+    this.setState({animation:''})
+    isPlaying = false
+  }
   render() {
-    const {style} = this.props
+    const {animation,style} = this.props
     return (
       <View style={styles.card}>
         <ContentConsumer>
           {context => {
+            context.animateContentContainer ? this.animateContainer(true) : this.animateContainer(false)
             return (
-              <View style={{ flex:1,width:'100%',...style}}>
+              <Animatable.View animation={this.state.animation} onAnimationEnd={()=>this.resetAnimation()}  useNativeDriver={true} duration={600}  style={{ flex:1,width:'100%',...style}}>
               <ScrollView
                 contentContainerStyle={{
                   // flex: 1,
@@ -26,7 +49,7 @@ class ContentContainer extends Component {
               >
                 {this.props.children}
               </ScrollView>
-              </View>
+              </Animatable.View>
             );
           }}
         </ContentConsumer>
@@ -53,4 +76,4 @@ const styles = EStyleSheet.create({
     elevation: 1
   }
 });
-export default withNavigation(ContentContainer);
+export default withNavigation(ContentContainerAnimated);

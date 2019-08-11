@@ -1,20 +1,28 @@
 import React, { Component } from "react";
 import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
+import {checkForEmptyKeys} from 'ServiceProviders/InputsNullChecker'
+
 import { Text, View } from "react-native";
 import { withNavigation } from "react-navigation";
 import BackHandlerSingleton from 'ServiceProviders/BackHandlerSingleton'
+import InputsErrorOverlay from "../UI/InputsErrorOverlay";
+
 export const PersonaBuildContext = React.createContext();
 export const PersonaBuildConsumer = PersonaBuildContext.Consumer;
 
 let teacherSteps = 3
-let studentSteps = 2
+let studentSteps = 3
+let parentSteps = 3
 let progressToIncrease = undefined
+let userDetailObj = {}
 export class CxtPersonaBuild extends Component {
 
   state = {
     step : 0,
     progress:0,
+    errorString:'',
     userType:'Teacher',
+    userDetailObj:{},
     totalSteps:3 // steps -> for teacher - 3 ,
   }
 
@@ -30,6 +38,10 @@ export class CxtPersonaBuild extends Component {
 
         case 'Student':
             progressToIncrease = 100 /studentSteps
+          break
+
+          case 'Parent':
+            progressToIncrease = 100 /parentSteps
           break
     }
   }
@@ -53,12 +65,27 @@ export class CxtPersonaBuild extends Component {
     })
   }
 
-  handleNxtBtn = (step,stepData) => {
-    if(step == 0){
+  handleNxtBtn = (step) => {
+    let {anyEmptyInputs,} = checkForEmptyKeys(userDetailObj)
+    let errorString = ''
     
+    if(anyEmptyInputs.length > 0){
+      errorString += `Error occured, Please fill `
+      for(let i=0, len = anyEmptyInputs.length; i < len;i++){
+        errorString += anyEmptyInputs[i]+','
+      } 
+      this.setState({errorString,});
+    } else {
+      switch(step){
+        case 1: //user details
+        this.saveStepData(userDetailObj)
+        break
+        
+        case 2: //profile pic
+        break
+      }
+      this.moveForward()
     }
-    this.saveStepData(stepData)
-    this.moveForward()
   }
 
   handleBackBtn = (index) => {
@@ -98,6 +125,12 @@ export class CxtPersonaBuild extends Component {
     })
   }
 
+  setUserDetailObj = (obj) => {
+    userDetailObj = obj
+    
+    
+  }
+
   render() {
     return (
       <PersonaBuildContext.Provider value={{
@@ -108,10 +141,11 @@ export class CxtPersonaBuild extends Component {
           progress:this.state.progress,
           handleBackBtn:this.handleBackBtn,
           restoreStep:this.restoreStep,
-          setUserType:this.setUserType
+          setUserType:this.setUserType,
+          setUserDetailObj:this.setUserDetailObj,
       }}>
         {this.props.children}
-        {/* <InputsErrorOverlay text={this.state.errorString} /> */}
+        <InputsErrorOverlay text={this.state.errorString} />
         <BackHandlerSingleton
           navigation={this.props.navigation}
           onBackPress={this.props.onBackPress}

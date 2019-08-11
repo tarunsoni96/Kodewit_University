@@ -4,10 +4,8 @@ import { Input } from "react-native-elements";
 import { Colors } from "UIProps/Colors";
 import InputValidations from "Helpers/InputValidations";
 import {
-  inputStyles,
-  inputStylesContainer,
   inputsError,
-  labelStyleSignup,
+  labelStyle,
   inputContainerStyle
 } from "UIProps/Styles";
 import "Helpers/global";
@@ -33,18 +31,17 @@ wantToEdit:undefined,
     
     return (
       <Input
-        label={label || 'Text'}
-        placeholder={label || 'Text'}
-        labelStyle={labelStyleSignup}
-        containerStyle={inputStylesContainer}
-        onChangeText={text => this.setText(text)}
-        autoCapitalize={caps ? "characters" : 'sentences' }
-        value={this.state.wantToEdit ? this.state.text : value}
-        placeholderTextColor={Colors.inputs_placeholders}
-        inputContainerStyle={inputContainerStyle}
-        inputStyle={inputStyles}
-        errorStyle={inputsError}
-        errorMessage={this.state.error}
+      label={label}
+      labelStyle={labelStyle}
+      inputContainerStyle={inputContainerStyle}
+      autoCapitalize="characters"
+      onChangeText={text => this.setText(text)}
+      value={this.state.wantToEdit ? this.state.text : value}
+      placeholderTextColor={Colors.inputs_placeholders}
+      errorStyle={inputsError}
+      errorMessage={this.state.error}
+      multiline
+      blurOnSubmit={true}
       />
     );
   }

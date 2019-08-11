@@ -76,7 +76,7 @@ export default class Password extends Component {
     return (
       <Input
         label={ "Your Password" }
-        labelStyle={label}
+        labelStyle={labelStyle}
         ref={input => (this.inputRef = input)}
         secureTextEntry={this.state.hidePass}
         
@@ -91,13 +91,7 @@ export default class Password extends Component {
         onChangeText={text => this.setText(text)}
         value={this.state.text}
         placeholderTextColor={Colors.inputs_placeholders}
-        containerStyle={[
-          inputStylesContainer,
-          { width: width * global.rem || undefined, }
-        ]}
         inputContainerStyle={inputContainerStyle}
-        inputStyle={inputStyles}
-        placeholder="Enter Password"
         errorStyle={inputsError}
         errorMessage={this.state.error}
       />

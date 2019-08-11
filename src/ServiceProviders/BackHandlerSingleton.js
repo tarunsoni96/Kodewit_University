@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { BackHandler } from "react-native";
+import { withNavigation } from "react-navigation";
 
 let isTransitionInProgress = false;
-export default class BackHandlerSingleton extends Component {
+class BackHandlerSingleton extends Component {
   constructor(props) {
     super(props);
     this.attachBackHandler();
@@ -65,3 +66,5 @@ export default class BackHandlerSingleton extends Component {
     return null;
   }
 }
+
+export default withNavigation(BackHandlerSingleton)

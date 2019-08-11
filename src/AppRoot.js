@@ -30,6 +30,7 @@ import Chat from "./Screens/Chat/Chat";
 import Login from "Screens/Login/Login";
 import BuddyChat from "./Screens/BuddyChat/BuddyChat";
 import Root from "Screens/BuildPersona/Root";
+import NotificationsHistory from "./Screens/NotificationsHistory/NotificationsHistory";
 
 let transitionSpeed = 700;
 let tabIconSize = 18
@@ -89,8 +90,17 @@ const NoticeboardStack = createStackNavigator({
     navigationOptions: {
       header: null,
     }
-  }
+  },
 
+  NotificationsHistory: {
+    screen: NotificationsHistory,
+    navigationOptions: {
+      header: null,
+    }
+  },
+
+},{
+  // initialRouteName:'NotificationsHistory'
 });
 
 const AppStudent = createMaterialBottomTabNavigator(
@@ -161,15 +171,14 @@ const AppStudent = createMaterialBottomTabNavigator(
     shifting: false,
     barStyle: { elevation: 0 },
     transitionConfig: nav => handleCustomTransition(nav),
-    
   }
 );
 
 const TopLevelNavigator = createAnimatedSwitchNavigator(
   {
-    BuildPersona,
     AppStudent,
     LoginStack,
+    BuildPersona,
     // AppTeacher,
     // AppParent,
   },

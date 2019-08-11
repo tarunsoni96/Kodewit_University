@@ -4,14 +4,15 @@ import Container from "AppLevelComponents/UI/Container";
 import { Header } from "AppLevelComponents/UI/Header";
 import SubHeader from "AppLevelComponents/UI/SubHeader";
 import EStyleSheet from "react-native-extended-stylesheet";
-import { ContentContainer } from "AppLevelComponents/UI/ContentContainer";
+import ContentContainerAnimated from "AppLevelComponents/UI/ContentContainerAnimated";
 import {
   BoardContentProvider,
   ContentConsumer
 } from "AppLevelComponents/Contexts/CxtBoardContent";
 import CategoriesRenderer from "./components/CategoriesRenderer";
+import { withNavigation } from "react-navigation";
 
-class Dashboard extends Component {
+export default class Noticeboard extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -25,11 +26,11 @@ class Dashboard extends Component {
             return (
               <Container style={{flex:1}} scroll={false} padding={0}>
                 <Header>
-                  <SubHeader />
+                  <SubHeader unreadNotifications={true} />
                   <CategoriesRenderer data={context.categoriesData} />
                 </Header>
                 <View style={{ width: "100%", flex: 1 }}>
-                  <ContentContainer>{context.contentView}</ContentContainer>
+                  <ContentContainerAnimated>{context.contentView}</ContentContainerAnimated>
                 </View>
               </Container>
             );
@@ -68,4 +69,3 @@ const styles = EStyleSheet.create({
   }
 });
 
-export default Dashboard;

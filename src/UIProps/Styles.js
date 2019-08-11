@@ -8,27 +8,19 @@ EStyleSheet.build({
 
 export const inputStyles = EStyleSheet.create({
   fontSize:17*global.rem,
-  
   color: Colors.black,
-  // paddingHorizontal:10,
   backgroundColor:'#fff'
 });
 
 export let labelStyle = EStyleSheet.create({
-  paddingHorizontal: 1*global.rem,
+  top:11,left:20,zIndex:1,
+  fontFamily:Fonts.regular,
+  color:'#000',
   alignSelf:'flex-start',
-  color: "#000",
-  fontFamily:Fonts.medium,
-  fontSize:17*global.rem,
-  marginBottom: 10,
-});
-
-export let labelStyleSignup = EStyleSheet.create({
-  paddingHorizontal: 1*global.rem,
-  alignSelf:'flex-start',
-  color: Colors.light,
-  fontSize:18*global.rem,
-  fontFamily:Fonts.regular 
+  width:null,
+  backgroundColor:'rgba(255,255,255,0.8)',
+  fontSize:14,
+  fontWeight: "300",
 });
 
 export const inputStylesContainer = EStyleSheet.create({
@@ -45,17 +37,15 @@ export const inputErrors = {
   color: "red",
   fontSize: 24*global.rem,
   alignSelf: 'flex-start',
-  textAlign:'left'
+  textAlign:'left',
 };
 
 export const inputContainerStyle = {
   borderRadius: 4,
   borderWidth:1,
   borderColor: Colors.inputBorderColor,
-  width:'100%',
-  marginVertical:3,
-  margin:0,
-  
+  backgroundColor:'#fff',
+  height:43,
 };
 
 export const cardStyle = {
@@ -65,37 +55,6 @@ export const cardStyle = {
       borderRadius: 5,
       marginVertical: 10,
 }
-
-export const stepIndicator = {
-  marginVertical: 20*global.rem,
-}
-
-export const stepsStyle={
-
-  stepIndicatorSize: 23,
-  currentStepIndicatorSize:27,
-  separatorStrokeWidth: 2.6,
-  currentStepStrokeWidth: 1.3,
-  stepStrokeCurrentColor: Colors.accent,
-  stepStrokeWidth: 1.3,
-  stepStrokeFinishedColor: Colors.accent,
-  stepStrokeUnFinishedColor: '#aaaaaa',
-  separatorFinishedColor: Colors.accent,
-  separatorUnFinishedColor: '#707070',
-  stepIndicatorFinishedColor: Colors.accent,
-  stepIndicatorUnFinishedColor: Colors.black,
-  stepIndicatorCurrentColor: Colors.black,
-  stepIndicatorLabelFontSize: 13,
-  currentStepIndicatorLabelFontSize: 13,
-  stepIndicatorLabelCurrentColor: Colors.accent,
-  stepIndicatorLabelFinishedColor: '#ffffff',
-  stepIndicatorLabelUnFinishedColor: Colors.white,
-  labelColor: '#999999',
-  labelSize: 13,
-  currentStepLabelColor: '#fe7013'
-
-}
- 
 export const personaContainer = {
     
     flex:1,
