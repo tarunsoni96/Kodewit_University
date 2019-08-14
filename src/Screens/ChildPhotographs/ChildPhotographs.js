@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { Text, View, FlatList, ScrollView,Animated } from "react-native";
 import Container from "AppLevelComponents/UI/Container";
 import Header from "AppLevelComponents/UI/Header";
+import CustomText from 'AppLevelComponents/UI/CustomText'
 import SubHeader from "AppLevelComponents/UI/SubHeader";
 import HelperMethods from 'Helpers/Methods'
 import Constants from "Helpers/Constants";
 import ContentContainerAnimated from "AppLevelComponents/UI/ContentContainerAnimated";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import ContentContainer from "AppLevelComponents/UI/ContentContainer";
+import Fonts from "UIProps/Fonts";
 import { withNavigation } from "react-navigation";
 import PhotoItem from "./components/PhotoItem";
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -68,6 +70,7 @@ class ChildPhotographs extends Component {
         </Header>
         <View style={{ width: "100%", flex: 1,}}>
           <ContentContainer animation={'undefined'} style={{}} >
+            <CustomText text="June 23" padding={5} paddingHorizontal={10} color='#000' font={Fonts.medium} size={15} />
             <FlatList 
             style={{flex:1}}
             data={formatData(data,numColumns)}

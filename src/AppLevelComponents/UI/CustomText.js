@@ -36,6 +36,7 @@ export default class CustomText extends Component {
         break;
 
       default:
+          
         break;
     }
 
@@ -57,13 +58,13 @@ export default class CustomText extends Component {
                   fontFamily: HelperMethods.isPlatformAndroid()
                     ? font 
                     : null,
-                  padding: padding * rem || 5 * rem,
+                  padding: padding || 5 ,
                   paddingHorizontal:
                     (padding == undefined || paddingHorizontal == undefined)
                       ? 0
                       : paddingHorizontal * global.rem,
                   textAlign: textAlign ,
-
+                  
                   ...style
                 }
               ]}

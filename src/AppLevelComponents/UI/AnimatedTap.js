@@ -49,7 +49,7 @@ export default class AnimatedTap extends Component {
     setTimeout(()=>{
 
       onPress();
-    },10)
+    },5)
     Animated.timing(this.state.animatePress, {
       toValue: defaultScale,
       friction: 2,
