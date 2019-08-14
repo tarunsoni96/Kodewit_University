@@ -77,11 +77,11 @@ class Noticeboard extends Component {
         break
 
         case 'bt_photos':
-          this.props.navigation.navigate('ChildPhotographs')
+          this.props.navigation.navigate('Photos')
           break
 
-          case 'hw_card':
-            alert('Show icard image')
+          case 'bt_card':
+            this.props.navigation.navigate('iCard')
             break
 
             case 'bt_hlCalendar':

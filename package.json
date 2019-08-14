@@ -8,6 +8,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@dudigital/react-native-zoomable-view": "^1.0.13",
     "@react-native-community/async-storage": "1.5.0",
     "@react-native-community/netinfo": "4.0.0",
     "@terrylinla/react-native-sketch-canvas": "^0.8.0",
@@ -33,6 +34,7 @@
     "react-native-modal-datetime-picker": "^7.5.0",
     "react-native-nested-scroll-view": "^8.0.0",
     "react-native-page-swiper": "^0.4.0",
+    "react-native-pinch-zoom-view": "^0.2.0",
     "react-native-power-translator": "^1.1.1",
     "react-native-reanimated": "^1.1.0",
     "react-native-simple-store": "2.0.0",
@@ -47,6 +49,7 @@
     "react-native-vector-icons": "6.6.0",
     "react-navigation": "3.11.0",
     "react-navigation-animated-switch": "^0.2.1",
+    "react-navigation-fluid-transitions": "^0.3.2",
     "react-navigation-material-bottom-tabs": "^0.1.2",
     "react-navigation-transitions": "^1.0.11",
     "rn-sliding-up-panel": "^2.3.1"

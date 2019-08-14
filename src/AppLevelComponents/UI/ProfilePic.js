@@ -4,6 +4,8 @@ import "Helpers/global";
 import HelperMethods from "Helpers/Methods";
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import {camera } from "UIProps/Colors";
+import { Transition } from "react-navigation-fluid-transitions";
+
 import EStyleSheet from "react-native-extended-stylesheet";
 import {Colors} from "UIProps/Colors";
 import { withNavigation } from "react-navigation";
@@ -35,7 +37,9 @@ class ProfilePic extends Component {
       <TouchableOpacity onPress={ ()=> canNavigateToProfile && this.navigateProfile()  }>
 
       <View style={[styles.container,{...style},size && {width:size,height:size} ]}>
+      <Transition shared='profilePic'>
           <Image style={{width:'100%',height:'100%',borderRadius:100}} resizeMode='cover' source={{uri:pic}}  />
+          </Transition>
           {showCameraIcon && 
           <View style={styles.circle}>
             <AntDesign name='camera' size={13} color={Colors.accent} />

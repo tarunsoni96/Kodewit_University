@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 
-import { View, StatusBar, Text } from "react-native";
+import { View, StatusBar, Animated,Easing } from "react-native";
 import { Colors } from "UIProps/Colors";
 import {
   createStackNavigator,
@@ -13,6 +13,12 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import "Helpers/global";
+import {
+  createFluidNavigator,
+  Transition as fluidTransition,
+  FluidNavigator
+} from "react-navigation-fluid-transitions";
+
 import EStyleSheet from "react-native-extended-stylesheet";
 import Noticeboard from "Screens/Noticeboard/Noticeboard";
 import createAnimatedSwitchNavigator from "react-navigation-animated-switch";
@@ -33,9 +39,17 @@ import Root from "Screens/BuildPersona/Root";
 import NotificationsHistory from "./Screens/NotificationsHistory/NotificationsHistory";
 import ChildPhotographs from "./Screens/ChildPhotographs/ChildPhotographs";
 import HolidayCalendar from "./Screens/HolidayCalendar/HolidayCalendar";
+import iCard from "./Screens/iCard/iCard";
+import PhotoGraphFullView from "./Screens/PhotographFullView/PhotoGraphFullView";
 
-let transitionSpeed = 700;
-let tabIconSize = 18
+let transitionSpeed = 650;
+let tabIconSize = 18;
+
+const transitionConfig = {
+  duration: 520,
+};
+
+
 const handleCustomTransition = ({ scenes }) => {
   const prevScene = scenes[scenes.length - 2];
   const nextScene = scenes[scenes.length - 1];
@@ -43,20 +57,19 @@ const handleCustomTransition = ({ scenes }) => {
   // Custom transitions here..
   if (
     prevScene &&
-    prevScene.route.routeName === "login" &&
-    nextScene.route.routeName === "screen_signup"
+    prevScene.route.routeName === "Noticeboard" &&
+    nextScene.route.routeName === "iCard"
   ) {
     return zoomIn(transitionSpeed);
   } else if (
     prevScene &&
-    prevScene.route.routeName === "login" &&
-    nextScene.route.routeName === "screen_languageSelection"
+    prevScene.route.routeName === "Noticeboard" &&
+    nextScene.route.routeName === "Profile"
   ) {
-    return fromBottom(transitionSpeed);
+    return null;
   }
   return fromRight(transitionSpeed);
 };
-
 
 const BuildPersona = createStackNavigator({
   root: {
@@ -67,8 +80,6 @@ const BuildPersona = createStackNavigator({
   }
 });
 
-
-
 const LoginStack = createStackNavigator({
   login: {
     screen: Login,
@@ -78,48 +89,92 @@ const LoginStack = createStackNavigator({
   }
 });
 
-const NoticeboardStack = createStackNavigator({
+
+
+const sharedPhotos = FluidNavigator({
+  photos: {
+    screen: ChildPhotographs,
+    navigationOptions: {
+      header: null
+    }
+  },
+  photographs_FullView: {
+    screen: PhotoGraphFullView,
+    navigationOptions: {
+      header: null
+    }
+  },
+},{
+  transitionConfig
+})
+
+
+
+const sharedPic = FluidNavigator({
   Noticeboard: {
     screen: Noticeboard,
     navigationOptions: {
       header: null
     }
   },
-
-
   Profile: {
     screen: Profile,
     navigationOptions: {
-      header: null,
+      header: null
     }
   },
+},{
+  transitionConfig
+})
 
-  NotificationsHistory: {
-    screen: NotificationsHistory,
-    navigationOptions: {
-      header: null,
-    }
-  },
 
-  ChildPhotographs: {
-    screen: ChildPhotographs,
-    navigationOptions: {
-      header: null,
-    }
-  },
+const NoticeboardStack = createStackNavigator(
+  {
+   
+   
+Noticeboard:sharedPic,
+    
+   Photos:sharedPhotos,
 
-  HolidayCalendar: {
-    screen: HolidayCalendar,
-    navigationOptions: {
-      header: null,
-    }
-  },
+    Profile: {
+      screen: Profile,
+      navigationOptions: {
+        header: null
+      }
+    },
+
+    NotificationsHistory: {
+      screen: NotificationsHistory,
+      navigationOptions: {
+        header: null
+      }
+    },
 
   
 
-},{
-  // initialRouteName:'NotificationsHistory'
-});
+    HolidayCalendar: {
+      screen: HolidayCalendar,
+      navigationOptions: {
+        header: null
+      }
+    },
+
+    iCard: {
+      screen: iCard,
+      navigationOptions: {
+        header: null
+      }
+    }
+  },
+  {
+    // initialRouteName: "Noticeboard",
+    transitionConfig: nav => handleCustomTransition(nav),
+      headerMode: 'none',
+      navigationOptions: {
+        headerVisible: false,
+      }
+  }
+);
 
 const AppStudent = createMaterialBottomTabNavigator(
   {
@@ -155,11 +210,7 @@ const AppStudent = createMaterialBottomTabNavigator(
         header: null,
         tabBarLabel: "My Course",
         tabBarIcon: ({ tintColor }) => (
-          <Entypo
-            name="open-book"
-            color={tintColor}
-            size={tabIconSize}
-          />
+          <Entypo name="open-book" color={tintColor} size={tabIconSize} />
         )
       }
     },
@@ -177,9 +228,7 @@ const AppStudent = createMaterialBottomTabNavigator(
           />
         )
       }
-    },
-
-   
+    }
   },
   {
     initialRouteName: "Noticeboard",
@@ -188,7 +237,7 @@ const AppStudent = createMaterialBottomTabNavigator(
     inactiveColor: "#a8a8a8",
     shifting: false,
     barStyle: { elevation: 0 },
-    transitionConfig: nav => handleCustomTransition(nav),
+    transitionConfig: nav => handleCustomTransition(nav)
   }
 );
 
@@ -196,7 +245,7 @@ const TopLevelNavigator = createAnimatedSwitchNavigator(
   {
     AppStudent,
     LoginStack,
-    BuildPersona,
+    BuildPersona
     // AppTeacher,
     // AppParent,
   },

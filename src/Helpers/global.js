@@ -14,7 +14,8 @@ global.deviceWidth =  Dimensions.get('window').width
 global.deviceHeight = Dimensions.get('window').height
 global.fontFamily_regular = "proximaNova_regualr"
 global.fontFamily_bold = "proximaNova_bold"
-
+global.minPinchScale = 1
+global.maxPinchScale = 2
 
 
 

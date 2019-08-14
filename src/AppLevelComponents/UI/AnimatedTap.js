@@ -46,13 +46,17 @@ export default class AnimatedTap extends Component {
   animateOut() {
     // this.props.pressHandler()
     const { onPress } = this.props;
+    setTimeout(()=>{
+
+      onPress();
+    },10)
     Animated.timing(this.state.animatePress, {
       toValue: defaultScale,
       friction: 2,
       tension: 0,
       useNativeDriver: true,
       duration: animDuration
-    }).start(() => {onPress();});
+    }).start(() => {});
   }
 
   render() {
