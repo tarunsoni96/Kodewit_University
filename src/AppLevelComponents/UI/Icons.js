@@ -8,6 +8,10 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import EvilIcons from "react-native-vector-icons/EvilIcons";
+import Feather from "react-native-vector-icons/Feather";
+
 
 let iconSize = 23;
 class Icons extends Component {
@@ -57,7 +61,24 @@ class Icons extends Component {
                 <SimpleLineIcons name={name} size={size || iconSize} color={color || "#000"} />
               );
 
-          
+              case 'FontAwesome5':
+              return (
+                <FontAwesome5 name={name} size={size || iconSize} color={color || "#000"} />
+              );
+
+              case 'EvilIcons':
+              return (
+                <EvilIcons name={name} size={size || iconSize} color={color || "#000"} />
+              );
+
+              case 'Feather':
+              return (
+                <Feather name={name} size={size || iconSize} color={color || "#000"} />
+              );
+
+                default:
+                  alert(`No library found for lib - ${lib}`)
+                  break
               
     }
   }

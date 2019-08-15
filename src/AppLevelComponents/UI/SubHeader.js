@@ -17,6 +17,7 @@ import "Helpers/global";
 import * as Animatable from "react-native-animatable";
 
 import ProfilePic from "./ProfilePic";
+import Icons from "./Icons";
 class SubHeader extends Component {
   constructor(props) {
     super(props);
@@ -100,6 +101,9 @@ class SubHeader extends Component {
     );
   }
 
+  navigateSettings(){
+    this.props.navigation.navigate('Settings')
+  }
   header_back_middle_right() {
     let { title } = this.props;
     return (
@@ -107,7 +111,7 @@ class SubHeader extends Component {
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity onPress={() => this.goBack()}>
             <View>
-              <Entypo name="chevron-thin-left" size={22} color="#fff" />
+              <Icons lib='Feather' name="chevron-left" size={30} color="#fff" />
             </View>
           </TouchableOpacity>
         </View>
@@ -115,9 +119,9 @@ class SubHeader extends Component {
         <View>
           <CustomText text={title} font={Fonts.heavy} size={17} color="#fff" />
         </View>
-        <TouchableOpacity onPress={() => alert("Go to Notifications")}>
+        <TouchableOpacity onPress={() => this.navigateSettings()}>
           <View>
-            <FontAwesome name="cog" size={20} color="#fff" />
+            <Icons lib='SimpleLine' name="settings" size={20} color="#fff" />
           </View>
         </TouchableOpacity>
       </>
@@ -131,7 +135,7 @@ class SubHeader extends Component {
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity onPress={() => this.goBack()}>
             <View>
-              <Entypo name="chevron-thin-left" size={22} color="#fff" />
+            <Icons lib='Feather' name="chevron-left" size={30} color="#fff" />
             </View>
           </TouchableOpacity>
         </View>

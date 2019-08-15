@@ -14,6 +14,8 @@ const BackBtnTransparent = ({ navigation,btnColor ='#fff' }) => {
               top: 0,
               left: 0,
               padding: 10,
+              width:'100%',
+              backgroundColor:'rgba(0,0,0,0.3)',
               justifyContent: "center",
               zIndex: 10
           }}

@@ -4,10 +4,10 @@ import { View, StatusBar, Animated,Easing } from "react-native";
 import { Colors } from "UIProps/Colors";
 import {
   createStackNavigator,
-  createMaterialTopTabNavigator,
   createAppContainer,
-  createSwitchNavigator
 } from "react-navigation";
+import Icons from 'AppLevelComponents/UI/Icons'
+
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -36,17 +36,18 @@ import Chat from "./Screens/Chat/Chat";
 import Login from "Screens/Login/Login";
 import BuddyChat from "./Screens/BuddyChat/BuddyChat";
 import Root from "Screens/BuildPersona/Root";
-import NotificationsHistory from "./Screens/NotificationsHistory/NotificationsHistory";
-import ChildPhotographs from "./Screens/ChildPhotographs/ChildPhotographs";
-import HolidayCalendar from "./Screens/HolidayCalendar/HolidayCalendar";
-import iCard from "./Screens/iCard/iCard";
-import PhotoGraphFullView from "./Screens/PhotographFullView/PhotoGraphFullView";
+import NotificationsHistory from "Screens/NotificationsHistory/NotificationsHistory";
+import ChildPhotographs from "Screens/ChildPhotographs/ChildPhotographs";
+import HolidayCalendar from "Screens/HolidayCalendar/HolidayCalendar";
+import iCard from "Screens/iCard/iCard";
+import PhotoGraphFullView from "Screens/PhotographFullView/PhotoGraphFullView";
+import Settings from "Screens/Settings/Settings";
 
 let transitionSpeed = 650;
 let tabIconSize = 18;
 
 const transitionConfig = {
-  duration: 520,
+  duration: 500,
 };
 
 
@@ -164,10 +165,21 @@ Noticeboard:sharedPic,
       navigationOptions: {
         header: null
       }
+    },
+
+    Settings: {
+      screen: Settings,
+      navigationOptions: {
+        header: null
+      }
     }
+
+
+
+
   },
   {
-    // initialRouteName: "Noticeboard",
+    initialRouteName: "Profile",
     transitionConfig: nav => handleCustomTransition(nav),
       headerMode: 'none',
       navigationOptions: {
@@ -199,7 +211,7 @@ const AppStudent = createMaterialBottomTabNavigator(
         header: null,
         tabBarLabel: "Chat",
         tabBarIcon: ({ tintColor }) => (
-          <AntDesign name="message1" color={tintColor} size={20} />
+          <AntDesign name="wechat" color={tintColor} size={20} />
         )
       }
     },
@@ -210,7 +222,8 @@ const AppStudent = createMaterialBottomTabNavigator(
         header: null,
         tabBarLabel: "My Course",
         tabBarIcon: ({ tintColor }) => (
-          <Entypo name="open-book" color={tintColor} size={tabIconSize} />
+          
+          <Icons lib='FontAwesome5' name="book-reader" color={tintColor} size={tabIconSize} />
         )
       }
     },
@@ -246,11 +259,9 @@ const TopLevelNavigator = createAnimatedSwitchNavigator(
     AppStudent,
     LoginStack,
     BuildPersona
-    // AppTeacher,
-    // AppParent,
   },
   {
-    // The previous screen will slide to the bottom while the next screen will fade in
+    //The previous screen will slide to the bottom while the next screen will fade in
     transition: (
       <Transition.Together>
         <Transition.Out

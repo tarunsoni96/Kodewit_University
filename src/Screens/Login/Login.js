@@ -53,7 +53,7 @@ class Login extends Component {
                 size={22}
                 font={Fonts.heavy}
               />
-              <Divider style={{ width: 21 }} />
+              <Divider style={{ width: 20 }} />
             </View>
             <Email marginBottom={7} inputValueGetter={text => (valObj.email = text)} />
             <Password inputValueGetter={text => (valObj.password = text)} />
@@ -61,7 +61,7 @@ class Login extends Component {
             <CustomText
               text="Forgot password?"
               color={Colors.accent}
-              font={Fonts.regular}
+              font={Fonts.medium}
               style={{ alignSelf: "flex-end", marginVertical: 10 }}
             />
             <CustomButton

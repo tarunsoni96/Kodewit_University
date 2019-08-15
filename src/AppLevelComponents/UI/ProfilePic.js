@@ -9,6 +9,7 @@ import { Transition } from "react-navigation-fluid-transitions";
 import EStyleSheet from "react-native-extended-stylesheet";
 import {Colors} from "UIProps/Colors";
 import { withNavigation } from "react-navigation";
+import Bottomsheet from "./Bottomsheet";
 
 let valObj = {
   image: ""
@@ -30,11 +31,15 @@ class ProfilePic extends Component {
     this.props.navigation.navigate('Profile')
     }
 
+    openSourceSelection_Bottomsheet(){
+      Bottomsheet.openBottomsheet()
+    }
+
   render() {
       let {profilePic} = this.state
       let {size,pic,style,showCameraIcon,canNavigateToProfile} = this.props
     return (
-      <TouchableOpacity onPress={ ()=> canNavigateToProfile && this.navigateProfile()  }>
+      <TouchableOpacity onPress={ ()=> canNavigateToProfile ? this.navigateProfile() : this.openSourceSelection_Bottomsheet()  }>
 
       <View style={[styles.container,{...style},size && {width:size,height:size} ]}>
       <Transition shared='profilePic'>

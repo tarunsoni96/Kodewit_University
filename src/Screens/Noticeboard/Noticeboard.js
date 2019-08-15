@@ -99,7 +99,7 @@ class Noticeboard extends Component {
             return (
               <Container onBackPress={()=>this.onBackPress()} style={{ flex: 1 }} scroll={false} padding={0}>
                 
-                <Header>
+                <Header headerType='main'>
                   <SubHeader unreadNotifications={true} />
                   <CategoriesRenderer data={context.categoriesData} />
                 </Header>

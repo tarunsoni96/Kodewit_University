@@ -33,7 +33,7 @@ import { withNavigation } from "react-navigation";
     scroll = scroll ? scroll : true
     return (
       <>
-      <StatusBar backgroundColor={Colors.accent} barStyle="light-content" />
+      <StatusBar backgroundColor={Colors.statusBarColor} barStyle="dark-content" />
       <ScrollView
       scrollEnabled={scroll}
       style={[styles.container,{padding:padding*global.rem || 0*global.rem,...style,backgroundColor:'#fff', }]}

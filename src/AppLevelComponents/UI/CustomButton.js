@@ -62,7 +62,7 @@ const styles = EStyleSheet.create({
 
   button: {
     
-    height: "41rem",
+    height: "44rem",
     justifyContent: 'center',
     backgroundColor: Colors.accent,
     borderRadius: 4

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StatusBar, ScrollView } from "react-native";
+import { TouchableOpacity, View, StatusBar, ScrollView } from "react-native";
 import { withNavigation } from "react-navigation";
 import Container from "AppLevelComponents/UI/Container";
 import Logo from "AppLevelComponents/UI/Logo";
@@ -18,20 +18,36 @@ import Constants from "Helpers/Constants";
 import ProfileLabel from "./components/ProfileLabel";
 import InfoItem from "./components/InfoItem";
 import { Row, Grid, Col } from "react-native-easy-grid";
+import Icons from "../../AppLevelComponents/UI/Icons";
+import BS_ImageSelection from "./components/BS_ImageSelection";
 export class Profile extends Component {
+
+  state = {
+    selectProfilePicSource:false
+  }
+  openBS_sourceSelection(){
+    this.setState({selectProfilePicSource:true})
+  }
+
   render() {
     return (
       <Container padding={0}>
         <Header>
           <View>
-            <SubHeader title="My Profile" type={Constants.header_back_middle_right} />
+            <SubHeader
+              title="My Profile"
+              type={Constants.header_back_middle_right}
+            />
             <View style={styles.headerContent}>
+              <TouchableOpacity onPress={()=>this.openBS_sourceSelection()}>
+
               <ProfilePic
-              showCameraIcon
+                showCameraIcon
                 style={{ marginTop: 10 }}
                 size={80}
                 pic="https://images.pexels.com/photos/1877913/pexels-photo-1877913.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-              />
+                />
+                </TouchableOpacity>
               <CustomText
                 text="Winnie singh"
                 style={{ marginVertical: 8 }}
@@ -41,13 +57,24 @@ export class Profile extends Component {
               <ProfileLabel />
             </View>
           </View>
+
+          <View style={[styles.pencilCircle, { bottom: -13 }]}>
+            <TouchableOpacity>
+              <Icons
+                lib="EvilIcons"
+                name="pencil"
+                size={25.5}
+                color={Colors.accent}
+              />
+            </TouchableOpacity>
+          </View>
         </Header>
         <ScrollView contentContainerStyle={{ width: "100%" }}>
           <Grid
             style={{
               alignItems: "center",
               // padding: 40,
-              paddingTop:30,
+              paddingTop: 30,
               flex: 1,
               width: "100%"
             }}
@@ -63,8 +90,19 @@ export class Profile extends Component {
                 <InfoItem title="Batch" info="2016-2020" />
               </Col>
             </Row>
-            <Row style={[styles.infoContainer,{paddingRight:40}]}>
-              <Divider style={{marginVertical:13}}  color="#E8E8EA" />
+            <Row style={[styles.infoContainer, { paddingLeft: 0 }]}>
+              <Divider style={{ marginVertical: 13 }} color="#E8E8EA" />
+
+              <View style={styles.pencilCircle}>
+                <TouchableOpacity>
+                  <Icons
+                    lib="EvilIcons"
+                    name="pencil"
+                    size={25.5}
+                    color={Colors.accent}
+                  />
+                </TouchableOpacity>
+              </View>
             </Row>
 
             <Row style={styles.infoContainer}>
@@ -90,6 +128,8 @@ export class Profile extends Component {
             </Row>
           </Grid>
         </ScrollView>
+        <BS_ImageSelection />
+            
       </Container>
     );
   }
@@ -107,14 +147,14 @@ const styles = EStyleSheet.create({
 
   infoContainer: {
     flex: 0,
-    paddingLeft:40,
+    paddingLeft: 40,
     width: "100%",
-    alignItems: "center",
+    alignItems: "center"
   },
 
   colRight: {
     paddingLeft: 20,
-    paddingRight:10,
+    paddingRight: 10,
     height: "100%"
   },
 
@@ -124,6 +164,25 @@ const styles = EStyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 25
+  },
+
+  pencilCircle: {
+    width:  29,
+    height: 29,
+    right: 30,
+    position: "absolute",
+    borderRadius: 100 / 2,
+    backgroundColor: "#f7f7f9",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: "rgba(112, 112, 112, 0.29)",
+    alignItems: "center",
+    justifyContent: "center",
+    elevation:19,
+    shadowColor: "#000",
+        shadowOffset: { height: 1, width: 0 },
+        shadowOpacity: 0.15,
+        shadowRadius: 2,
   }
 });
 export default Profile;

@@ -2,7 +2,8 @@
 
 
 export const Colors  = {
-  header:['#27a4ff','#74c3fc'],
+  headerNavigational:['#27a4ff','#74c3fc'],
+  headerMain:['#74c3fc','#27a4ff'],
   pageBackground:'#fff',
   primary: '#000',
   accent:'#27a4ff',
@@ -14,6 +15,7 @@ export const Colors  = {
   dividerColor:'#CBCBCB',
   dark:'#3E3D3D',
   darker:'#1A1A1A',
+  statusBarColor:'#86CCFF',
   black: '#000',
   contentCard:'#f7f7f9',
   noticeMsgBox:'#dedede',
