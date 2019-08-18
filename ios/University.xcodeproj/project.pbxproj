@@ -31,6 +31,7 @@
 		7D977091E233448A8D85DC57 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF0B72946A80455E86CD87DA /* AntDesign.ttf */; };
 		82A9701422F9BAF500F28BF3 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A9701322F9BAF500F28BF3 /* UserNotifications.framework */; };
 		82A9701522F9BB0500F28BF3 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A9701222F9BAD200F28BF3 /* libRNFirebase.a */; };
+		82E5367C23093C90006E6D63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82E5367A23093C8F006E6D63 /* GoogleService-Info.plist */; };
 		8AE5881B792D4010880D7D66 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DCE7AA390FDB42D29FE71AE9 /* FontAwesome.ttf */; };
 		904CDD027A726E16F56EE71D /* libPods-UniversityTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59C32B7759738EC11A754C68 /* libPods-UniversityTests.a */; };
 		92604D29BA364FB59485D180 /* AvenirLTStd-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5403C43B95D04675A61FA577 /* AvenirLTStd-Heavy.otf */; };
@@ -108,6 +109,7 @@
 		82A9700C22F9BA2B00F28BF3 /* University.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = University.entitlements; path = University/University.entitlements; sourceTree = "<group>"; };
 		82A9700D22F9BAD200F28BF3 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		82A9701322F9BAF500F28BF3 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		82E5367A23093C8F006E6D63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9CC24A65055648289B6F36B6 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		9CFF1C658649A4FE77E9EE22 /* Pods-UniversityTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversityTests.release.xcconfig"; path = "Target Support Files/Pods-UniversityTests/Pods-UniversityTests.release.xcconfig"; sourceTree = "<group>"; };
 		9DDAD0D7E48549DDB82D0425 /* AvenirLTStd-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AvenirLTStd-Black.otf"; path = "../assets/fonts/AvenirLTStd-Black.otf"; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			children = (
 				82A9700C22F9BA2B00F28BF3 /* University.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				82E5367A23093C8F006E6D63 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -496,6 +499,7 @@
 				D53AE1E96D5643C490F79438 /* Ionicons.ttf in Resources */,
 				E46625BDE0F34936A5C677BB /* MaterialCommunityIcons.ttf in Resources */,
 				4D870A1D7FF14E6CA516B1AC /* MaterialIcons.ttf in Resources */,
+				82E5367C23093C90006E6D63 /* GoogleService-Info.plist in Resources */,
 				F99AC1F98C4448D98B5D374F /* Octicons.ttf in Resources */,
 				B0153E2B932C43F48CB55F9D /* SimpleLineIcons.ttf in Resources */,
 				A1993A2C1C334643B6AABF96 /* Zocial.ttf in Resources */,

@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import { View, Image, TouchableOpacity } from "react-native";
 import "Helpers/global";
 import HelperMethods from "Helpers/Methods";
+import {TakePhoto} from 'ServiceProviders/TakePhoto'
+
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import {camera } from "UIProps/Colors";
 import { Transition } from "react-navigation-fluid-transitions";
@@ -31,21 +33,24 @@ class ProfilePic extends Component {
     this.props.navigation.navigate('Profile')
     }
 
-    openSourceSelection_Bottomsheet(){
-      Bottomsheet.openBottomsheet()
+    tapFunc(){
+      TakePhoto((resp) => {
+        this.setState({profilePic:resp.uri})
+      })
     }
 
   render() {
       let {profilePic} = this.state
       let {size,pic,style,showCameraIcon,canNavigateToProfile} = this.props
     return (
-      <TouchableOpacity onPress={ ()=> canNavigateToProfile ? this.navigateProfile() : this.openSourceSelection_Bottomsheet()  }>
+      <TouchableOpacity onPress={ ()=> canNavigateToProfile ? this.navigateProfile() : this.tapFunc() }>
 
       <View style={[styles.container,{...style},size && {width:size,height:size} ]}>
       <Transition shared='profilePic'>
-          <Image style={{width:'100%',height:'100%',borderRadius:100}} resizeMode='cover' source={{uri:pic}}  />
+          <Image style={{width:'100%',height:'100%',borderRadius:100}} resizeMode='cover' source={{uri:profilePic || pic}}  />
           </Transition>
           {showCameraIcon && 
+
           <View style={styles.circle}>
             <AntDesign name='camera' size={13} color={Colors.accent} />
           </View>

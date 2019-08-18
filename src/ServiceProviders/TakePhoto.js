@@ -1,6 +1,6 @@
-import React, { Component } from './node_modules/react'
-import { Text, View } from './node_modules/react-native'
-import ImagePicker from './node_modules/react-native-image-picker';
+import React, { Component } from 'react'
+import { Text, View } from 'react-native'
+import ImagePicker from 'react-native-image-picker';
 
 const options = {
     title: 'Select Profile picture',

@@ -12,13 +12,13 @@ import { withNavigation } from "react-navigation";
     let {padding,style,contentPadding,scroll} = this.props
     return (
       <>
-      <SafeAreaView style={{ flex: 0, backgroundColor: Colors.accent }} />
-      <SafeAreaView style={{ flex: 1,backgroundColor:Colors.accent }}>
-      <StatusBar barStyle="light-content" />
+      <SafeAreaView style={{ flex: 0, backgroundColor: Colors.accent,color:'#fff' }} />
+      <SafeAreaView style={{ flex: 1,backgroundColor:Colors.contentCard, }}>
+      <StatusBar translucent={true} barStyle="light-content" />
         <ScrollView
         scrollEnabled={scroll}
-          style={styles.container}
-          contentContainerStyle={{alignItems: "center",...style,padding:padding == 0 ? 0 : 15*global.rem, }}
+          style={[styles.container]}
+          contentContainerStyle={{alignItems: "center",...style,padding:padding == 0 ? 0 : 15*global.rem,flex:1 }}
           keyboardShouldPersistTaps="always"
         >
           {this.props.children}

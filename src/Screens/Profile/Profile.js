@@ -19,15 +19,12 @@ import ProfileLabel from "./components/ProfileLabel";
 import InfoItem from "./components/InfoItem";
 import { Row, Grid, Col } from "react-native-easy-grid";
 import Icons from "../../AppLevelComponents/UI/Icons";
-import BS_ImageSelection from "./components/BS_ImageSelection";
-export class Profile extends Component {
 
+export class Profile extends Component {
   state = {
-    selectProfilePicSource:false
-  }
-  openBS_sourceSelection(){
-    this.setState({selectProfilePicSource:true})
-  }
+    selectProfilePicSource: false
+  };
+  openBS_sourceSelection() {}
 
   render() {
     return (
@@ -39,15 +36,12 @@ export class Profile extends Component {
               type={Constants.header_back_middle_right}
             />
             <View style={styles.headerContent}>
-              <TouchableOpacity onPress={()=>this.openBS_sourceSelection()}>
-
               <ProfilePic
                 showCameraIcon
                 style={{ marginTop: 10 }}
                 size={80}
                 pic="https://images.pexels.com/photos/1877913/pexels-photo-1877913.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                />
-                </TouchableOpacity>
+              />
               <CustomText
                 text="Winnie singh"
                 style={{ marginVertical: 8 }}
@@ -128,8 +122,6 @@ export class Profile extends Component {
             </Row>
           </Grid>
         </ScrollView>
-        <BS_ImageSelection />
-            
       </Container>
     );
   }
@@ -167,7 +159,7 @@ const styles = EStyleSheet.create({
   },
 
   pencilCircle: {
-    width:  29,
+    width: 29,
     height: 29,
     right: 30,
     position: "absolute",
@@ -178,11 +170,11 @@ const styles = EStyleSheet.create({
     borderColor: "rgba(112, 112, 112, 0.29)",
     alignItems: "center",
     justifyContent: "center",
-    elevation:19,
+    elevation: 19,
     shadowColor: "#000",
-        shadowOffset: { height: 1, width: 0 },
-        shadowOpacity: 0.15,
-        shadowRadius: 2,
+    shadowOffset: { height: 1, width: 0 },
+    shadowOpacity: 0.15,
+    shadowRadius: 5
   }
 });
 export default Profile;

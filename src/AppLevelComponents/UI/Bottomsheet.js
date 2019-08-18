@@ -4,6 +4,7 @@ import {
   CoordinatorLayout,
   BottomSheetBehavior
 } from "react-native-bottom-sheet-behavior";
+import HelperMethods from 'Helpers/Methods'
 import Modal from "react-native-modal";
 
 let that;
@@ -39,7 +40,7 @@ class Bottomsheet extends Component {
       swipeDirection={[ 'down']}
       onBackButtonPress={()=>this.hideModal()}
       onBackdropPress={() => this.setState({ visible: false })}
-      style={styles.bottomModal}
+      style={[styles.bottomModal,{...this.props.style}]}
     >
       <View style={{backgroundColor:'#fff',borderTopLeftRadius:borderRadius,borderTopRightRadius:borderRadius}}>
 
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
   bottomModal: {
     justifyContent: 'flex-end',
     margin: 0,
+    marginBottom: HelperMethods.isPlatformIos() ? 30 : 0,
   },
 });
 
