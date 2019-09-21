@@ -11,8 +11,6 @@ import Divider from "AppLevelComponents/UI/Divider";
 import Header from "AppLevelComponents/UI/Header";
 import SubHeader from "../../AppLevelComponents/UI/SubHeader";
 import Fonts from "UIProps/Fonts";
-import Email from "AppLevelComponents/UI/FormInputs/Email";
-import Password from "AppLevelComponents/UI/FormInputs/Password";
 import ProfilePic from "AppLevelComponents/UI/ProfilePic";
 import Constants from "Helpers/Constants";
 import ProfileLabel from "./components/ProfileLabel";
