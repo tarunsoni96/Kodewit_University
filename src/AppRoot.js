@@ -179,7 +179,7 @@ Noticeboard:sharedPic,
 
   },
   {
-    initialRouteName: "Profile",
+    // initialRouteName: "Profile",
     transitionConfig: nav => handleCustomTransition(nav),
       headerMode: 'none',
       navigationOptions: {
@@ -256,8 +256,8 @@ const AppStudent = createMaterialBottomTabNavigator(
 
 const TopLevelNavigator = createAnimatedSwitchNavigator(
   {
-    AppStudent,
     LoginStack,
+    AppStudent,
     BuildPersona
   },
   {

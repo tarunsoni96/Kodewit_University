@@ -4,6 +4,10 @@ const Constants = {
     LANGUAGE_SELECTED : 'LANGUAGE_SELECTED',
     header_back_middle_right:'header_back_middle_right',
     header_back:'header_back',
+    keyUserToken : 'userToken',
+    keysocailLoggedIn : 'isSocialLoggedIn',
+    isProfileCreated:'isProfileCreated',
+    userInfoObj: 'userInfoObj',
 
 
     //_______________________________category constants 

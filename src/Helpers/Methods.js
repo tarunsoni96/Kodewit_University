@@ -8,16 +8,17 @@ import {
   ToastAndroid
 } from "react-native";
 import axios from "react-native-axios";
-
 import NavigationService from "ServiceProviders/NavigationService";
 import { NavigationActions, StackActions } from "react-navigation";
-import Snackbar from "react-native-snackbar";
 import moment from "moment";
 import "Helpers/global";
 import { Colors } from "UIProps/Colors";
-// let baseUrl = 'http://13.234.16.181/api/'
+import { storeToken, getToken } from 'DataManagers/UserDataManager'
 
+
+let baseUrl = 'http://192.168.29.212:80/'
 let counter = 2;
+
 const HelperMethods = {
   showAlert: function(
     message,
@@ -61,50 +62,48 @@ const HelperMethods = {
     return Platform.OS == "ios";
   },
 
-  makeNetworkCall_post: function(apiName, formData, callBack) {
-    // let baseUrl = 'http://www.travygge.com/api/' //production
-    let baseUrl = "http://35.154.158.88/api/"; //test
-
-    axios({
-      url: baseUrl + apiName,
-      method: "POST",
-      data: formData,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "multipart/form-data"
-      }
+  makeNetworkCall: function(apiName, formData,method = 'GET' , callBack,skipToken = false) {
+    if(skipToken){
+      this.makeApiCall(apiName,'',formData,callBack,method)
+    } else {
+      getToken().then((val) => {
+      const Headers = { 'Authorization': `Bearer ${val}` }
+      this.makeApiCall(apiName,Headers,formData,callBack,method)
     })
-      .then(response => {
-        callBack(response.data, false);
-      })
-      .catch(error => {
-        callBack(`${error}`, true);
-      });
+    }
   },
 
-  makeNetworkCall_get: function(apiName, callBack) {
-    // let baseUrl = 'http://www.travygge.com/api/' //production
-    let baseUrl = "http://35.154.158.88/api/"; //test
-    axios({
-      url: baseUrl + apiName,
-      method: "GET"
+  makeApiCall:function(apiName,headers,formData,callBack,method){
+    axios.interceptors.request.use(request => {
+      console.log('Starting Request', request)
+      return request
     })
-      .then(response => {
-        callBack(response.data);
-      })
-      .catch(error => {
-        console.warn(error);
-      });
+  axios.interceptors.response.use(response => console.log('reponse', response))
+
+    axios({
+      url: baseUrl+apiName,
+      data:formData,
+      headers,
+      method,
+    })
+    .then(response => {
+      console.log(response)
+      // const {result} = response.data
+      // if('auth' in result){ //new token ... update in db
+      //   const token = result.auth.token
+      //   storeToken(token)
+      // }
+      callBack(response, false);
+    })
+    .catch(error => {
+      alert(error)
+      callBack({},true)
+      this.snackbar(`Api error: ${error.response}`,'OK',()=>{})
+    });
   },
 
   logout: function(navigation) {
     AsyncStorage.setItem("loggedIn", "false").then(() => {
-      UserDataHolder.username = "";
-      UserDataHolder.profile = "";
-      UserDataHolder.id = "";
-      UserDataHolder.contact = "";
-      UserDataHolder.email = "";
-      UserDataHolder.unreadNotifications = 0;
       const resetAction = StackActions.reset({
         index: 0,
         actions: [NavigationActions.navigate({ routeName: "login" })]

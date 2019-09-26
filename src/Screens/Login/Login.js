@@ -12,6 +12,7 @@ import Divider from "AppLevelComponents/UI/Divider";
 import Fonts from "UIProps/Fonts";
 import Email from "AppLevelComponents/UI/FormInputs/Email";
 import Password from "AppLevelComponents/UI/FormInputs/Password";
+import {getToken} from 'ServiceProviders/ApiCaller'
 
 let valObj = {
   email: "dummy@g.com",
@@ -23,8 +24,15 @@ class Login extends Component {
   };
 
   login = () => {
-    this.props.navigation.navigate("AppStudent");
+    this.setState({isApiCall:true})
+    getToken().then(response => {
+    this.setState({isApiCall:false})
+    alert(response)
+    })
+    // this.props.navigation.navigate("AppStudent");
   };
+
+
   render() {
     return (
       <Container padding={0} contentPadding={0} scroll={true}>
