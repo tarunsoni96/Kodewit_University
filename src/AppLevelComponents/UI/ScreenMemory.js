@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Constants from "Helpers/Constants";
 import "Helpers/global";
-import HelperMethods from "Helpers/Methods";
 import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
 import NavigationService from "ServiceProviders/NavigationService";
+import { withNavigation } from "react-navigation";
 
-export default class ScreenMemory extends Component {
+class ScreenMemory extends Component {
   state = {
     renderContent: false
   };
@@ -24,15 +24,27 @@ export default class ScreenMemory extends Component {
     switch (
       screen //need to always provide screen prop to this class or else nothing would render.
     ) {
-      case Constants.screenSource_langSelector:
-        this.isLangSelected(screenParams);
-        break;
-
-      case Constants.screenSource_login:
-        this.checkIsLoggedIn(screenParams);
+      case 'login':
+        this.checkIsLoggedIn();
         break;
     }
   }
+
+  checkIsLoggedIn(){
+    this.validate(Constants.keyUserToken,'AppStudent')
+  }
+
+  validate(constant,screen){
+    AsyncStorageHandler.get(constant, val => {
+      if (val == null) {
+        this.drawContent()
+        return
+      } else {
+        this.props.navigation.navigate(screen)
+      }
+    })
+  }
+
 
   isLangSelected(screenParams) {
     let { isForLanguageChange } = screenParams ? screenParams : {};
@@ -57,32 +69,6 @@ export default class ScreenMemory extends Component {
     });
   }
 
-  checkIsLoggedIn(screenParams) {
-    //checks if logged in or not
-     this.haveAccount(have => {
-         
-         if(have == null){
-             NavigationService.navigate("screen_signup", {});
-             setTimeout(()=>{
-
-                 this.drawContent();
-                },1000)
-         } else {
-            AsyncStorageHandler.get(Constants.IS_REMEMBERED, val => {
-                if (val == null) {
-                  this.drawContent();
-                } else {
-                  // this.drawContent();
-                  NavigationService.navigate("dashboard", {});
-                }
-              });
-            
-         }
-     })
-    
-    
-  }
-
   drawContent() {
     this.setState({ renderContent: true });
   }
@@ -96,3 +82,5 @@ export default class ScreenMemory extends Component {
     return <>{this.state.renderContent && this.renderChildren()}</>;
   }
 }
+
+export default withNavigation(ScreenMemory)

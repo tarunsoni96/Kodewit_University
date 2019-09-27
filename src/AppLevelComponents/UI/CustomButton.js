@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Keyboard, View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
+import * as Animatable from 'react-native-animatable';
 import { Button } from "react-native-elements";
 import "Helpers/global";
 import HelperMethods from "Helpers/Methods";
@@ -11,6 +12,10 @@ import Constants from "Helpers/Constants";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 export default class CustomButton extends Component {
+
+  state ={
+    animation:''
+  }
   onPress() {
     let { onPress } = this.props;
     if (!onPress) {
@@ -21,14 +26,23 @@ export default class CustomButton extends Component {
     Keyboard.dismiss();
   }
 
+  componentWillReceiveProps(nextProps){
+    const {isApiCall} = nextProps
+      this.setState({animation:isApiCall == 'failed' ? 'shake' : '' } )
+  }
+
   render() {
     let { text, isApiCall,font, width,isRightIcon,icon,borderRadius, containerStyle, textColor } = this.props;
 
+    let title = text+` ${isApiCall == 'failed' ? '- Retry' : '' } `
+    
     return (
+      <Animatable.View animation={this.state.animation} useNativeDriver={true} duration={600}  style={{ flex:1,width:'100%'}}>
+
       <Button
-        disabled={isApiCall}
+        disabled={isApiCall && isApiCall != 'failed' }
         onPress={() => this.onPress()}
-        title={text}
+        title={title.toUpperCase()}
         textStyle={{fontFamily: font || Fonts.medium ,}}
         icon={
           isRightIcon && (
@@ -50,8 +64,9 @@ export default class CustomButton extends Component {
           styles.button,
           { borderRadius: borderRadius || 60 }
         ]}
-        loading={isApiCall}
+        loading={isApiCall && isApiCall != 'failed'}
       />
+      </Animatable.View>
     );
   }
 }

@@ -15,9 +15,13 @@ import Constants from "Helpers/Constants";
 import Fonts from "UIProps/Fonts";
 import "Helpers/global";
 import * as Animatable from "react-native-animatable";
+import {UserInfoConsumer} from 'AppLevelComponents/Contexts/CxtUserInfo';
 
 import ProfilePic from "./ProfilePic";
 import Icons from "./Icons";
+import HelperMethods from "Helpers/Methods";
+
+let  currentContext
 class SubHeader extends Component {
   constructor(props) {
     super(props);
@@ -50,6 +54,12 @@ class SubHeader extends Component {
   main() {
     const { unreadNotifications } = this.props;
     return (
+      <UserInfoConsumer>
+  {context => {
+  currentContext = context
+                  return(
+                      
+                 
       <>
         <View style={styles.container}>
           <View
@@ -65,7 +75,7 @@ class SubHeader extends Component {
               </View>
             </TouchableWithoutFeedback>
           </View>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationsHistory')}>
+          <TouchableOpacity onPress={() =>  this.props.navigation.navigate('NotificationsHistory')  }>
             <Animatable.View
               animation="swing"
               iterationCount={1}
@@ -92,12 +102,16 @@ class SubHeader extends Component {
               <CustomText
                 font="AvenirLTStd-Heavy"
                 size={17}
-                text="   Hi, Winnie"
+                text={`   Hi, ${context.userData.name}`}
               />
             </View>
           </TouchableWithoutFeedback>
         </View>
       </>
+      )
+              }}
+      </UserInfoConsumer>
+
     );
   }
 

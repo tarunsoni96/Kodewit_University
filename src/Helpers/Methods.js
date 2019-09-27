@@ -7,13 +7,17 @@ import {
   LayoutAnimation,
   ToastAndroid
 } from "react-native";
+import Snackbar from 'react-native-snackbar'
+
 import axios from "react-native-axios";
 import NavigationService from "ServiceProviders/NavigationService";
 import { NavigationActions, StackActions } from "react-navigation";
 import moment from "moment";
 import "Helpers/global";
 import { Colors } from "UIProps/Colors";
+import Constants from 'Helpers/Constants'
 import { storeToken, getToken } from 'DataManagers/UserDataManager'
+import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
 
 
 let baseUrl = 'http://192.168.29.212:80/'
@@ -62,11 +66,12 @@ const HelperMethods = {
     return Platform.OS == "ios";
   },
 
-  makeNetworkCall: function(apiName, formData,method = 'GET' , callBack,skipToken = false) {
+  makeNetworkCall: function(apiName, formData, callBack,method = 'GET',skipToken = false) {
     if(skipToken){
-      this.makeApiCall(apiName,'',formData,callBack,method)
+      this.makeApiCall(apiName,formData,formData,callBack,method)
     } else {
       getToken().then((val) => {
+        console.log(val)
       const Headers = { 'Authorization': `Bearer ${val}` }
       this.makeApiCall(apiName,Headers,formData,callBack,method)
     })
@@ -78,114 +83,47 @@ const HelperMethods = {
       console.log('Starting Request', request)
       return request
     })
-  axios.interceptors.response.use(response => console.log('reponse', response))
+  // axios.interceptors.response.use(response => console.log('reponse', response))
 
     axios({
       url: baseUrl+apiName,
-      data:formData,
+      data:method == 'POST' ? formData : null ,
       headers,
       method,
     })
-    .then(response => {
+    .then((response) => {
       console.log(response)
       // const {result} = response.data
       // if('auth' in result){ //new token ... update in db
       //   const token = result.auth.token
       //   storeToken(token)
       // }
-      callBack(response, false);
+      callBack(response.data, false);
     })
     .catch(error => {
-      alert(error)
       callBack({},true)
-      this.snackbar(`Api error: ${error.response}`,'OK',()=>{})
+      this.snackbar(`Api ${error}`,'OK',()=>{})
     });
   },
 
   logout: function(navigation) {
-    AsyncStorage.setItem("loggedIn", "false").then(() => {
-      const resetAction = StackActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: "login" })]
-      });
-      navigation.dispatch(resetAction);
-    });
+    AsyncStorageHandler.delete(Constants.keyUserToken,() => {
+      navigation.navigate('LoginStack')
+    })
   },
 
-  navigateHome: function(
-    navigation,
-    id,
-    fullname,
-    email,
-    auth_token,
-    profile,
-    mobile,
-    gender,
-    noh,
-    nob,
-    nor,
-    penaltyStatus,
-    refCode,
-    credentialLogin,
-    adhaar
-  ) {
-    UserDataHolder.credentialLogin = credentialLogin;
-    UserDataHolder.id = id;
-    UserDataHolder.username = fullname;
-    UserDataHolder.email = email;
-    UserDataHolder.authToken = auth_token;
-    UserDataHolder.profile = profile;
-    UserDataHolder.contact = mobile;
-    UserDataHolder.nob = nob;
-    UserDataHolder.noh = noh;
-    UserDataHolder.nor = nor;
-    UserDataHolder.penaltyStatus = penaltyStatus;
-    UserDataHolder.refCode = refCode;
-    UserDataHolder.adhaar = adhaar;
-
-    AsyncStorage.setItem("id", id);
-    AsyncStorage.setItem("fullname", fullname);
-    AsyncStorage.setItem("gender", gender);
-    AsyncStorage.setItem("mobile", mobile);
-    AsyncStorage.setItem("email", email);
-    AsyncStorage.setItem("profile", profile);
-    AsyncStorage.setItem("loggedIn", "true");
-    AsyncStorage.setItem("noh", noh);
-    AsyncStorage.setItem("nor", nor);
-    AsyncStorage.setItem("nob", nob);
-    AsyncStorage.setItem("refCode", refCode);
-    AsyncStorage.setItem("penaltyStatus", penaltyStatus);
-    AsyncStorage.setItem("credentialLogin", credentialLogin);
-    AsyncStorage.setItem("adhaar", adhaar);
-    AsyncStorage.setItem(constants.constant_appLaunched, "true");
-    AsyncStorage.setItem("authToken", auth_token).then(() => {
-      if (UserDataHolder.username == "") {
-        alert("Please set user data in UserDataHolder model to navigate home");
-        return;
-      } else {
-        const resetAction = StackActions.reset({
-          index: 0,
-          actions: [
-            NavigationActions.navigate({
-              routeName: "home",
-              params: { loginData: UserDataHolder }
-            })
-          ]
-        });
-        navigation.dispatch(resetAction);
-      }
-    });
+  navigateHome: function(){
   },
 
   snackbar: function(message, actionFuncTitle, actionFunc, length) {
-    let snackLen =
-      length == "short" ? Snackbar.LENGTH_SHORT : Snackbar.LENGTH_LONG;
+    let snackLen = length == "short" ? Snackbar.LENGTH_SHORT : Snackbar.LENGTH_LONG;
     Snackbar.show({
+      backgroundColor: Colors.accent,
       title: message,
       duration: snackLen,
       action: {
         title: actionFuncTitle,
-        color: Colors.accent,
+        color: '#fff',
         onPress: () => {
           actionFunc();
         }

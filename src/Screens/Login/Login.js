@@ -12,11 +12,13 @@ import Divider from "AppLevelComponents/UI/Divider";
 import Fonts from "UIProps/Fonts";
 import Email from "AppLevelComponents/UI/FormInputs/Email";
 import Password from "AppLevelComponents/UI/FormInputs/Password";
-import {getToken} from 'ServiceProviders/ApiCaller'
+import ScreenMemory from "AppLevelComponents/UI/ScreenMemory";
+import {getToken,getUser,getStudentInfo} from 'ServiceProviders/ApiCaller'
+import {storeToken,storeUserInfo} from 'DataManagers/UserDataManager'
 
 let valObj = {
-  email: "dummy@g.com",
-  password: "dummy"
+  email: "tarsoni69@gmail.com",
+  password: "qwerty"
 };
 class Login extends Component {
   state = {
@@ -25,16 +27,40 @@ class Login extends Component {
 
   login = () => {
     this.setState({isApiCall:true})
-    getToken().then(response => {
+    getToken(valObj.email,valObj.password).then(response => {
     this.setState({isApiCall:false})
-    alert(response)
+    const {access_token} = response
+    if(access_token){
+      storeToken(access_token).then(()=>{
+        this.getUserObj()
+      })
+    }
+    
+    }).catch(err => {
+    this.setState({isApiCall:'failed'})
     })
-    // this.props.navigation.navigate("AppStudent");
   };
+
+  getUserObj(){
+    getUser().then(resp => {
+      const {id} = resp
+      getStudentInfo(id).then(resp => {
+        console.log(resp);
+        this.props.navigation.navigate("AppStudent");
+        storeUserInfo(resp)
+      })
+    })
+  }
+
+  navigateForgotPass = () => {
+    this.props.navigation.navigate('forgotPassword')
+  }
 
 
   render() {
     return (
+      <ScreenMemory screen='login' >
+
       <Container padding={0} contentPadding={0} scroll={true}>
         <StatusBar
           backgroundColor={Colors.contentCard}
@@ -63,12 +89,13 @@ class Login extends Component {
               />
               <Divider style={{ width: 20 }} />
             </View>
-            <Email marginBottom={7} inputValueGetter={text => (valObj.email = text)} />
-            <Password inputValueGetter={text => (valObj.password = text)} />
+            <Email value={valObj.email}  marginBottom={7} inputValueGetter={text => (valObj.email = text)} />
+            <Password value={valObj.password} inputValueGetter={text => (valObj.password = text)} />
 
             <CustomText
               text="Forgot password?"
               color={Colors.accent}
+              onPress={this.navigateForgotPass}
               font={Fonts.medium}
               style={{ alignSelf: "flex-end", marginVertical: 10 }}
             />
@@ -81,6 +108,8 @@ class Login extends Component {
           </View>
         </View>
       </Container>
+      </ScreenMemory>
+
     );
   }
 }

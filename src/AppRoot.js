@@ -42,6 +42,7 @@ import HolidayCalendar from "Screens/HolidayCalendar/HolidayCalendar";
 import iCard from "Screens/iCard/iCard";
 import PhotoGraphFullView from "Screens/PhotographFullView/PhotoGraphFullView";
 import Settings from "Screens/Settings/Settings";
+import ForgotPassword from "./Screens/ForgotPassword/ForgotPassword";
 
 let transitionSpeed = 650;
 let tabIconSize = 18;
@@ -87,7 +88,22 @@ const LoginStack = createStackNavigator({
     navigationOptions: {
       header: null
     }
+  },
+
+  forgotPassword: {
+    screen: ForgotPassword,
+    navigationOptions: {
+      headerStyle:{
+        backgroundColor:Colors.contentCard,
+
+      },
+      title:'Forgot password'
+    }
   }
+
+
+},{
+  initialRouteName:'login'
 });
 
 

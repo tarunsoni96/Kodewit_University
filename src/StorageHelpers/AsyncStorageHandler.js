@@ -20,7 +20,7 @@ const AsyncStorageHandler = {
     }
   },
 
-  deleteData:function(key,callback){
+  delete:function(key,callback){
     store.delete(key).then(()=>{
       callback()
     })

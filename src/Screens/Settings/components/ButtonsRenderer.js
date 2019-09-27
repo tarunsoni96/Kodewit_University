@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 import LanguageButtons from "AppLevelComponents/LanguageSelector/components/LanguageButtons";
 import SettingBtn from "./SettingBtn";
 import { withNavigation } from "react-navigation";
+import HelperMethods from "../../../Helpers/Methods";
 
 class ButtonsRenderer extends Component {
   renderButtons(buttons) {
@@ -16,7 +17,7 @@ class ButtonsRenderer extends Component {
   onPressHandler (name) {
         switch(name){
             case 'Logout':
-            this.props.navigation.navigate('LoginStack')  
+            HelperMethods.logout(this.props.navigation)
             break
     }
   }

@@ -17,6 +17,7 @@ import ProfileLabel from "./components/ProfileLabel";
 import InfoItem from "./components/InfoItem";
 import { Row, Grid, Col } from "react-native-easy-grid";
 import Icons from "../../AppLevelComponents/UI/Icons";
+import { UserInfoConsumer } from "../../AppLevelComponents/Contexts/CxtUserInfo";
 
 export class Profile extends Component {
   state = {
@@ -26,6 +27,12 @@ export class Profile extends Component {
 
   render() {
     return (
+      <UserInfoConsumer>
+          {context => {
+            const {userData} = context
+                          return(
+                              
+                      
       <Container padding={0}>
         <Header>
           <View>
@@ -38,15 +45,15 @@ export class Profile extends Component {
                 showCameraIcon
                 style={{ marginTop: 10 }}
                 size={80}
-                pic="https://images.pexels.com/photos/1877913/pexels-photo-1877913.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                pic={userData.pic_path == '' ? "https://images.pexels.com/photos/1877913/pexels-photo-1877913.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500": userData.pic_path}
               />
               <CustomText
-                text="Winnie singh"
+                text={userData.name}
                 style={{ marginVertical: 8 }}
                 color={Colors.black}
                 font={Fonts.heavy}
               />
-              <ProfileLabel />
+              <ProfileLabel label={userData.role} />
             </View>
           </View>
 
@@ -73,13 +80,13 @@ export class Profile extends Component {
           >
             <Row style={styles.infoContainer}>
               <Col style={{}}>
-                <InfoItem title="Roll Number" info="1155434" />
-                <InfoItem title="Subject" info="Industrial Design" />
+                <InfoItem title="Roll Number" info={userData.student_code} />
+                <InfoItem title="Subject" info={userData.section.class.group} />
               </Col>
 
               <Col style={styles.colRight}>
-                <InfoItem title="Course" info="B.Design" />
-                <InfoItem title="Batch" info="2016-2020" />
+                <InfoItem title="Course" info={'missing'} />
+                <InfoItem title="Batch" info={userData.student_info.session} />
               </Col>
             </Row>
             <Row style={[styles.infoContainer, { paddingLeft: 0 }]}>
@@ -99,28 +106,31 @@ export class Profile extends Component {
 
             <Row style={styles.infoContainer}>
               <Col style={{}}>
-                <InfoItem title="Date of Birth" info="15/01/1999" />
-                <InfoItem title="Address" info="240/4, DLF Hamilton, Phase 3" />
+                <InfoItem title="Date of Birth" info={userData.student_info.birthday} />
+                <InfoItem title="Address" info={userData.address} />
               </Col>
 
               <Col style={styles.colRight}>
-                <InfoItem title="Email" info="name@collegmail.com" />
-                <InfoItem title="Batch" info="Gurgaon" />
+                <InfoItem title="Email" info={userData.email} />
+                <InfoItem title="Batch" info="missing" />
               </Col>
             </Row>
 
             <Row style={styles.infoContainer}>
               <Col style={{}}>
-                <InfoItem title="State" info="Haryana" />
+                <InfoItem title="State" info="missing" />
               </Col>
 
               <Col style={styles.colRight}>
-                <InfoItem title="Pin" info="221230" />
+                <InfoItem title="Pin" info="missing" />
               </Col>
             </Row>
           </Grid>
         </ScrollView>
       </Container>
+      )
+                      }}
+      </UserInfoConsumer>
     );
   }
 }

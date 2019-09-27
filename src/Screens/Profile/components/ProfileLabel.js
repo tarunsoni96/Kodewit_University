@@ -24,9 +24,10 @@ class ProfileLabel extends Component {
   }
 
   render() {
+    const {label} = this.props
     return (
       <View style={styles.container}>
-        <CustomText text="Student" size={16} color='#000' font={Fonts.medium} />
+        <CustomText text={label} size={16} color='#000' font={Fonts.medium} />
         
       </View>
     );

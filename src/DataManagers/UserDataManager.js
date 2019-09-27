@@ -2,9 +2,12 @@ import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
 import Constants from 'Helpers/Constants'
 
 let token = undefined
+
 export const storeToken = function (token) {
-    AsyncStorageHandler.deleteData(Constants.keyUserToken, () => {
-        AsyncStorageHandler.store(Constants.keyUserToken, token)
+    return new Promise(function (resolve, reject) {
+        AsyncStorageHandler.store(Constants.keyUserToken, token,()=>{
+            resolve(true)
+        })
     })
 }
 
