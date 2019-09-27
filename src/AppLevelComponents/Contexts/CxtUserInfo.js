@@ -9,7 +9,7 @@ export const UserInfoConsumer = UserInfoContext.Consumer;
 
 export class UserInfoProvider extends Component {
   state = {
-  data:undefined,
+  data:{},
   };
 
   componentWillMount() {

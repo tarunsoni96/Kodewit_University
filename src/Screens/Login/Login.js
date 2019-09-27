@@ -15,11 +15,14 @@ import Password from "AppLevelComponents/UI/FormInputs/Password";
 import ScreenMemory from "AppLevelComponents/UI/ScreenMemory";
 import {getToken,getUser,getStudentInfo} from 'ServiceProviders/ApiCaller'
 import {storeToken,storeUserInfo} from 'DataManagers/UserDataManager'
+import { UserInfoConsumer } from "../../AppLevelComponents/Contexts/CxtUserInfo";
 
 let valObj = {
   email: "tarsoni69@gmail.com",
   password: "qwerty"
 };
+
+let currentContext
 class Login extends Component {
   state = {
     isApiCall: undefined
@@ -28,7 +31,6 @@ class Login extends Component {
   login = () => {
     this.setState({isApiCall:true})
     getToken(valObj.email,valObj.password).then(response => {
-    this.setState({isApiCall:false})
     const {access_token} = response
     if(access_token){
       storeToken(access_token).then(()=>{
@@ -43,11 +45,14 @@ class Login extends Component {
 
   getUserObj(){
     getUser().then(resp => {
+
       const {id} = resp
       getStudentInfo(id).then(resp => {
-        console.log(resp);
-        this.props.navigation.navigate("AppStudent");
-        storeUserInfo(resp)
+        this.setState({isApiCall:false})
+        currentContext.setUserData(resp)
+        storeUserInfo(resp).then(()=>{
+          this.props.navigation.navigate('AppStudent')
+        })
       })
     })
   }
@@ -59,6 +64,11 @@ class Login extends Component {
 
   render() {
     return (
+      <UserInfoConsumer>
+        {context => {
+        currentContext = context
+                        return(
+                     
       <ScreenMemory screen='login' >
 
       <Container padding={0} contentPadding={0} scroll={true}>
@@ -109,6 +119,10 @@ class Login extends Component {
         </View>
       </Container>
       </ScreenMemory>
+             
+      )
+                    }}
+      </UserInfoConsumer>
 
     );
   }

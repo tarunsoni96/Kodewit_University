@@ -89,7 +89,6 @@ class Noticeboard extends Component {
   }
   render() {
     return (
-      <BoardContentProvider>
         <ContentConsumer>
           {context => {
             return (
@@ -132,7 +131,6 @@ class Noticeboard extends Component {
             );
           }}
         </ContentConsumer>
-      </BoardContentProvider>
     );
   }
 }

@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import { TouchableOpacity, View, StatusBar, ScrollView } from "react-native";
-import { withNavigation } from "react-navigation";
 import Container from "AppLevelComponents/UI/Container";
-import Logo from "AppLevelComponents/UI/Logo";
 import { Colors } from "UIProps/Colors";
 import EStyleSheet from "react-native-extended-stylesheet";
 import CustomText from "AppLevelComponents/UI/CustomText";
-import CustomButton from "AppLevelComponents/UI/CustomButton";
 import Divider from "AppLevelComponents/UI/Divider";
 import Header from "AppLevelComponents/UI/Header";
 import SubHeader from "../../AppLevelComponents/UI/SubHeader";

@@ -31,7 +31,11 @@ export const getToken = function () {
 }
 
 export const storeUserInfo = function (obj) {
-    AsyncStorageHandler.store(Constants.userInfoObj, obj)
+    return new Promise(function (resolve, reject) {
+    AsyncStorageHandler.store(Constants.userInfoObj, obj,()=>{
+        resolve(true)
+        })
+    })
 }
 
 export const getUserObj = function () {
