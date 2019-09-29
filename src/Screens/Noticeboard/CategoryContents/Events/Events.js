@@ -12,7 +12,7 @@ import { withNavigation } from "react-navigation";
 import Bottomsheet from "AppLevelComponents/UI/Bottomsheet";
 import BottomsheetEvents from "./components/BottomsheetEvents";
 import EventCard from "./components/EventCard";
-
+import {getEvents} from 'ServiceProviders/ApiCaller'
 let data = [
   {
     title: "Title",
@@ -28,9 +28,20 @@ class Events extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isApiCall:false,
       bottomSheetContent: undefined
     };
   }
+
+  getData(){
+    this.setState({isApiCall:true})
+    getEvents().then(resp => {
+      this.setState({isApiCall:false})
+    }).catch(()=>{
+      this.setState({isApiCall:'failed'})
+    })
+  }
+
 
   downloadAttachment() {
     alert("dasd");

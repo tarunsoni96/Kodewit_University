@@ -11,6 +11,7 @@ import Fonts from "UIProps/Fonts";
 import ProfilePic from "AppLevelComponents/UI/ProfilePic";
 import Constants from "Helpers/Constants";
 import ProfileLabel from "./components/ProfileLabel";
+import HelperMethods from 'Helpers/Methods'
 import InfoItem from "./components/InfoItem";
 import { Row, Grid, Col } from "react-native-easy-grid";
 import Icons from "../../AppLevelComponents/UI/Icons";
@@ -103,7 +104,7 @@ export class Profile extends Component {
 
             <Row style={styles.infoContainer}>
               <Col style={{}}>
-                <InfoItem title="Date of Birth" info={userData.student_info.birthday} />
+                <InfoItem title="Date of Birth" info={HelperMethods.formatDate_DMY(userData.student_info.birthday)} />
                 <InfoItem title="Address" info={userData.address} />
               </Col>
 

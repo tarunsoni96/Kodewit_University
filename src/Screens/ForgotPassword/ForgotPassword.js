@@ -20,12 +20,14 @@ let valObj = {
  class ForgotPassword extends Component {
 
     state = {
-        isApiCall:undefined
+        isApiCall:undefined,
+        passSent:false,
     }
 
     sendMail = () => {
         this.setState({isApiCall:true})
         forgotPassSendMail(valObj.email).then((resp,failed) => {
+          this.setState({passSent:true})
         this.setState({isApiCall: false })
         }).catch(err => {
         this.setState({isApiCall: 'failed' })

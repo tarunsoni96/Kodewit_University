@@ -67,6 +67,21 @@ export const forgotPassSendMail = function(email) {
     });
   };
 
+  export const getEvents = function(id) {
+    return new Promise(function(resolve, reject) {
+      HelperMethods.makeNetworkCall(`api/academics/schoolevent`,{},(resp, isError) => {
+          if (!isError) {
+            resolve(resp);
+          } else {
+            reject(true);
+          }
+        },
+        'GET'
+      );
+    });
+  };
+
+
 
 
 // export const referUsers = function(mobile) {

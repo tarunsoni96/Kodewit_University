@@ -209,8 +209,8 @@ const HelperMethods = {
     });
   },
 
-  formatDate_DMY: function(date) {
-    return moment(date).format("DD-MM-YYYY");
+  formatDate_DMY: function(date) { //requires date in format 2-2-2 or 2/2/2 with time or without time
+    return moment(date).format("DD/MM/YYYY");
   }
 };
 
