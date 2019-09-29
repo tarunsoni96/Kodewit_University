@@ -45,7 +45,6 @@ class Login extends Component {
 
   getUserObj(){
     getUser().then(resp => {
-
       const {id} = resp
       getStudentInfo(id).then(resp => {
         this.setState({isApiCall:false})

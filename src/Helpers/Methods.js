@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import Snackbar from 'react-native-snackbar'
 
-import axios from "react-native-axios";
+import axios from "axios";
+import axiosCancel from 'axios-cancel';
 import NavigationService from "ServiceProviders/NavigationService";
 import { NavigationActions, StackActions } from "react-navigation";
 import moment from "moment";
@@ -19,9 +20,13 @@ import Constants from 'Helpers/Constants'
 import { storeToken, getToken } from 'DataManagers/UserDataManager'
 import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
 
-
+let timer;
 let baseUrl = 'http://192.168.29.212:80/'
 let counter = 2;
+
+var CancelToken = axios.CancelToken;
+var cancel;
+const reqTimeout = 15000
 
 const HelperMethods = {
   showAlert: function(
@@ -78,36 +83,56 @@ const HelperMethods = {
     }
   },
 
-  makeApiCall:function(apiName,headers,formData,callBack,method){
-    axios.interceptors.request.use(request => {
-      console.log('Starting Request', request)
-      return request
-    })
-  // axios.interceptors.response.use(response => console.log('reponse', response))
+  promiseTimeout : function (msec,callBack) {
+    if(timer){
+      clearTimeout(timer)
+    }
 
-    axios({
+    return promise => {
+      const timeout = new Promise((yea, nah) => {
+       timer = setTimeout(() => {
+        callBack(false,true)
+        cancel();
+      },msec)
+    })
+      return Promise.race([promise, timeout])
+    }
+  },
+
+  makeApiCall:function(apiName,headers,formData,callBack,method){
+    // axios.interceptors.request.use(request => {
+    //   console.log('Starting Request', request)
+    //   return request
+    // })
+  // axios.interceptors.response.use(response => console.log('reponse', response))
+    this.promiseTimeout(reqTimeout,callBack)(axios({
       url: baseUrl+apiName,
       data:method == 'POST' ? formData : null ,
       headers,
+      cancelToken: new CancelToken(
+        function executor(c) {
+            cancel = c;
+         }),
       method,
     })
     .then((response) => {
       console.log(response)
-      // const {result} = response.data
-      // if('auth' in result){ //new token ... update in db
-      //   const token = result.auth.token
-      //   storeToken(token)
-      // }
+      clearTimeout(timer)
       callBack(response.data, false);
     })
     .catch(error => {
-      callBack({},true)
-      this.snackbar(`Api ${error}`,'OK',()=>{})
-    });
+      
+      if(axios.isCancel(error)){
+        this.snackbar(`Request timeout, please retry`,'OK',()=>{})
+      } else {
+        callBack(false, true);
+        this.snackbar(`Api ${error}`,'OK',()=>{})
+      }
+    }))
   },
 
   logout: function(navigation) {
-    AsyncStorageHandler.delete(Constants.keyUserToken,() => {
+    AsyncStorageHandler.delete(Constants.userInfoObj,() => {
       navigation.navigate('LoginStack')
     })
   },

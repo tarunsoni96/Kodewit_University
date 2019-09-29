@@ -14,7 +14,6 @@ export const getToken = function(username, password) {
 
     HelperMethods.makeNetworkCall('oauth/token',formData,(resp, isError) => {
         if (resp) {
-
           resolve(resp);
         } else {
           reject(isError);

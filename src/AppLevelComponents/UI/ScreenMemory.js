@@ -31,7 +31,7 @@ class ScreenMemory extends Component {
   }
 
   checkIsLoggedIn(){
-    this.validate(Constants.keyUserToken,'AppStudent')
+    this.validate(Constants.userInfoObj,'AppStudent')
   }
 
   validate(constant,screen){

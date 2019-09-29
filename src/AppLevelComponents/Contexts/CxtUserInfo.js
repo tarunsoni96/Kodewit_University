@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { LayoutAnimation, UIManager, Platform,View } from "react-native";
 import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
-import HelperMethods from 'Helpers/Methods'
 import Constants from "Helpers/Constants";
 
 export const UserInfoContext = React.createContext();
@@ -28,8 +26,7 @@ export class UserInfoProvider extends Component {
         value={{
           userData:this.state.data,
           setUserData:this.setUserData
-        }}
-      >
+        }}>
         {this.props.children}
       </UserInfoContext.Provider>
     );

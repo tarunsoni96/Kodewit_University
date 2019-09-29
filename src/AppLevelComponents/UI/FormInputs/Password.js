@@ -89,7 +89,8 @@ export default class Password extends Component {
           />
         }
         onChangeText={text => this.setText(text)}
-        value={this.state.text}
+        value={this.state.wantToEdit ? this.state.text : value}
+        
         placeholderTextColor={Colors.inputs_placeholders}
         inputContainerStyle={inputContainerStyle}
         errorStyle={inputsError}
