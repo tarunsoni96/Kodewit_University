@@ -1,9 +1,11 @@
 import HelperMethods from 'Helpers/Methods';
-
+import {AsyncStorage} from 'react-native'
+import {storeToken,storeUserInfo} from 'DataManagers/UserDataManager'
+import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
 let client_id = 4;
 let client_secret = 'rOpR82W1rWFsWjX4iVzgkZBi0Nw41rYRyDUnwuZ5';
 
-export const getToken = function(username, password) {
+export const login = function(username, password) {
   return new Promise(function(resolve, reject) {
     const formData = new FormData();
     formData.append('client_id', client_id);
@@ -14,7 +16,13 @@ export const getToken = function(username, password) {
 
     HelperMethods.makeNetworkCall('oauth/token',formData,(resp, isError) => {
         if (resp) {
-          resolve(resp);
+          const {access_token} = resp
+            if(access_token){
+              storeToken(access_token).then(()=>{
+                getUser(resolve)
+              })
+            }
+
         } else {
           reject(isError);
         }
@@ -23,6 +31,46 @@ export const getToken = function(username, password) {
     );
   });
 };
+
+
+export const getUser = function(promise) {
+  return new Promise(function(resolve, reject) {
+    HelperMethods.makeNetworkCall(`api/user`,{},(resp, isError) => {
+        if (!isError) {
+          const {id,email} = resp
+          getStudentInfo(id,promise,email)
+        } else {
+          reject(true);
+        }
+      },
+      'GET'
+    );
+  });
+};
+
+
+
+export const getStudentInfo = function(id,promise,email) {
+  return new Promise(function(resolve, reject) {
+    HelperMethods.makeNetworkCall(`api/studentinfo/${id}`,{},(resp, isError) => {
+        if (!isError) {
+          storeUserInfo(resp).then(()=>{
+            AsyncStorage.getItem("fcmToken").then(val=>{
+              registerDevice(id,email,val)
+              promise(resp);
+           })
+
+          })
+        } else {
+          reject(true);
+        }
+      },
+      'GET'
+    );
+  });
+};
+
+
 
 export const forgotPassSendMail = function(email) {
     return new Promise(function(resolve, reject) {
@@ -38,9 +86,10 @@ export const forgotPassSendMail = function(email) {
     });
   };
 
-  export const getUser = function() {
+
+  export const resetPass = function(email,pass) {
     return new Promise(function(resolve, reject) {
-      HelperMethods.makeNetworkCall(`api/user`,{},(resp, isError) => {
+      HelperMethods.makeNetworkCall(`api/resetpassword/${email}/${pass}`,{},(resp, isError) => {
           if (!isError) {
             resolve(resp);
           } else {
@@ -52,20 +101,7 @@ export const forgotPassSendMail = function(email) {
     });
   };
 
-
-  export const getStudentInfo = function(id) {
-    return new Promise(function(resolve, reject) {
-      HelperMethods.makeNetworkCall(`api/studentinfo/${id}`,{},(resp, isError) => {
-          if (!isError) {
-            resolve(resp);
-          } else {
-            reject(true);
-          }
-        },
-        'GET'
-      );
-    });
-  };
+  
 
   export const getEvents = function(id) {
     return new Promise(function(resolve, reject) {
@@ -83,58 +119,25 @@ export const forgotPassSendMail = function(email) {
 
 
 
+  export const registerDevice = function(id,email,token) {
+    return new Promise(function(resolve, reject) {
+      const formData = new FormData();
+      formData.append('user_id',id)
+      formData.append('fcm_token',token)
+      formData.append('email_address',email)
+  
+      HelperMethods.makeNetworkCall('api/registerDevice',formData,(resp, isError) => {
+          if (resp) {
+            HelperMethods.snackbar('Device registered.')
+            resolve(true)
+          } else {
+            reject(isError);
+          }
+        },
+        'POST',
+      );
+    });
+  };
 
-// export const referUsers = function(mobile) {
-//     return new Promise(function(resolve,reject) {
-//         const formData = {
-//             mobile:mobile
-//         }
-//         HelperMethods.makeNetworkCall_post("/user/referral/request/create",formData,(resp, isError) => {
-//             const { success, result,errors } = resp;
 
-//             if (success) {
-//                 resolve(result)
-//             } else {
-//                 reject(errors)
-//             }
-//           });
-//     })
 
-// };
-
-// export const inputReferCode = function(code){
-//     return new Promise(function(resolve,reject) {
-//         const formData = {
-//             code : code
-//         }
-//         HelperMethods.makeNetworkCall_post("/user/referral/code/use",formData,(resp, isError) => {
-//             const { success, result,errors } = resp;
-//             if (success) {
-//                 resolve(result)
-//             } else {
-//                 reject(errors)
-//             }
-//           });
-//     })
-// }
-
-// export const uploadPhoto = function(uri){
-//     return new Promise(function(resolve,reject) {
-
-//         const formData = {
-//             upload:{uri,type:'image/jpg',name:'tst'},
-//             category:'profile_image',
-
-//         }
-//         HelperMethods.uploadPhoto("/profile/gallery/upload",formData,(resp, isError) => {
-//             const { success, result,errors } = resp;
-
-//             if (success) {
-//                 resolve(result)
-//             } else {
-//                 // alert(errors)
-//                 reject(errors)
-//             }
-//           });
-//     })
-// }

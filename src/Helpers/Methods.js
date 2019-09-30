@@ -100,10 +100,10 @@ const HelperMethods = {
   },
 
   makeApiCall:function(apiName,headers,formData,callBack,method){
-    // axios.interceptors.request.use(request => {
-    //   console.log('Starting Request', request)
-    //   return request
-    // })
+    axios.interceptors.request.use(request => {
+      console.log('Starting Request', request)
+      return request
+    })
   // axios.interceptors.response.use(response => console.log('reponse', response))
     this.promiseTimeout(reqTimeout,callBack)(axios({
       url: baseUrl+apiName,
@@ -140,7 +140,7 @@ const HelperMethods = {
   navigateHome: function(){
   },
 
-  snackbar: function(message, actionFuncTitle, actionFunc, length) {
+  snackbar: function(message, actionFuncTitle = 'OK', actionFunc = ()=>{}, length) {
     let snackLen = length == "short" ? Snackbar.LENGTH_SHORT : Snackbar.LENGTH_LONG;
     Snackbar.show({
       backgroundColor: Colors.accent,

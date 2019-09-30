@@ -25,7 +25,7 @@ class App extends Component {
       <BoardContentProvider>
         <UserInfoProvider>
           <AppRoot />
-          {/* <PushNotification /> */}
+          <PushNotification />
         </UserInfoProvider>
       </BoardContentProvider>
     );

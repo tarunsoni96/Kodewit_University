@@ -71,11 +71,10 @@ export default class Password extends Component {
     );
   };
   render() {
-    let { width, labelStyleAdditional,showLabel, value } = this.props;
-    let label = { ...labelStyle, ...labelStyleAdditional };
+    let { width, labelStyleAdditional,showLabel,label, value } = this.props;
     return (
       <Input
-        label={ "Your Password" }
+        label={label || "Your Password" }
         labelStyle={labelStyle}
         ref={input => (this.inputRef = input)}
         secureTextEntry={this.state.hidePass}

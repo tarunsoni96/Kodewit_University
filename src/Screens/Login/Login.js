@@ -13,13 +13,15 @@ import Fonts from "UIProps/Fonts";
 import Email from "AppLevelComponents/UI/FormInputs/Email";
 import Password from "AppLevelComponents/UI/FormInputs/Password";
 import ScreenMemory from "AppLevelComponents/UI/ScreenMemory";
-import {getToken,getUser,getStudentInfo} from 'ServiceProviders/ApiCaller'
-import {storeToken,storeUserInfo} from 'DataManagers/UserDataManager'
+import {login} from 'ServiceProviders/ApiCaller'
+import {storeUserInfo} from 'DataManagers/UserDataManager'
 import { UserInfoConsumer } from "../../AppLevelComponents/Contexts/CxtUserInfo";
+import AsyncStorageHandler from "../../StorageHelpers/AsyncStorageHandler";
+import Constants from "../../Helpers/Constants";
 
 let valObj = {
   email: "tarsoni69@gmail.com",
-  password: "qwerty"
+  password: "123456"
 };
 
 let currentContext
@@ -30,36 +32,30 @@ class Login extends Component {
 
   login = () => {
     this.setState({isApiCall:true})
-    getToken(valObj.email,valObj.password).then(response => {
-    const {access_token} = response
-    if(access_token){
-      storeToken(access_token).then(()=>{
-        this.getUserObj()
+    login(valObj.email,valObj.password).then(resp => {
+      this.setState({isApiCall:false})
+      currentContext.setUserData(resp)
+      storeUserInfo(resp).then(()=>{
+        AsyncStorageHandler.get(Constants.canResetPass,val => {
+          if(val != null){
+            if(val == 'true'){
+              this.props.navigation.navigate('resetPassword')
+            }
+          } else {
+            this.props.navigation.navigate('AppStudent')
+          }
+        })
       })
-    }
-    
+
+
     }).catch(err => {
     this.setState({isApiCall:'failed'})
     })
   };
 
-  getUserObj(){
-    getUser().then(resp => {
-      const {id} = resp
-      getStudentInfo(id).then(resp => {
-        this.setState({isApiCall:false})
-        currentContext.setUserData(resp)
-        storeUserInfo(resp).then(()=>{
-          this.props.navigation.navigate('AppStudent')
-        })
-      })
-    })
-  }
-
   navigateForgotPass = () => {
     this.props.navigation.navigate('forgotPassword')
   }
-
 
   render() {
     return (

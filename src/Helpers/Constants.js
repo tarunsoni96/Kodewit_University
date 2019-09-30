@@ -8,7 +8,8 @@ const Constants = {
     keysocailLoggedIn : 'isSocialLoggedIn',
     isProfileCreated:'isProfileCreated',
     userInfoObj: 'userInfoObj',
-
+    canResetPass:'canResetPass',
+    fcmToken:'fcmToken',
 
     //_______________________________category constants 
     //___________________________STUDENT

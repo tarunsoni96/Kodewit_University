@@ -37,7 +37,7 @@ export default class CustomButton extends Component {
     let title = text+` ${isApiCall == 'failed' ? '- Retry' : '' } `
     
     return (
-      <Animatable.View animation={this.state.animation} useNativeDriver={true} duration={600}  style={{ flex:1,width:'100%'}}>
+      <Animatable.View animation={this.state.animation} useNativeDriver={true} duration={600} style={{flex:1,...containerStyle}} >
 
       <Button
         disabled={isApiCall && isApiCall != 'failed' }
@@ -62,7 +62,7 @@ export default class CustomButton extends Component {
         }}
         buttonStyle={[
           styles.button,
-          { borderRadius: borderRadius || 60 }
+          { borderRadius: borderRadius || 60, }
         ]}
         loading={isApiCall && isApiCall != 'failed'}
       />

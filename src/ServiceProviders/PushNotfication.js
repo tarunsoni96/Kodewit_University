@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { AsyncStorage } from "react-native";
 import { Colors } from "UIProps/Colors";
 import firebase from "react-native-firebase";
-
+import Constants from 'Helpers/Constants'
+import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
+import {registerDevice} from 'ServiceProviders/ApiCaller'
 export default class PushNotification extends Component {
   async componentDidMount() {
     this.checkPermission();
@@ -79,6 +81,7 @@ export default class PushNotification extends Component {
         await AsyncStorage.setItem("fcmToken", fcmToken);
       }
     }
+    
     console.log(fcmToken);
   }
 

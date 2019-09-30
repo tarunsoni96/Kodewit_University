@@ -43,6 +43,7 @@ import iCard from "Screens/iCard/iCard";
 import PhotoGraphFullView from "Screens/PhotographFullView/PhotoGraphFullView";
 import Settings from "Screens/Settings/Settings";
 import ForgotPassword from "./Screens/ForgotPassword/ForgotPassword";
+import ResetPassword from "./Screens/ResetPassword/ResetPassword";
 
 let transitionSpeed = 650;
 let tabIconSize = 18;
@@ -92,18 +93,15 @@ const LoginStack = createStackNavigator({
 
   forgotPassword: {
     screen: ForgotPassword,
-    navigationOptions: {
-      headerStyle:{
-        backgroundColor:Colors.contentCard,
+  },
 
-      },
-      title:'Forgot password'
-    }
+  resetPassword: {
+    screen: ResetPassword,
   }
 
-
 },{
-  initialRouteName:'login'
+  initialRouteName:'login',
+  headerMode:'none'
 });
 
 
