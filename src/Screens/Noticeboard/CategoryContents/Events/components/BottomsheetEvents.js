@@ -15,6 +15,7 @@ import { Row, Grid, Col } from "react-native-easy-grid";
 import Divider from "AppLevelComponents/UI/Divider";
 import InfoItem from "../../../../Profile/components/InfoItem";
 import HelperMethods from "../../../../../Helpers/Methods";
+import DownloadButton from "../../../../../AppLevelComponents/UI/DownloadButton";
 
 let attachments = [
   { name: "Datesheet.pdf" },
@@ -99,12 +100,7 @@ export default class BottomsheetEvents extends Component {
               <InfoItem title="Venue" info="Bose Hall" />
             </View>
           </View>
-          <CustomButton
-            onPress={this.downloadAttachment}
-            text="DOWNLOAD ATTACHMENT"
-            containerStyle={{marginBottom:60}}
-            isApiCall={this.state.isApiCall}
-          />
+         <DownloadButton />
         </View>
       </Bottomsheet>
     );

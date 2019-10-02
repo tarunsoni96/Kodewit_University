@@ -11,6 +11,7 @@ import Bottomsheet from "AppLevelComponents/UI/Bottomsheet";
 import CustomText from "AppLevelComponents/UI/CustomText";
 import CustomButton from "AppLevelComponents/UI/CustomButton";
 import EStyleSheet from "react-native-extended-stylesheet";
+import DownloadButton from "../../../../../AppLevelComponents/UI/DownloadButton";
 
 export default class BottomsheetCircular extends Component {
   constructor(props) {
@@ -59,12 +60,7 @@ export default class BottomsheetCircular extends Component {
 
         </View>
          
-          <CustomButton
-            onPress={this.downloadAttachment}
-            text="DOWNLOAD ATTACHMENT"
-            containerStyle={{marginBottom:60}}
-            isApiCall={this.state.isApiCall}
-          />
+          <DownloadButton url={content.file_path} />
         </View>
       </Bottomsheet>
     );

@@ -9,7 +9,7 @@
 #import <Firebase.h>
 #import "RNFirebaseNotifications.h"
 #import <React/RCTBridge.h>
-
+#import <RNBackgroundDownloader.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
@@ -17,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
+[RNBackgroundDownloader setCompletionHandlerWithIdentifier:identifier completionHandler:completionHandler];
    [FIRApp configure]; //Add This Line
   [RNFirebaseNotifications configure];  //Add This Line
 

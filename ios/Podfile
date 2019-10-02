@@ -43,8 +43,9 @@ target 'University' do
   pod 'Firebase/Messaging'
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
-
+  pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
   pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
+
 
   target 'UniversityTests' do
     inherit! :search_paths
