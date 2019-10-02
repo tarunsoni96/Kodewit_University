@@ -48,7 +48,7 @@ let isPlaying = false
               <Animatable.View animation={this.state.animation} onAnimationEnd={()=>this.resetAnimation()}  useNativeDriver={true} duration={600}  style={{ flex:1,width:'100%',...style}}>
               <ScrollView
                 contentContainerStyle={{
-                  // flex: 1,
+                  // flex: 1, //disable for scrolling isues
                   width: "100%",
                   // padding: 14,
                   paddingTop: 0,

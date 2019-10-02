@@ -13,30 +13,26 @@ import Bottomsheet from "AppLevelComponents/UI/Bottomsheet";
 import BottomsheetEvents from "./components/BottomsheetEvents";
 import EventCard from "./components/EventCard";
 import {getEvents} from 'ServiceProviders/ApiCaller'
-let data = [
-  {
-    title: "Title",
-    description: "A good descripton looks good to read and see"
-  },
-  {
-    title: "Title",
-    description: "A good descripton looks good to read and see"
-  }
-];
+import NetworkAwareContent from "../../../../UniversityComponents/NetworkAwareContent";
 
 class Events extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isApiCall:false,
-      bottomSheetContent: undefined
+      bottomSheetContent: undefined,
+      data:[],
     };
   }
 
-  getData(){
+  componentWillMount(){
+    this.getData()
+  }
+
+  getData = () => {
     this.setState({isApiCall:true})
     getEvents().then(resp => {
-      this.setState({isApiCall:false})
+      this.setState({isApiCall:false,data:resp})
     }).catch(()=>{
       this.setState({isApiCall:'failed'})
     })
@@ -57,7 +53,7 @@ class Events extends Component {
     return (
       <TouchableWithoutFeedback onPress={() => this.openBottomsheet(item)}>
         <View style={{ paddingBottom: 5 }}>
-          <EventCard title={item.title} desc={item.description} />
+          <EventCard title={item.event_name} desc={item.event_summary} />
         </View>
       </TouchableWithoutFeedback>
     );
@@ -65,11 +61,13 @@ class Events extends Component {
 
   render() {
     return (
+      <NetworkAwareContent data={this.state.data} isApiCall={this.state.isApiCall} apiFunc={this.getData} >
+
       <View style={{ flex: 1, alignItems: "center" }}>
         <View>
           <FlatList
             showsHorizontalScrollIndicator={false}
-            data={data}
+            data={this.state.data}
             keyExtractor={(item, index) => index + ""}
             renderItem={this.renderEvents}
           />
@@ -79,6 +77,8 @@ class Events extends Component {
           <BottomsheetEvents content={this.state.bottomSheetContent} />
         )}
       </View>
+      </NetworkAwareContent>
+
     );
   }
 }

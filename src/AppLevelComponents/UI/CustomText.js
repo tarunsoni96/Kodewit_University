@@ -41,6 +41,14 @@ export default class CustomText extends Component {
     }
 
     padding = padding == undefined && 1
+
+    let fontType 
+    if(HelperMethods.isPlatformAndroid()){
+      fontType = font || Fonts.medium
+    } else {
+      fontType = null
+    }
+    
     return (
       <LanguageConsumer>
         {context => {
@@ -55,9 +63,7 @@ export default class CustomText extends Component {
                 {
                   fontSize: size * rem || 18 * rem,
                   color: color || Colors.white,
-                  fontFamily: HelperMethods.isPlatformAndroid()
-                    ? font 
-                    : null,
+                  fontFamily: fontType,
                   padding: padding || 5 ,
                   paddingHorizontal:
                     (padding == undefined || paddingHorizontal == undefined)

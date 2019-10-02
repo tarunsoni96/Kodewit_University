@@ -8,7 +8,7 @@ import {
   ToastAndroid
 } from "react-native";
 import Snackbar from 'react-native-snackbar'
-
+import NetInfo from "@react-native-community/netinfo";
 import axios from "axios";
 import axiosCancel from 'axios-cancel';
 import NavigationService from "ServiceProviders/NavigationService";
@@ -71,16 +71,33 @@ const HelperMethods = {
     return Platform.OS == "ios";
   },
 
-  makeNetworkCall: function(apiName, formData, callBack,method = 'GET',skipToken = false) {
-    if(skipToken){
-      this.makeApiCall(apiName,formData,formData,callBack,method)
-    } else {
-      getToken().then((val) => {
-        console.log(val)
-      const Headers = { 'Authorization': `Bearer ${val}` }
-      this.makeApiCall(apiName,Headers,formData,callBack,method)
+  isConnected:function(){
+    return new Promise((resolve,reject) => {
+      NetInfo.fetch().then(state => {
+        console.log("Connection type", state.type);
+        resolve(state.isConnected)
+      });
     })
-    }
+    
+  },
+
+  makeNetworkCall: function(apiName, formData, callBack,method = 'GET',skipToken = false) {
+    this.isConnected().then(connected => {
+      if(!connected){
+        callBack(false,true)
+        this.snackbar('No internet connection')
+      } else {
+        if(skipToken){
+          this.makeApiCall(apiName,formData,formData,callBack,method)
+        } else {
+          getToken().then((val) => {
+            console.log(val)
+          const Headers = { 'Authorization': `Bearer ${val}` }
+          this.makeApiCall(apiName,Headers,formData,callBack,method)
+        })
+        }
+      }
+    })
   },
 
   promiseTimeout : function (msec,callBack) {

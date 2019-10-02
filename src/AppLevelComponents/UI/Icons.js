@@ -16,7 +16,7 @@ import Feather from "react-native-vector-icons/Feather";
 let iconSize = 23;
 class Icons extends Component {
   returnIcon() {
-    const { lib, name, color, size } = this.props;
+    const { lib, name, color, size,style } = this.props;
     switch (lib) {
       case "AntDesign":
         return (
@@ -38,7 +38,7 @@ class Icons extends Component {
 
       case "Entypo":
         return (
-          <Entypo name={name} size={size || iconSize} color={color || "#000"} />
+          <Entypo style={style} name={name} size={size || iconSize} color={color || "#000"} />
         );
 
         case 'Ionicons':

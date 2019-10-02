@@ -14,6 +14,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import { Row, Grid, Col } from "react-native-easy-grid";
 import Divider from "AppLevelComponents/UI/Divider";
 import InfoItem from "../../../../Profile/components/InfoItem";
+import HelperMethods from "../../../../../Helpers/Methods";
 
 let attachments = [
   { name: "Datesheet.pdf" },
@@ -68,7 +69,7 @@ export default class BottomsheetEvents extends Component {
         <View style={{ padding: 20, paddingBottom: 5, paddingTop: 10 }}>
         <View style={{padding:10}}>
         <CustomText
-            text={'Title'}
+            text={content.event_name}
             singleLine
             
             size={18}
@@ -77,8 +78,7 @@ export default class BottomsheetEvents extends Component {
             />
 
 <CustomText
-            text={'Long Description here '}
-            singleLine
+            text={content.event_summary}
             style={{marginTop:5}}
             size={17}
             color="rgba(0,0,0,0.7)"
@@ -89,7 +89,7 @@ export default class BottomsheetEvents extends Component {
           <View style={styles.container}>
             <View style={[styles.column, {}]}>
               <InfoItem title="Registeration Starts" info="24 May 2019" />
-              <InfoItem title="Event Date" info="1 July 2019" />
+              <InfoItem title="Event Date" info={HelperMethods.formatDate_DMY(content.event_date_time)} />
               <InfoItem title="Talk Topic" info="Power of Industrial Design" />
             </View>
 
@@ -102,6 +102,7 @@ export default class BottomsheetEvents extends Component {
           <CustomButton
             onPress={this.downloadAttachment}
             text="DOWNLOAD ATTACHMENT"
+            containerStyle={{marginBottom:60}}
             isApiCall={this.state.isApiCall}
           />
         </View>

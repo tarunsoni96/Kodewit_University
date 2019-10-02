@@ -117,6 +117,35 @@ export const forgotPassSendMail = function(email) {
     });
   };
 
+  export const getCurriculam = function(classId,session,date = 0) {
+    return new Promise(function(resolve, reject) {
+      HelperMethods.makeNetworkCall(`api/academics/curriculam/${date}/${classId}/${session}`,{},(resp, isError) => {
+          if (!isError) {
+            resolve(resp);
+          } else {
+            reject(true);
+          }
+        },
+        'GET'
+      );
+    });
+  };
+
+
+  export const getChildPhotos = function(classId,sectionId,session,date = 0) {
+    return new Promise(function(resolve, reject) {
+      HelperMethods.makeNetworkCall(`api/academics/photograph/${date}/${classId}/${sectionId}/${session}`,{},(resp, isError) => {
+          if (!isError) {
+            resolve(resp);
+          } else {
+            reject(true);
+          }
+        },
+        'GET'
+      );
+    });
+  };
+
 
 
   export const registerDevice = function(id,email,token) {
@@ -128,7 +157,7 @@ export const forgotPassSendMail = function(email) {
   
       HelperMethods.makeNetworkCall('api/registerDevice',formData,(resp, isError) => {
           if (resp) {
-            HelperMethods.snackbar('Device registered.')
+            // HelperMethods.snackbar('Device registered.')
             resolve(true)
           } else {
             reject(isError);

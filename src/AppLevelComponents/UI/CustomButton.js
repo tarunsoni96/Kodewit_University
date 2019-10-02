@@ -35,7 +35,12 @@ export default class CustomButton extends Component {
     let { text, isApiCall,font, width,isRightIcon,icon,borderRadius, containerStyle, textColor } = this.props;
 
     let title = text+` ${isApiCall == 'failed' ? '- Retry' : '' } `
-    
+    let fontType 
+    if(HelperMethods.isPlatformAndroid()){
+      fontType = font || Fonts.medium
+    } else {
+      fontType = null
+    }
     return (
       <Animatable.View animation={this.state.animation} useNativeDriver={true} duration={600} style={{flex:1,...containerStyle}} >
 
@@ -43,7 +48,7 @@ export default class CustomButton extends Component {
         disabled={isApiCall && isApiCall != 'failed' }
         onPress={() => this.onPress()}
         title={title.toUpperCase()}
-        textStyle={{fontFamily: font || Fonts.medium ,}}
+        titleStyle={{fontFamily: fontType || Fonts.medium ,fontSize:13}}
         icon={
           isRightIcon && (
             <AntDesign

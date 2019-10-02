@@ -3,10 +3,10 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 target 'University' do
   # Pods for University
-  pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
-  pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
-  pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
-  pod 'RCTTypeSafety', :path => "../node_modules/react-native/Libraries/TypeSafety"
+  # pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
+  # pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
+  # pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
+  # pod 'RCTTypeSafety', :path => "../node_modules/react-native/Libraries/TypeSafety"
   pod 'React', :path => '../node_modules/react-native/'
   pod 'React-Core', :path => '../node_modules/react-native/'
   pod 'React-CoreModules', :path => '../node_modules/react-native/React/CoreModules'
@@ -43,6 +43,8 @@ target 'University' do
   pod 'Firebase/Messaging'
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
+  pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
 
   target 'UniversityTests' do
     inherit! :search_paths

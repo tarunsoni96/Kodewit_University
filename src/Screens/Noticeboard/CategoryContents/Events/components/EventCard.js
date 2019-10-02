@@ -36,12 +36,12 @@ export default class EventCard extends Component {
           <CustomText
             text={desc}
             singleLine
-            style={{ maxWidth: "88%" }}
+            style={{ maxWidth: "88%",width:'88%' }}
             size={15}
             color="rgba(0,0,0,0.7)"
             font={Fonts.medium}
             />
-          <TouchableOpacity>
+          <TouchableOpacity  >
             <Icons lib="Entypo" name="attachment" size={16} />
           </TouchableOpacity>
         </View>
