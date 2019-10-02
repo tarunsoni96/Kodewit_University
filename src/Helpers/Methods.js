@@ -228,6 +228,12 @@ const HelperMethods = {
 
   formatDate_DMY: function(date) { //requires date in format 2-2-2 or 2/2/2 with time or without time
     return moment(date).format("DD/MM/YYYY");
+  },
+
+  formatDate_Month_Date: function(date) { //requires date in format 2-2-2 or 2/2/2 with time or without time
+    let month =  moment(date).format("mmmm");
+    let dateNumber =  moment(date).format("d");
+    return `${month} ${dateNumber}`
   }
 };
 

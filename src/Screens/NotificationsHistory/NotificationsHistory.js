@@ -9,7 +9,9 @@ import ContentContainerAnimated from "../../AppLevelComponents/UI/ContentContain
 import NotificationCard from "./components/NotificationCard";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import ContentContainer from "../../AppLevelComponents/UI/ContentContainer";
-
+import NetworkAwareContent from "../../UniversityComponents/NetworkAwareContent";
+import {getMessages} from 'ServiceProviders/ApiCaller'
+import { UserInfoConsumer } from "../../AppLevelComponents/Contexts/CxtUserInfo";
 let data = [
   {
     title: "Happy Birthday!",
@@ -26,12 +28,15 @@ let data = [
   }
 ];
 
-
+let currentContext
 class NotificationsHistory extends Component {
 
 
   state={
-    selected:undefined
+    selected:undefined,
+    isApiCall:true,
+    data:[],
+
   }
 
   constructor(props) {
@@ -41,13 +46,29 @@ class NotificationsHistory extends Component {
   }
   
 
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData = () => {
+    const {id} = currentContext.userData;
+    this.setState({isApiCall: true});
+    getMessages(id)
+      .then(resp => {
+        this.setState({isApiCall: false, data: resp});
+      })
+      .catch(err => {
+        this.setState({isApiCall: 'failed'})
+      });
+  };
+  
+
   renderItems = ({ item, index }) => {
     let selected = item.title == this.state.selected
     return (
       <TouchableWithoutFeedback onPress={()=>this.toggleFullView(item.title)}>
-
         <Animated.View style={{ padding:20,paddingBottom: 5,transform:[{scale:selected ? this.itemScale : 1}] }}>
-          <NotificationCard fullView={this.state.selected == item.title} title={item.title} desc={item.description} />
+          <NotificationCard fullView={this.state.selected == item.title} title={item.title} desc={item.message} />
         </Animated.View>
       </TouchableWithoutFeedback>
     );
@@ -78,22 +99,25 @@ class NotificationsHistory extends Component {
           ...springConfig,
         }).start()
       } else {
-        
-        
         Animated.spring(this.itemScale,{
-          
           duration:1000,
           ...springConfig,
         }).start()
       }
     })
   },130)
-
   }
 
 
   render() {
     return (
+
+      <UserInfoConsumer>
+        {context => {
+        currentContext = context
+                        return(
+                            
+                      
       <Container style={{ flex: 1 }} padding={0}>
         <Header>
           <View>
@@ -103,16 +127,22 @@ class NotificationsHistory extends Component {
         <View style={{ width: "100%", flex: 1 }}>
           
           <ContentContainer animation={'undefined'} style={{}} >
+          <NetworkAwareContent data={this.state.data} isApiCall={this.state.isApiCall} apiFunc={this.getData}  >
+
           <FlatList
             showsHorizontalScrollIndicator={false}
-            data={data}
+            data={this.state.data}
             extraData={this.state}
             keyExtractor={(item, index) => index + ""}
             renderItem={this.renderItems}
           />
+          </NetworkAwareContent>
           </ContentContainer>
         </View>
       </Container>
+      )
+                    }}
+      </UserInfoConsumer>
     );
   }
 }

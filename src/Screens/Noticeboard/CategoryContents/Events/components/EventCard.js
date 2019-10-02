@@ -28,19 +28,36 @@ export default class EventCard extends Component {
         <Card
         dividerStyle={{ height: 0 }}
         titleStyle={{ padding: 0, marginBottom: 0 }}
-        title={title}
-        containerStyle={cardStyle}
+        containerStyle={{...cardStyle}}
         >
 
         <View style={styles.descContainer}>
-          <CustomText
-            text={desc}
+        
+
+      <View style={{width:'91%'}} >
+      <CustomText
+            text={title}
             singleLine
-            style={{ maxWidth: "88%",width:'88%' }}
+            style={{ maxWidth: "91%", }}
             size={15}
             color="rgba(0,0,0,0.7)"
             font={Fonts.medium}
             />
+
+
+            {desc.length > 0 && 
+          <CustomText
+            text={desc}
+            singleLine
+            style={{ maxWidth: "91%", }}
+            size={15}
+            color="rgba(0,0,0,0.7)"
+            font={Fonts.medium}
+            />
+        }
+
+      </View>
+        
           <TouchableOpacity  >
             <Icons lib="Entypo" name="attachment" size={16} />
           </TouchableOpacity>

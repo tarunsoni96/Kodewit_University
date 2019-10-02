@@ -193,7 +193,7 @@ Noticeboard:sharedPic,
 
   },
   {
-    initialRouteName: "Photos",
+    // initialRouteName: "NotificationsHistory",
     transitionConfig: nav => handleCustomTransition(nav),
       headerMode: 'none',
       navigationOptions: {

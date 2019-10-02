@@ -7,6 +7,7 @@ import TimeTable from "Screens/Noticeboard/CategoryContents/TimeTable/TimeTable"
 import Syllabus from "Screens/Noticeboard/CategoryContents/Syllabus/Syllabus";
 import { Categories } from "Screens/Noticeboard/Categories/Student";
 import Fees from "Screens/Noticeboard/CategoryContents/Fees/Fees";
+import Circular from "../../Screens/Noticeboard/CategoryContents/Circular/Circular";
 export const BoardContext = React.createContext();
 export const ContentConsumer = BoardContext.Consumer;
 
@@ -36,7 +37,11 @@ export class BoardContentProvider extends Component {
         this.setState({ contentView: <Events /> });
         break;
 
-      case Constants.categorySyllabus:
+        case Constants.categoryCircular:
+            this.setState({ contentView: <Circular /> });
+          break;
+
+        case Constants.categorySyllabus:
           this.setState({ contentView: <Syllabus /> });
         break;
 

@@ -14,6 +14,7 @@ const Constants = {
     //_______________________________category constants 
     //___________________________STUDENT
     categoryEvents:'Events',
+    categoryCircular:'Circular',
     categorySyllabus:'Syllabus',
     categoryTimeTable:'TimeTable',
     categoryResults:'Results',

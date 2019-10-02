@@ -35,7 +35,7 @@ export default class NotificationCard extends Component {
           <CustomText
             text={desc + " "}
             singleLine={!fullView}
-            style={{ maxWidth: "95%", marginRight: 5 }}
+            style={{ maxWidth: "95%",width:'95%', marginRight: 5 }}
             size={15}
             color="rgba(0,0,0,0.7)"
             font={Fonts.medium}
@@ -45,7 +45,7 @@ export default class NotificationCard extends Component {
             <Icons
               lib="Material"
               name={
-                !fullView ? "unfold-more-horizontal" : "unfold-less-horizontal"
+                !fullView  ? "unfold-more-horizontal" : "unfold-less-horizontal"
               }
               size={19}
             />

@@ -147,6 +147,51 @@ export const forgotPassSendMail = function(email) {
   };
 
 
+  export const getHolidays = function() {
+    return new Promise(function(resolve, reject) {
+      HelperMethods.makeNetworkCall(`api/holidaylist`,{},(resp, isError) => {
+          if (!isError) {
+            resolve(resp);
+          } else {
+            reject(true);
+          }
+        },
+        'GET'
+      );
+    });
+  };
+
+
+  export const getMessages = function(userId) {
+    return new Promise(function(resolve, reject) {
+      HelperMethods.makeNetworkCall(`api/academics/message/${userId}`,{},(resp, isError) => {
+          if (!isError) {
+            resolve(resp);
+          } else {
+            reject(true);
+          }
+        },
+        'GET'
+      );
+    });
+  };
+
+
+  export const getCircular = function(classId,sectionId,session,date = 0) {
+    return new Promise(function(resolve, reject) {
+      HelperMethods.makeNetworkCall(`api/academics/circular/${date}/${classId}/${sectionId}/${2019}`,{},(resp, isError) => {
+          if (!isError) {
+            resolve(resp);
+          } else {
+            reject(true);
+          }
+        },
+        'GET'
+      );
+    });
+  };
+
+
 
   export const registerDevice = function(id,email,token) {
     return new Promise(function(resolve, reject) {
