@@ -21,7 +21,8 @@ import { storeToken, getToken } from 'DataManagers/UserDataManager'
 import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
 
 let timer;
-let baseUrl = 'http://192.168.29.212:80/'
+// let baseUrl = 'http://192.168.29.212:80/'
+let baseUrl = 'http://18.232.71.15/'
 let counter = 2;
 
 var CancelToken = axios.CancelToken;

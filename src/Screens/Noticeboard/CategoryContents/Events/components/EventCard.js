@@ -5,6 +5,7 @@ import {
     TouchableWithoutFeedback,
     FlatList
   } from "react-native";
+import FileDownloader from 'ServiceProviders/FileDownloader';
   
 import { Card } from "react-native-elements";
 import Fonts from "UIProps/Fonts";
@@ -21,8 +22,13 @@ export default class EventCard extends Component {
     };
   }
 
+  download = () => {
+    const {attachment} = this.props
+    FileDownloader(attachment)
+  }
+
   render() {
-    const {title,desc} = this.props
+    const {title,desc,attachment} = this.props
     return (
 
         <Card
@@ -57,10 +63,11 @@ export default class EventCard extends Component {
         }
 
       </View>
-        
-          <TouchableOpacity  >
+          {attachment && 
+          <TouchableOpacity onPress={this.download} >
             <Icons lib="Entypo" name="attachment" size={16} />
           </TouchableOpacity>
+          }
         </View>
       </Card>
     );

@@ -5,7 +5,7 @@ export class MyCourse extends Component {
     render() {
         return (
             <View>
-                <Text> textInComponent </Text>
+                <Text> What on earth to show here ? </Text>
             </View>
         )
     }

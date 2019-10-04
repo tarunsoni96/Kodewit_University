@@ -22,7 +22,7 @@ import AsyncStorageHandler from "../../StorageHelpers/AsyncStorageHandler";
 import Constants from "../../Helpers/Constants";
 
 let valObj = {
-    email: "tarsoni69@gmail.com",
+    email: "samyak@yopmail.com",
     password:'123456'
   };
 
@@ -86,6 +86,8 @@ let valObj = {
 <CustomButton
               onPress={this.skip}
               text="skip >"
+              textStyle={{color:'#fff'}}
+              buttonStyle={{backgroundColor:'#B1B1B1'}}
               containerStyle={{ marginVertical: 20,width:'90%',flex:0.4 }}
             />
 

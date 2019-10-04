@@ -18,7 +18,7 @@ import {forgotPassSendMail} from 'ServiceProviders/ApiCaller';
 import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
 import SubHeader from '../../AppLevelComponents/UI/SubHeader';
 let valObj = {
-  email: 'tarsoni69@gmail.com',
+  email: 'samyak@yopmail.com',
 };
 
 class ForgotPassword extends Component {

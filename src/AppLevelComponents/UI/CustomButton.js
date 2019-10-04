@@ -32,7 +32,7 @@ export default class CustomButton extends Component {
   }
 
   render() {
-    let { text, isApiCall,font, width,isRightIcon,icon,borderRadius, containerStyle, textColor } = this.props;
+    let { text, isApiCall,font,buttonStyle,textStyle, width,isRightIcon,icon,borderRadius, containerStyle, textColor } = this.props;
 
     let title = text+` ${isApiCall == 'failed' ? '- Retry' : '' } `
     let fontType 
@@ -48,7 +48,7 @@ export default class CustomButton extends Component {
         disabled={isApiCall && isApiCall != 'failed' }
         onPress={() => this.onPress()}
         title={title.toUpperCase()}
-        titleStyle={{fontFamily: fontType || Fonts.medium ,fontSize:13}}
+        titleStyle={{fontFamily: fontType || Fonts.medium ,fontSize:13,...textStyle}}
         icon={
           isRightIcon && (
             <AntDesign
@@ -67,7 +67,7 @@ export default class CustomButton extends Component {
         }}
         buttonStyle={[
           styles.button,
-          { borderRadius: borderRadius || 60, }
+          { borderRadius: borderRadius || 60,...buttonStyle }
         ]}
         loading={isApiCall && isApiCall != 'failed'}
       />

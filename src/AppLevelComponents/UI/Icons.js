@@ -6,11 +6,11 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Fontisto from "react-native-vector-icons/Fontisto";
+import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
-import Feather from "react-native-vector-icons/Feather";
 
 
 let iconSize = 23;
@@ -50,6 +50,8 @@ class Icons extends Component {
               return (
                 <Fontisto name={name} size={size || iconSize} color={color || "#000"} />
               );
+
+              
 
               case 'Material':
               return (

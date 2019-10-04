@@ -16,9 +16,9 @@ export default class NoInternetView extends Component {
         }
         <CustomButton
                             onPress={apiFunc}
-                            text="Retry"
-                            containerStyle={{width:160,marginTop:10}}
-                            isApiCall={isApiCall}
+                            text="no connection - Retry"
+                            containerStyle={{marginTop:10}}
+                            isApiCall={false}
                           />
       </View>
     );

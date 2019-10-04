@@ -21,7 +21,7 @@ export default class TableRow extends Component {
               width: "100%",
               alignItems: "center",
               justifyContent: "center",
-              padding: 10,
+              padding: 7,
               
             }}
           >
@@ -29,6 +29,8 @@ export default class TableRow extends Component {
               style={{fontFamily: Fonts.medium,}}
               text={columns[i]}
               size={14}
+              textAlign='center'
+              singleLine={true}
               color={Colors.dark}
               font={Fonts.Regular}
             />

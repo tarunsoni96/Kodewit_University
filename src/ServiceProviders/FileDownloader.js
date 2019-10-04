@@ -1,18 +1,20 @@
-import RNBackgroundDownloader from 'react-native-background-downloader';
+import RNFetchBlob from 'react-native-fetch-blob';
 
-
-export default DownloadFile = function(url,destination){
-    let task = RNBackgroundDownloader.download({
-        id: 'file123',
-        url,
-        destination: destination || `${RNBackgroundDownloader.directories.documents}/file`
-    }).begin((expectedBytes) => {
-        console.log(`Going to download ${expectedBytes} bytes!`);
-    }).progress((percent) => {
-        console.log(`Downloaded: ${percent * 100}%`);
-    }).done(() => {
-        console.log('Download is done!');
-    }).error((error) => {
-        console.log('Download canceled due to error: ', error);
-    });
+import {ToastAndroid} from 'react-native'
+export default FileDownloader = function(url){
+  ToastAndroid.show("Downloading, Check notifications for progress", 1000);
+    RNFetchBlob.config({
+        addAndroidDownloads : {
+          useDownloadManager : true,
+          notification : true,
+        },
+        IOSBackgroundTask: true,
+        overwrite: true,
+        trusty:true,
+        indicator: true,
+        fileCache:true,
+      })
+        .fetch('GET', url, {
+          //some headers ..
+        })
 }

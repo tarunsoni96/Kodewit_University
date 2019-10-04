@@ -3,7 +3,7 @@ import {Keyboard, View, PermissionsAndroid} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import 'Helpers/global';
 import CustomButton from 'AppLevelComponents/UI/CustomButton';
-import RNFetchBlob from 'react-native-fetch-blob';
+import FileDownloader from 'ServiceProviders/FileDownloader';
 
 export default class DownloadButton extends Component {
 
@@ -33,30 +33,8 @@ export default class DownloadButton extends Component {
     });
   }
   download = () => {
-    let dirs = RNFetchBlob.fs.dirs;
-    const {url, destination} = this.props;
-    RNFetchBlob.config({
-      addAndroidDownloads : {
-        useDownloadManager : true,
-        notification : true,
-        
-      },
-      IOSBackgroundTask: true,
-      overwrite: true,
-      trusty:true,
-      indicator: true,
-      fileCache:true,
-    })
-      .fetch('GET', url, {
-        //some headers ..
-      })
-      .progress((received, total) => {
-        console.log('progress : ' + received + ' / ' + total);
-      })
-      .then(res => {
-        
-        console.log('# The file saved to :', file_path);
-      });
+    const {url, } = this.props;
+    FileDownloader(url)
   };
 
   render() {

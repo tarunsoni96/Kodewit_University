@@ -53,7 +53,7 @@ class Events extends Component {
     return (
       <TouchableWithoutFeedback onPress={() => this.openBottomsheet(item)}>
         <View style={{ paddingBottom: 5 }}>
-          <EventCard title={item.event_name} desc={item.event_summary} />
+          <EventCard attachment={item.file_path} title={item.event_name} desc={item.event_summary} />
         </View>
       </TouchableWithoutFeedback>
     );

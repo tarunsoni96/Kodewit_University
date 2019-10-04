@@ -10,6 +10,7 @@ import Fonts from "UIProps/Fonts";
 let hourHeight = 74;
 let horizSpacing = 20;
 export default class Timeline extends Component {
+  
   renderHours() {
     const { timelineData } = this.props;
 

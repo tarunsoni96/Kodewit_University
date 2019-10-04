@@ -48,7 +48,7 @@ class NetworkAwareContent extends Component {
           this.setState({
             view: (
               <NoInternetView
-                isApiCall={isApiCall}
+                isApiCall={false}
                 apiFunc={apiFunc}
                 marginTop={marginTop}
               />
@@ -78,7 +78,7 @@ class NetworkAwareContent extends Component {
           <CustomButton
             containerStyle={{
               width: '70%',
-              marginTop: marginTop,
+              marginTop: marginTop-30,
               alignSelf: 'center',
             }}
             onPress={apiFunc}

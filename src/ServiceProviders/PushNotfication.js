@@ -39,7 +39,7 @@ export default class PushNotification extends Component {
           .setTitle(notification.title)
           .setBody(notification.body)
           .android.setChannelId("fcm_default_channel") // e.g. the id you chose above
-          // .android.setSmallIcon('ic_notification') // create this icon in Android Studio
+          .android.setSmallIcon('ic_notification') // create this icon in Android Studio
           .android.setColor(Colors.accent)
           .android.setPriority(firebase.notifications.Android.Priority.High);
 

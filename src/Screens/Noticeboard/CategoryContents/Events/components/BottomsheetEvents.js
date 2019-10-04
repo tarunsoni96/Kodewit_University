@@ -74,7 +74,7 @@ export default class BottomsheetEvents extends Component {
             singleLine
             
             size={18}
-            color="rgba(0,0,0,0.7)"
+            color="rgba(0,0,0,0.9)"
             font={Fonts.heavy}
             />
 
@@ -82,25 +82,27 @@ export default class BottomsheetEvents extends Component {
             text={content.event_summary}
             style={{marginTop:5}}
             size={17}
-            color="rgba(0,0,0,0.7)"
+            color="rgba(0,0,0,0.8)"
             font={Fonts.medium}
             />
 
         </View>
           <View style={styles.container}>
             <View style={[styles.column, {}]}>
-              <InfoItem title="Registeration Starts" info="24 May 2019" />
+              {/* <InfoItem title="Registeration Starts" info="24 May 2019" /> */}
               <InfoItem title="Event Date" info={HelperMethods.formatDate_DMY(content.event_date_time)} />
-              <InfoItem title="Talk Topic" info="Power of Industrial Design" />
+              {/* <InfoItem title="Talk Topic" info="Power of Industrial Design" /> */}
             </View>
 
             <View style={[styles.column, {}]}>
-              <InfoItem title="Registeration Ends" info="24 May 2019" />
-              <InfoItem title="Registeration Fees" info="500 INR" />
-              <InfoItem title="Venue" info="Bose Hall" />
+              {/* <InfoItem title="Registeration Ends" info="24 May 2019" /> */}
+              {/* <InfoItem title="Registeration Fees" info="500 INR" /> */}
+              {/* <InfoItem title="Venue" info="Bose Hall" /> */}
             </View>
           </View>
-         <DownloadButton />
+          {content.file_path && 
+            <DownloadButton />
+          }
         </View>
       </Bottomsheet>
     );

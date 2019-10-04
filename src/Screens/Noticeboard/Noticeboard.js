@@ -17,7 +17,6 @@ import {withNavigation} from 'react-navigation';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import Icons from 'AppLevelComponents/UI/Icons';
 import HelperMethods from 'Helpers/Methods';
-
 const actions = [
   {
     text: 'Homework',
@@ -86,6 +85,9 @@ class Noticeboard extends Component {
 
         break;
     }
+  }
+  componentWillMount(){
+    
   }
   render() {
     return (

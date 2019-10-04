@@ -100,7 +100,7 @@ const LoginStack = createStackNavigator({
   }
 
 },{
-  initialRouteName:'login',
+  // initialRouteName:'resetPassword',
   headerMode:'none'
 });
 
@@ -219,16 +219,16 @@ const AppStudent = createMaterialBottomTabNavigator(
       }
     },
 
-    chat: {
-      screen: Chat,
-      navigationOptions: {
-        header: null,
-        tabBarLabel: "Chat",
-        tabBarIcon: ({ tintColor }) => (
-          <AntDesign name="wechat" color={tintColor} size={20} />
-        )
-      }
-    },
+    // chat: {
+    //   screen: Chat,
+    //   navigationOptions: {
+    //     header: null,
+    //     tabBarLabel: "Chat",
+    //     tabBarIcon: ({ tintColor }) => (
+    //       <AntDesign name="wechat" color={tintColor} size={20} />
+    //     )
+    //   }
+    // },
 
     myCourse: {
       screen: MyCourse,
@@ -242,20 +242,20 @@ const AppStudent = createMaterialBottomTabNavigator(
       }
     },
 
-    buddyChat: {
-      screen: BuddyChat,
-      navigationOptions: {
-        header: null,
-        tabBarLabel: "Buddy",
-        tabBarIcon: ({ tintColor }) => (
-          <MaterialCommunityIcons
-            name="robot"
-            color={tintColor}
-            size={tabIconSize}
-          />
-        )
-      }
-    }
+    // buddyChat: {
+    //   screen: BuddyChat,
+    //   navigationOptions: {
+    //     header: null,
+    //     tabBarLabel: "Buddy",
+    //     tabBarIcon: ({ tintColor }) => (
+    //       <MaterialCommunityIcons
+    //         name="robot"
+    //         color={tintColor}
+    //         size={tabIconSize}
+    //       />
+    //     )
+    //   }
+    // }
   },
   {
     initialRouteName: "Noticeboard",

@@ -1,9 +1,9 @@
 import HelperMethods from 'Helpers/Methods';
-import {AsyncStorage} from 'react-native'
+import {AsyncStorage,Platform} from 'react-native'
 import {storeToken,storeUserInfo} from 'DataManagers/UserDataManager'
 import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
-let client_id = 4;
-let client_secret = 'rOpR82W1rWFsWjX4iVzgkZBi0Nw41rYRyDUnwuZ5';
+let client_id = 1;
+let client_secret = '76AAuoQVpLujL1CYCRGFGhKaPuW0FzySxBXxWmam';
 
 export const login = function(username, password) {
   return new Promise(function(resolve, reject) {
@@ -179,7 +179,7 @@ export const forgotPassSendMail = function(email) {
 
   export const getCircular = function(classId,sectionId,session,date = 0) {
     return new Promise(function(resolve, reject) {
-      HelperMethods.makeNetworkCall(`api/academics/circular/${date}/${classId}/${sectionId}/${2019}`,{},(resp, isError) => {
+      HelperMethods.makeNetworkCall(`api/academics/circular/${date}/${classId}/${sectionId}/${session}`,{},(resp, isError) => {
           if (!isError) {
             resolve(resp);
           } else {
@@ -199,7 +199,8 @@ export const forgotPassSendMail = function(email) {
       formData.append('user_id',id)
       formData.append('fcm_token',token)
       formData.append('email_address',email)
-  
+      formData.append('device_type',Platform.OS)
+      
       HelperMethods.makeNetworkCall('api/registerDevice',formData,(resp, isError) => {
           if (resp) {
             // HelperMethods.snackbar('Device registered.')

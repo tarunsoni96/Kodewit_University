@@ -20,8 +20,8 @@ import AsyncStorageHandler from "../../StorageHelpers/AsyncStorageHandler";
 import Constants from "../../Helpers/Constants";
 
 let valObj = {
-  email: "tarsoni69@gmail.com",
-  password: "123456"
+  email: "samyak@yopmail.com",
+  password: ""
 };
 
 let currentContext

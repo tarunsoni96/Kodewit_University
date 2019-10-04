@@ -15,9 +15,9 @@ import SettingsMiscBtns from "./components/SettingsMiscBtns";
 
 
 let buttons = [
-    {name:'Notification Settings',btnInfo:'Choose which push notification to receive',icon:'bell',iconLib:'Entypo'},
-    {name:'Account Settings',btnInfo:'Change email, Password. Enhance Security.',icon:'lock',iconLib:'Entypo'},
-    {name:'Application Settings',btnInfo:'Customise application settings as per you.',icon:'cellphone-iphone',iconLib:'Material'},
+    // {name:'Notification Settings',btnInfo:'Choose which push notification to receive',icon:'bell',iconLib:'Entypo'},
+    // {name:'Account Settings',btnInfo:'Change email, Password. Enhance Security.',icon:'lock',iconLib:'Entypo'},
+    // {name:'Application Settings',btnInfo:'Customise application settings as per you.',icon:'cellphone-iphone',iconLib:'Material'},
     {name:'Logout',icon:'logout',iconLib:'Material'},
     
 ]

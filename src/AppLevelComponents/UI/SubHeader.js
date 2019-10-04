@@ -82,10 +82,10 @@ class SubHeader extends Component {
               delay={600}
               duration={1000}
             >
-              <FontAwesome name="bell-o" size={20} color="#fff" />
+              <Icons lib='Feather' name="message-square" size={23} color="#fff" />
 
               {unreadNotifications && (
-                <View style={{ position: "absolute", right: 1, top: 2 }}>
+                <View style={{ position: "absolute", right: 0, top: 0 }}>
                   <View style={styles.bellCircle} />
                 </View>
               )}
