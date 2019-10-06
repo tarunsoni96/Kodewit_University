@@ -19,6 +19,8 @@ class ButtonsRenderer extends Component {
             case 'Logout':
             HelperMethods.logout(this.props.navigation)
             break
+
+            
     }
   }
 

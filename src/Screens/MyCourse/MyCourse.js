@@ -5,7 +5,7 @@ export class MyCourse extends Component {
     render() {
         return (
             <View>
-                <Text> What on earth to show here ? </Text>
+                {/* <Text> What on earth to show here ? </Text> */}
             </View>
         )
     }

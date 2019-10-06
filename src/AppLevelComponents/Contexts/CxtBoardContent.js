@@ -41,7 +41,7 @@ export class BoardContentProvider extends Component {
             this.setState({ contentView: <Circular /> });
           break;
 
-        case Constants.categorySyllabus:
+        case Constants.categoryCurriculum:
           this.setState({ contentView: <Syllabus /> });
         break;
 

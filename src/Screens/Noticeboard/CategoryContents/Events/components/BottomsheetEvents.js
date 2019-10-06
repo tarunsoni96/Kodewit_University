@@ -69,22 +69,26 @@ export default class BottomsheetEvents extends Component {
       <Bottomsheet>
         <View style={{ padding: 20, paddingBottom: 5, paddingTop: 10 }}>
         <View style={{padding:10}}>
+
+      <View style={styles.titleContainer} >
+
         <CustomText
             text={content.event_name}
             singleLine
             
             size={18}
-            color="rgba(0,0,0,0.9)"
+            color="rgba(0,0,0,1)"
             font={Fonts.heavy}
             />
 
-<CustomText
-            text={content.event_summary}
-            style={{marginTop:5}}
-            size={17}
-            color="rgba(0,0,0,0.8)"
-            font={Fonts.medium}
-            />
+      <CustomText
+              text={`Created: ${HelperMethods.formatDate_DMY(content.created_at)}`}
+              size={12}
+              textAlign='right'
+              color="rgba(0,0,0,0.6)"
+              font={Fonts.medium}
+              />
+      </View>
 
         </View>
           <View style={styles.container}>
@@ -137,5 +141,11 @@ const styles = EStyleSheet.create({
   colRight: {
     paddingLeft: 60,
     height: "100%"
+  },
+
+  titleContainer:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent: 'space-between',
   }
 });

@@ -5,11 +5,10 @@ import {
   FlatList,
   TouchableWithoutFeedback
 } from "react-native";
-import { Colors } from "UIProps/Colors";
+import HelperMethods from 'Helpers/Methods'
 import Fonts from "UIProps/Fonts";
 import Bottomsheet from "AppLevelComponents/UI/Bottomsheet";
 import CustomText from "AppLevelComponents/UI/CustomText";
-import CustomButton from "AppLevelComponents/UI/CustomButton";
 import EStyleSheet from "react-native-extended-stylesheet";
 import DownloadButton from "../../../../../AppLevelComponents/UI/DownloadButton";
 
@@ -41,14 +40,29 @@ export default class BottomsheetCircular extends Component {
       <Bottomsheet>
         <View style={{ padding: 20, paddingBottom: 5, paddingTop: 10 }}>
         <View style={{padding:10}}>
-        <CustomText
+       
+
+
+<View style={styles.titleContainer} >
+
+<CustomText
             text={content.title}
             singleLine={true}
             
             size={18}
-            color="rgba(0,0,0,0.7)"
+            color="rgba(0,0,0,1)"
             font={Fonts.heavy}
             />
+
+<CustomText
+      text={`Created: ${HelperMethods.formatDate_DMY(content.created_at)}`}
+      size={12}
+      textAlign='right'
+      color="rgba(0,0,0,0.6)"
+      font={Fonts.medium}
+      />
+</View>
+
 
             <CustomText
             text={content.summary}
@@ -95,5 +109,12 @@ const styles = EStyleSheet.create({
   colRight: {
     paddingLeft: 60,
     height: "100%"
+  },
+
+  titleContainer:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent: 'space-between',
   }
+
 });

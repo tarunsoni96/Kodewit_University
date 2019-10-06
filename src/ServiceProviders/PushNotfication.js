@@ -9,6 +9,16 @@ export default class PushNotification extends Component {
   async componentDidMount() {
     this.checkPermission();
     this.createNotificationListeners(); //add this line
+
+    this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
+      alert(notificationOpen)
+      // Get the action triggered by the notification being opened
+      const action = notificationOpen.action;
+      // Get information about the notification that was opened
+      const notification = notificationOpen.notification;
+  });
+
+
   }
 
   componentWillUnmount() {
@@ -59,7 +69,9 @@ export default class PushNotification extends Component {
     this.notificationOpenedListener = firebase
       .notifications()
       .onNotificationOpened(notificationOpen => {
-        const { title, body } = notificationOpen.notification;
+        alert('d')
+        const { title, body,navigation } = notificationOpen.notification;
+        alert(navigation)
       });
 
     /*
@@ -69,7 +81,8 @@ export default class PushNotification extends Component {
       .notifications()
       .getInitialNotification();
     if (notificationOpen) {
-      const { title, body } = notificationOpen.notification;
+      const { title, body,navigation } = notificationOpen.notification;
+        alert(navigation)
     }
   }
 

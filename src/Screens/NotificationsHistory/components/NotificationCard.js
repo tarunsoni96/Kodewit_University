@@ -9,6 +9,7 @@ import {
 import { Card } from "react-native-elements";
 import Fonts from "UIProps/Fonts";
 import { cardStyle } from "UIProps/Styles";
+import HelperMethods from 'Helpers/Methods'
 import { Colors } from "UIProps/Colors";
 import Icons from "AppLevelComponents/UI/Icons";
 import CustomText from "AppLevelComponents/UI/CustomText";
@@ -21,21 +22,34 @@ export default class NotificationCard extends Component {
   }
 
   render() {
-    const { title, desc, fullView } = this.props;
+    const { title,date, desc, fullView ,className} = this.props;
     return (
       <TouchableWithoutFeedback>
 
       <Card
         dividerStyle={{ height: 0 }}
         titleStyle={{ padding: 0, marginBottom: 0 }}
-        title={title}
         containerStyle={[cardStyle,{marginVertical:0}]}
       >
+
+      <View>
+      <View style={{flexDirection:'row',marginBottom:13 ,alignItems:'center',justifyContent:'space-between'}} >
+      
+       <CustomText
+              text={`Created: ${HelperMethods.formatDate_DMY(date)}`}
+              size={11}
+              textAlign='right'
+              color="rgba(0,0,0,0.6)"
+              font={Fonts.medium}
+              />
+      </View>
+
+
         <View style={styles.descContainer}>
           <CustomText
-            text={desc + " "}
+            text={`Class ${className}: `+desc + " "}
             singleLine={!fullView}
-            style={{ maxWidth: "95%",width:'95%', marginRight: 5 }}
+            style={{ maxWidth: "92%",width:'92%', marginRight: 5 }}
             size={15}
             color="rgba(0,0,0,0.7)"
             font={Fonts.medium}
@@ -51,9 +65,9 @@ export default class NotificationCard extends Component {
             />
           </TouchableOpacity>
         </View>
+      </View>
       </Card>
       </TouchableWithoutFeedback>
-
     );
   }
 }

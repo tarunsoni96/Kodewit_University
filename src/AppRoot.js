@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 
-import { View, StatusBar, Animated,Easing } from "react-native";
+import { View, StatusBar, Text,Easing } from "react-native";
+import Fonts from "UIProps/Fonts";
 import { Colors } from "UIProps/Colors";
 import {
   createStackNavigator,
@@ -51,6 +52,22 @@ let tabIconSize = 18;
 const transitionConfig = {
   duration: 500,
 };
+
+
+
+const styles = EStyleSheet.create({
+  $columnWidth: "100%",
+  $rem: global.rem,
+
+  container: {
+    flex: 1
+  },
+
+  bottomTabsLabelStyle:{
+    fontSize: 13.6,fontFamily:Fonts.medium
+  }
+});
+
 
 
 const handleCustomTransition = ({ scenes }) => {
@@ -193,7 +210,7 @@ Noticeboard:sharedPic,
 
   },
   {
-    // initialRouteName: "NotificationsHistory",
+    // initialRouteName: "Profile",
     transitionConfig: nav => handleCustomTransition(nav),
       headerMode: 'none',
       navigationOptions: {
@@ -202,22 +219,41 @@ Noticeboard:sharedPic,
   }
 );
 
+
 const AppStudent = createMaterialBottomTabNavigator(
   {
     Noticeboard: {
       screen: NoticeboardStack,
       navigationOptions: {
         header: null,
-        tabBarLabel: "Board",
+        
+        tabBarLabel: <Text style={styles.bottomTabsLabelStyle}> School </Text>,
         tabBarIcon: ({ tintColor }) => (
           <MaterialCommunityIcons
-            name="view-dashboard"
+            name="school"
             color={tintColor}
             size={tabIconSize}
           />
         )
       }
     },
+
+
+     Chat: {
+      screen: Chat,
+      navigationOptions: {
+        header: null,
+        tabBarLabel: <Text style={styles.bottomTabsLabelStyle}> Board </Text>,
+        tabBarIcon: ({ tintColor }) => (
+          <MaterialCommunityIcons
+            name="bulletin-board"
+            color={tintColor}
+            size={tabIconSize}
+          />
+        )
+      }
+    },
+
 
     // chat: {
     //   screen: Chat,
@@ -234,7 +270,7 @@ const AppStudent = createMaterialBottomTabNavigator(
       screen: MyCourse,
       navigationOptions: {
         header: null,
-        tabBarLabel: "My Course",
+        tabBarLabel: <Text style={styles.bottomTabsLabelStyle}> My Course </Text>,
         tabBarIcon: ({ tintColor }) => (
           
           <Icons lib='FontAwesome5' name="book-reader" color={tintColor} size={tabIconSize} />
@@ -242,20 +278,20 @@ const AppStudent = createMaterialBottomTabNavigator(
       }
     },
 
-    // buddyChat: {
-    //   screen: BuddyChat,
-    //   navigationOptions: {
-    //     header: null,
-    //     tabBarLabel: "Buddy",
-    //     tabBarIcon: ({ tintColor }) => (
-    //       <MaterialCommunityIcons
-    //         name="robot"
-    //         color={tintColor}
-    //         size={tabIconSize}
-    //       />
-    //     )
-    //   }
-    // }
+    buddyChat: {
+      screen: BuddyChat,
+      navigationOptions: {
+        header: null,
+        tabBarLabel: <Text style={styles.bottomTabsLabelStyle}> Buddy </Text>,
+        tabBarIcon: ({ tintColor }) => (
+          <MaterialCommunityIcons
+            name="robot"
+            color={tintColor}
+            size={tabIconSize}
+          />
+        )
+      }
+    }
   },
   {
     initialRouteName: "Noticeboard",
@@ -303,11 +339,3 @@ export default class AppRoot extends Component {
   }
 }
 
-const styles = EStyleSheet.create({
-  $columnWidth: "100%",
-  $rem: global.rem,
-
-  container: {
-    flex: 1
-  }
-});

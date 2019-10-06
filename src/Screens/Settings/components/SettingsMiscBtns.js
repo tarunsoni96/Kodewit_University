@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, View } from "react-native";
 import MiscBtnsSettings from "./MiscBtnsSettings";
+import HelperMethods from "../../../Helpers/Methods";
 
 export class SettingsMiscBtns extends Component {
   renderButtons(buttons) {
@@ -24,7 +25,9 @@ export class SettingsMiscBtns extends Component {
     } else {
         //perform function here
         switch(name){
-            // case ''
+            case 'Support':
+              HelperMethods.openEmail('info@kodewit.com')
+              break
         }
     }
   }

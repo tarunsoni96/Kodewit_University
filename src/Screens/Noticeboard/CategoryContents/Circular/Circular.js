@@ -36,6 +36,7 @@ class Events extends Component {
     const {session} = currentContext.userData.student_info;
 
     getCircular(class_id,id,session).then(resp => {
+      console.log(resp);
       this.setState({isApiCall:false,data:resp})
     }).catch(()=>{
       this.setState({isApiCall:'failed'})
@@ -56,7 +57,7 @@ class Events extends Component {
     return (
       <TouchableWithoutFeedback onPress={() => this.openBottomsheet(item)}>
         <View style={{ paddingBottom: 5 }}>
-          <EventCard attachment={item.file_path} title={item.title} desc={item.summary} />
+          <EventCard date={item.created_at} className={currentContext.userData.section.class.class_number} attachment={item.file_path} title={item.title} desc={item.summary} />
         </View>
       </TouchableWithoutFeedback>
     );

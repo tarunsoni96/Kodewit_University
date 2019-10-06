@@ -210,6 +210,10 @@ const HelperMethods = {
     Linking.openURL("market://details?id=" + packageName + "&hl=en");
   },
 
+  openEmail: function(emailAddress) {
+    Linking.openURL('mailto:'+emailAddress)
+  },
+
   appExitPrompter: function() {
     if (counter == 2) {
       setTimeout(() => {

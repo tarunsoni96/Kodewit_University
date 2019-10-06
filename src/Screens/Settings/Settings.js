@@ -23,10 +23,10 @@ let buttons = [
 ]
 
 let buttonsMisc = [
-    {name:'Privacy Policy'},
-    {name:'Terms of Use'},
-    {name:'App Version'},
-    {name:'Report a Bug'},
+    // {name:'Privacy Policy'},
+    // {name:'Terms of Use'},
+    {name:'App Version - 1.0'},
+    // {name:'Report a Bug'},
     {name:'Support'},
     
 ]

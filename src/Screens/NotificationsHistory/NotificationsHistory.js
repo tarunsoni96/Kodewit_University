@@ -55,6 +55,7 @@ class NotificationsHistory extends Component {
     this.setState({isApiCall: true});
     getMessages(id)
       .then(resp => {
+        console.log(resp)
         this.setState({isApiCall: false, data: resp});
       })
       .catch(err => {
@@ -66,9 +67,9 @@ class NotificationsHistory extends Component {
   renderItems = ({ item, index }) => {
     let selected = item.title == this.state.selected
     return (
-      <TouchableWithoutFeedback onPress={()=>this.toggleFullView(item.title)}>
+      <TouchableWithoutFeedback onPress={()=>this.toggleFullView(item.message)}>
         <Animated.View style={{ padding:20,paddingBottom: 5,transform:[{scale:selected ? this.itemScale : 1}] }}>
-          <NotificationCard fullView={this.state.selected == item.title} title={item.title} desc={item.message} />
+          <NotificationCard className={currentContext.userData.section.class.class_number} date={item.created_at} fullView={this.state.selected == item.message} title={item.title} desc={item.message} />
         </Animated.View>
       </TouchableWithoutFeedback>
     );

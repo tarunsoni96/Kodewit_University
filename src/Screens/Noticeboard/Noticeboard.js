@@ -24,12 +24,12 @@ const actions = [
     icon: <Icons size={17} lib="Material" name="pencil-outline" color="#fff" />,
     position: 2,
   },
-  {
-    text: 'I-Card',
-    name: 'bt_card',
-    icon: <Icons size={17} lib="AntDesign" name="idcard" color="#fff" />,
-    position: 1,
-  },
+  // {
+  //   text: 'I-Card',
+  //   name: 'bt_card',
+  //   icon: <Icons size={17} lib="AntDesign" name="idcard" color="#fff" />,
+  //   position: 1,
+  // },
   {
     text: 'Child Photographs',
     name: 'bt_photos',

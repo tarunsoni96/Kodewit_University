@@ -15,10 +15,14 @@ const Constants = {
     //___________________________STUDENT
     categoryEvents:'Events',
     categoryCircular:'Circular',
-    categorySyllabus:'Syllabus',
+    categoryCurriculum:'Curriculum',
     categoryTimeTable:'TimeTable',
     categoryResults:'Results',
-    categoryFees:'Fees'
+    categoryFees:'Fees',
+
+    eventsData:'eventsData',
+    circularData:'circularData',
+    syllabusData:'syllabusData',
 }
 
 export default Constants

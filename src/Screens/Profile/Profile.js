@@ -28,6 +28,7 @@ export class Profile extends Component {
       <UserInfoConsumer>
           {context => {
             const {userData} = context
+          
                           return(
                               
                       
@@ -40,7 +41,8 @@ export class Profile extends Component {
             />
             <View style={styles.headerContent}>
               <ProfilePic
-                showCameraIcon
+                // showCameraIcon
+                canNavigateToProfile={true}
                 style={{ marginTop: 10 }}
                 size={80}
                 pic={userData.pic_path == '' ? "https://images.pexels.com/photos/1877913/pexels-photo-1877913.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500": userData.pic_path}
@@ -55,7 +57,7 @@ export class Profile extends Component {
             </View>
           </View>
 
-          <View style={[styles.pencilCircle, { bottom: -13 }]}>
+          {/* <View style={[styles.pencilCircle, { bottom: -13 }]}>
             <TouchableOpacity>
               <Icons
                 lib="EvilIcons"
@@ -64,7 +66,7 @@ export class Profile extends Component {
                 color={Colors.accent}
               />
             </TouchableOpacity>
-          </View>
+          </View> */}
         </Header>
         <ScrollView contentContainerStyle={{ width: "100%" }}>
           <Grid
@@ -78,19 +80,19 @@ export class Profile extends Component {
           >
             <Row style={styles.infoContainer}>
               <Col style={{}}>
-                <InfoItem title="Roll Number" info={userData.student_code} />
+                <InfoItem title="Blood Group" info={userData.blood_group} />
                 <InfoItem title="Subject" info={userData.section.class.group} />
               </Col>
 
               <Col style={styles.colRight}>
-                <InfoItem title="Course" info={'missing'} />
+                <InfoItem title="Course" info={'NA'} />
                 <InfoItem title="Batch" info={userData.student_info.session} />
               </Col>
             </Row>
             <Row style={[styles.infoContainer, { paddingLeft: 0 }]}>
               <Divider style={{ marginVertical: 13 }} color="#E8E8EA" />
 
-              <View style={styles.pencilCircle}>
+              {/* <View style={styles.pencilCircle}>
                 <TouchableOpacity>
                   <Icons
                     lib="EvilIcons"
@@ -99,7 +101,7 @@ export class Profile extends Component {
                     color={Colors.accent}
                   />
                 </TouchableOpacity>
-              </View>
+              </View> */}
             </Row>
 
             <Row style={styles.infoContainer}>
@@ -110,18 +112,17 @@ export class Profile extends Component {
 
               <Col style={styles.colRight}>
                 <InfoItem title="Email" info={userData.email} />
-                <InfoItem title="Batch" info="missing" />
+                <InfoItem title="State" info="Not available" />
+
               </Col>
             </Row>
 
             <Row style={styles.infoContainer}>
               <Col style={{}}>
-                <InfoItem title="State" info="missing" />
+              <InfoItem title="Pin" info="Not available" />
+                
               </Col>
 
-              <Col style={styles.colRight}>
-                <InfoItem title="Pin" info="missing" />
-              </Col>
             </Row>
           </Grid>
         </ScrollView>
