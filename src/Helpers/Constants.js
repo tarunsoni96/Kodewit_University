@@ -19,6 +19,7 @@ const Constants = {
     categoryTimeTable:'TimeTable',
     categoryResults:'Results',
     categoryFees:'Fees',
+    categoryLeaves:'Leaves',
 
     eventsData:'eventsData',
     circularData:'circularData',

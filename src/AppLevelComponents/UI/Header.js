@@ -35,7 +35,7 @@ export class Header extends Component {
 const styles = EStyleSheet.create({
   $columnWidth: "100%",
   $rem: global.rem,
-  $borderRadius: 20,
+  $borderRadius: 10,
 
   headerBG: {
     flex: 0,

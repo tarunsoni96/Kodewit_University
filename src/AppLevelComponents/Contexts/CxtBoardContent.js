@@ -8,6 +8,7 @@ import Syllabus from "Screens/Noticeboard/CategoryContents/Syllabus/Syllabus";
 import { Categories } from "Screens/Noticeboard/Categories/Student";
 import Fees from "Screens/Noticeboard/CategoryContents/Fees/Fees";
 import Circular from "../../Screens/Noticeboard/CategoryContents/Circular/Circular";
+import Leaves from "../../Screens/Noticeboard/CategoryContents/Leaves/Leaves";
 export const BoardContext = React.createContext();
 export const ContentConsumer = BoardContext.Consumer;
 
@@ -55,6 +56,11 @@ export class BoardContentProvider extends Component {
       case Constants.categoryFees:
           this.setState({ contentView: <Fees /> });
         break;
+
+        case Constants.categoryLeaves:
+          this.setState({ contentView: <Leaves /> });
+        break;
+
     }
 
     currentCategory = category

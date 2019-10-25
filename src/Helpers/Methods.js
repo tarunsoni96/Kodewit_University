@@ -22,7 +22,7 @@ import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
 
 let timer;
 // let baseUrl = 'http://192.168.29.212:80/'
-let baseUrl = 'http://18.232.71.15/'
+let baseUrl = 'http://3.88.61.60/'
 let counter = 2;
 
 var CancelToken = axios.CancelToken;
@@ -233,6 +233,12 @@ const HelperMethods = {
 
   formatDate_DMY: function(date) { //requires date in format 2-2-2 or 2/2/2 with time or without time
     return moment(date).format("DD/MM/YYYY");
+  },
+
+  formatDate_Calendar: function(days) { // gives format like today, tomorrow,
+    return moment().subtract(days, 'days').calendar(null,{
+      sameElse: 'DD MMM, YYYY'
+    });
   },
 
   formatDate_Month_Date: function(date) { //requires date in format 2-2-2 or 2/2/2 with time or without time

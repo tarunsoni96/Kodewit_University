@@ -17,6 +17,7 @@ import {withNavigation} from 'react-navigation';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import Icons from 'AppLevelComponents/UI/Icons';
 import HelperMethods from 'Helpers/Methods';
+
 const actions = [
   {
     text: 'Homework',
@@ -43,6 +44,14 @@ const actions = [
     icon: <Icons size={17} lib="AntDesign" name="calendar" color="#fff" />,
     position: 3,
   },
+
+  {
+    text: 'Apply leave',
+    name: 'bt_leave',
+    icon: <Icons size={17} lib="AntDesign" name="calendar" color="#fff" />,
+    position: 4,
+  },
+
 ];
 class Noticeboard extends Component {
   constructor(props) {
@@ -84,6 +93,11 @@ class Noticeboard extends Component {
         this.props.navigation.navigate('HolidayCalendar');
 
         break;
+
+        case 'bt_leave':
+        this.props.navigation.navigate('applyLeave');
+
+          break
     }
   }
   componentWillMount(){

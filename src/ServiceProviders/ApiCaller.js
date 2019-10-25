@@ -1,7 +1,7 @@
 import HelperMethods from 'Helpers/Methods';
 import {AsyncStorage,Platform} from 'react-native'
 import {storeToken,storeUserInfo} from 'DataManagers/UserDataManager'
-import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
+
 let client_id = 1;
 let client_secret = '76AAuoQVpLujL1CYCRGFGhKaPuW0FzySxBXxWmam';
 
@@ -131,10 +131,39 @@ export const forgotPassSendMail = function(email) {
     });
   };
 
-
   export const getChildPhotos = function(classId,sectionId,session,date = 0) {
     return new Promise(function(resolve, reject) {
       HelperMethods.makeNetworkCall(`api/academics/photograph/${date}/${classId}/${sectionId}/${session}`,{},(resp, isError) => {
+          if (!isError) {
+            resolve(resp);
+          } else {
+            reject(true);
+          }
+        },
+        'GET'
+      );
+    });
+  };
+
+
+  export const getFeedsFromPhotos = function(classId,sectionId,session,date = 0) {
+    return new Promise(function(resolve, reject) {
+      HelperMethods.makeNetworkCall(`api/academics/photograph/${date}/${classId}/${sectionId}/${session}`,{},(resp, isError) => {
+          if (!isError) {
+            resolve(resp);
+          } else {
+            reject(true);
+          }
+        },
+        'GET'
+      );
+    });
+  };
+
+
+  export const getLeaves = function() {
+    return new Promise(function(resolve, reject) {
+      HelperMethods.makeNetworkCall(`api/getLeaveRequests`,{},(resp, isError) => {
           if (!isError) {
             resolve(resp);
           } else {
@@ -204,6 +233,25 @@ export const forgotPassSendMail = function(email) {
       HelperMethods.makeNetworkCall('api/registerDevice',formData,(resp, isError) => {
           if (resp) {
             // HelperMethods.snackbar('Device registered.')
+            resolve(true)
+          } else {
+            reject(isError);
+          }
+        },
+        'POST',
+      );
+    });
+  };
+
+  export const applyLeave = function(reason,startDate,endDate) {
+    return new Promise(function(resolve, reject) {
+      const formData = new FormData();
+      formData.append('reason',reason)
+      formData.append('start_date',startDate)
+      formData.append('end_date',endDate)
+      
+      HelperMethods.makeNetworkCall('api/leaveRequest',formData,(resp, isError) => {
+          if (resp) {
             resolve(true)
           } else {
             reject(isError);

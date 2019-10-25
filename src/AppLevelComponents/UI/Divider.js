@@ -12,7 +12,7 @@ class Divider extends Component {
   render() {
       let {width,color,style} = this.props
     return (
-      <View style={{flex:1 ,height:1,backgroundColor:color ||  Colors.dividerColor,...style}} />
+      <View style={{height:1,backgroundColor:color ||  Colors.dividerColor,...style}} />
         
       
     );

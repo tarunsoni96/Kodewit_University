@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
+import Image from 'react-native-image-progress';
+import ProgressBar from 'react-native-progress/Bar';
 import EStyleSheet from "react-native-extended-stylesheet";
 import "Helpers/global";
+import {Colors} from "UIProps/Colors";
 import { Transition } from "react-navigation-fluid-transitions";
 import { withNavigation } from "react-navigation";
 class PhotoItem extends Component {
@@ -21,6 +24,11 @@ class PhotoItem extends Component {
           <View style={styles.container}>
             <Transition shared={uri}>
               <Image
+              indicatorProps={{
+                size:30,
+                color:Colors.accent
+              }}
+                indicator={ProgressBar}
                 source={{ uri: uri }}
                 resizeMode="cover"
                 style={{ width: "100%", height: "100%" }}

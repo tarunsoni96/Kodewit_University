@@ -68,7 +68,7 @@ import com.android.build.OutputFile
  *   inputExcludes: ["android/**", "ios/**"],
  *
  *   // override which node gets called and with what additional arguments
- *   nodeExecutableAndArgs: ["node"],
+ *   nodeExecutableAndArgs: ["node"],h v
  *
  *   // supply additional arguments to the packager
  *   extraPackagerArgs: []
@@ -78,7 +78,7 @@ import com.android.build.OutputFile
 project.ext.react = [
     entryFile: "index.js",
     enableHermes: false,  // clean and rebuild if changing
-    devDisabledInprePod: true
+    devDisabledInprePod: true 
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"

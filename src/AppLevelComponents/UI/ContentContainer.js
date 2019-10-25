@@ -17,7 +17,7 @@ class ContentContainer extends Component {
               <View style={{ flex:1,width:'100%',...style}}>
               <ScrollView
                 contentContainerStyle={{
-                  // flex: 1,
+                  flex: 1,
                   width: "100%",
                   // padding: 14,
                   paddingTop: 0,
