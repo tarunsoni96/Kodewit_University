@@ -10,7 +10,7 @@ import Fonts from "UIProps/Fonts";
 import Bottomsheet from "AppLevelComponents/UI/Bottomsheet";
 import CustomText from "AppLevelComponents/UI/CustomText";
 import EStyleSheet from "react-native-extended-stylesheet";
-import DownloadButton from "../../../../../AppLevelComponents/UI/DownloadButton";
+import DownloadButton from "AppLevelComponents/UI/DownloadButton";
 
 export default class BottomsheetCircular extends Component {
   constructor(props) {

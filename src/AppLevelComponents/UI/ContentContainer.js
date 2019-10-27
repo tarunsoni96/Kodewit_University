@@ -16,6 +16,7 @@ class ContentContainer extends Component {
             return (
               <View style={{ flex:1,width:'100%',...style}}>
               <ScrollView
+              keyboardShouldPersistTaps='always'
                 contentContainerStyle={{
                   flex: 1,
                   width: "100%",

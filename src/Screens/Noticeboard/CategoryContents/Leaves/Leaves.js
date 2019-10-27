@@ -34,7 +34,6 @@ class Leaves extends Component {
             
               <View style={{flex: 1,width:'100%',padding:13, alignItems: 'center'}}>
                 <View style={{width:'100%'}} >
-                <LeavesListItem />
                   <LeavesList />
                 </View>
               </View>

@@ -205,7 +205,7 @@ const NoticeboardStack = createStackNavigator(
 
   },
   {
-    initialRouteName: "applyLeave",
+    initialRouteName: "Noticeboard",
     transitionConfig: nav => handleCustomTransition(nav),
     headerMode: 'none',
     navigationOptions: {

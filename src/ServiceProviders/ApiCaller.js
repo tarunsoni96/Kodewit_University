@@ -263,4 +263,19 @@ export const forgotPassSendMail = function(email) {
   };
 
 
+  export const deleteLeaveReq = function(id) {
+    return new Promise(function(resolve, reject) {
+      HelperMethods.makeNetworkCall('api/removeLeaveRequest/'+id,{},(resp, isError) => {
+          if (resp) {
+            resolve(true)
+          } else {
+            reject(isError);
+          }
+        },
+        'PUT',
+      );
+    });
+  };
+
+
 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, FlatList, ScrollView} from 'react-native';
+import {Text, View, FlatList, TouchableOpacity} from 'react-native';
 import Image from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Bar';
 import Container from 'AppLevelComponents/UI/Container';
@@ -13,9 +13,13 @@ import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import ContentContainer from 'AppLevelComponents/UI/ContentContainer';
 import {withNavigation} from 'react-navigation';
 import {Colors} from "UIProps/Colors";
+import FileDownloader from 'ServiceProviders/FileDownloader';
+
 class FeedImages extends Component {
   _renderItem({item, index}) {
     return (
+      <TouchableOpacity onPress={()=>FileDownloader(item)} >
+
       <Image
         
         indicator={ProgressBar}
@@ -23,6 +27,7 @@ class FeedImages extends Component {
         resizeMode="cover"
         style={{width: '100%', height: 400}}
       />
+      </TouchableOpacity>
     );
   }
 

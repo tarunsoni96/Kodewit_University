@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
-
+import {View,TouchableWithoutFeedback} from 'react-native';
+import {deleteLeaveReq} from 'ServiceProviders/ApiCaller'
 import {Card} from 'react-native-elements';
 import Fonts from 'UIProps/Fonts';
 import {cardStyle} from 'UIProps/Styles';
 import {Colors} from 'UIProps/Colors';
 import CustomText from 'AppLevelComponents/UI/CustomText';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import HelperMethods from '../../../../../Helpers/Methods';
 
 let approvedColor = '#4A9618';
+let pendingColor = '#ff9548'
 export default class LeavesListItem extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +18,8 @@ export default class LeavesListItem extends Component {
   }
 
   renderDates() {
+    const {start_date,end_date, desc, attachment, className, date} = this.props.item;
+
     return (
       <>
         <CustomText
@@ -27,7 +31,7 @@ export default class LeavesListItem extends Component {
         />
 
         <CustomText
-          text={`10/10/2019`}
+          text={HelperMethods.formatDate_DMY(start_date)}
           size={11}
           textAlign="left"
           color={Colors.black}
@@ -44,19 +48,43 @@ export default class LeavesListItem extends Component {
         />
 
         <CustomText
-          text={`10/10/2019`}
+          text={HelperMethods.formatDate_DMY(end_date)}
           size={11}
           textAlign="left"
           color={Colors.black}
-          font={Fonts.light}
+          font={Fonts.heavy}
         />
       </>
     );
   }
 
+  deleteLeave(){
+    const {reason, status,id} = this.props.item;
+    const {listRefresher} = this.props
+    if(status == 'Pending'){
+      HelperMethods.snackbar('Delete this leave request?','Delete',()=>{
+
+       this.setState({isApiCall:true})
+       deleteLeaveReq(id).then(resp => {
+         if(resp){
+          listRefresher(id)
+         }
+            this.setState({isApiCall:false})
+            
+          }).catch(err => {
+            this.setState({isApiCall:'failed'})
+          })
+      })
+
+    }
+  }
+
   render() {
-    const {title, desc, attachment, className, date} = this.props;
+    const {reason, status,} = this.props.item;
+    let statusColor = status == 'Pending' ? pendingColor :  approvedColor
     return (
+      <TouchableWithoutFeedback onPress={()=>this.deleteLeave()}>
+
       <Card
         dividerStyle={{height: 0}}
         titleStyle={{padding: 0, marginBottom: 0}}
@@ -66,7 +94,7 @@ export default class LeavesListItem extends Component {
 
         <View style={styles.descContainer}>
           <CustomText
-            text={`Winnie, Winnie Winnie Winnie Winnie Winnie`}
+            text={reason}
             size={11}
             textAlign="left"
             color={'#8D8D8D'}
@@ -75,17 +103,19 @@ export default class LeavesListItem extends Component {
         </View>
 
         <View style={styles.status}>
-          <View style={styles.circle} />
+          <View style={[styles.circle,{backgroundColor:statusColor}]} />
           <CustomText
-            text={`Approved`}
+            text={status}
             size={11}
             textAlign="left"
-            color={approvedColor}
+            color={statusColor}
             paddingHorizontal={10}
             font={Fonts.medium}
           />
         </View>
       </Card>
+      </TouchableWithoutFeedback>
+
     );
   }
 }

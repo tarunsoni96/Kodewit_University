@@ -2,16 +2,15 @@ import React, { Component } from "react";
 import { Text, View } from "react-native";
 import { Input } from "react-native-elements";
 import { Colors } from "UIProps/Colors";
-import InputValidations from "Helpers/InputValidations";
 import {
-  inputsError,
+  inputStylesContainer,
   labelStyle,
+  inputsError,
   inputContainerStyle
 } from "UIProps/Styles";
 import "Helpers/global";
 import HelperMethods from "Helpers/Methods";
 
-import InputIcon from "./InputIcon";
 
 export default class PlainText extends Component {
   state = {
@@ -27,21 +26,19 @@ wantToEdit:undefined,
   }
 
   render() {
-    let { width,label,value, labelStyleAdditional,caps } = this.props;
-    
+    let {width,containerStyleAdd,multiline,inputStylesAdd,value,label,placeholder} = this.props    
     return (
       <Input
-      label={label}
-      labelStyle={labelStyle}
-      inputContainerStyle={inputContainerStyle}
-      autoCapitalize="characters"
-      onChangeText={text => this.setText(text)}
-      value={this.state.wantToEdit ? this.state.text : value}
-      placeholderTextColor={Colors.inputs_placeholders}
-      errorStyle={inputsError}
-      errorMessage={this.state.error}
-      multiline
-      blurOnSubmit={true}
+      inputStyle={{textAlignVertical: "top",height:200,margin:17}}
+        label={label || "Email Address"}
+        labelStyle={labelStyle}
+        multiline={multiline}
+        inputContainerStyle={{...inputContainerStyle,...containerStyleAdd,}}
+        onChangeText={text => this.setText(text)}
+        value={this.state.wantToEdit ? this.state.text : value}
+        placeholderTextColor={Colors.inputs_placeholders}
+        errorStyle={inputsError}
+        errorMessage={this.state.error}
       />
     );
   }

@@ -10,7 +10,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {withNavigation} from 'react-navigation';
 import {getLeaves} from 'ServiceProviders/ApiCaller';
 import NetworkAwareContent from 'UniversityComponents/NetworkAwareContent';
-
+import LeavesListItem from './LeavesListItem';
+import HelperMethods from '../../../../../Helpers/Methods';
 let currentContext;
  class LeavesList extends Component {
   constructor(props) {
@@ -39,9 +40,18 @@ let currentContext;
 
   renderItems = ({item, index}) => {
     return (
-      <View />
+      <LeavesListItem listRefresher={id => this.removeAndRefreshList(id)} item={item} />
+
     );
   };
+
+  removeAndRefreshList(id){
+    let arr = [...this.state.data]
+    let index = arr.findIndex(v => v.id == id)
+    arr.splice(index,1)
+    HelperMethods.animateLayout()
+    this.setState({data:arr})
+  }
 
   render() {
     const {content} = this.props;
@@ -55,6 +65,7 @@ let currentContext;
         data={this.state.data}
         keyExtractor={(item, index) => index + ''}
         renderItem={this.renderItems}
+        extraData={this.state}
       />
         </NetworkAwareContent>
     );

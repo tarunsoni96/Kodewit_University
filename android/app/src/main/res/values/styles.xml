@@ -7,9 +7,15 @@
         <item name="android:colorControlNormal">#FFFFFF</item>
         <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
-
+<item name="android:datePickerDialogTheme">@style/MyDialogTheme</item>
+<item name="android:timePickerDialogTheme">@style/MyDialogTheme</item>
     </style>
 
+<style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    
      <style name="SpinnerItem">
         <item name="android:textColor">#ffffff</item>
         <item name="android:padding">0dp</item>
