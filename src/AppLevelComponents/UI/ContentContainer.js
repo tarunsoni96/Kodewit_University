@@ -18,7 +18,6 @@ class ContentContainer extends Component {
               <ScrollView
               keyboardShouldPersistTaps='always'
                 contentContainerStyle={{
-                  flex: 1,
                   width: "100%",
                   // padding: 14,
                   paddingTop: 0,

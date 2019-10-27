@@ -34,7 +34,7 @@ class DateSelector extends Component {
       <>
         <TouchableOpacity onPress={() => !disabled && this.selectDate()}>
           <View style={styles.container}>
-            <CustomText text={title} color={Colors.lighter} size={13} />
+            <CustomText text={title} style={{paddingRight:50}} textAlign='left' color={Colors.lighter} size={13} />
             <Icons lib="AntDesign" color={Colors.accent} name="calendar" />
           </View>
         </TouchableOpacity>
@@ -57,7 +57,6 @@ const styles = {
     justifyContent: 'space-between',
     backgroundColor: '#fff',
     padding: 6,
-    width: 180,
     borderRadius: 10,
     borderColor: '#D2D2D2',
     borderWidth: 1,

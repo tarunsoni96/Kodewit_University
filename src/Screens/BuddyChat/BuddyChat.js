@@ -26,6 +26,7 @@ export default class BuddyChat extends Component {
             height: '100%',
             justifyContent: 'center',
             flex: 1,
+            marginTop:150
           }}>
           <Image
             source={require('assets/img/Chatbot.png')}

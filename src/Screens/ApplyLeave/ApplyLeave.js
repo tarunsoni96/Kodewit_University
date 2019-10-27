@@ -42,6 +42,7 @@ class ApplyLeave extends Component {
         valObj.fromDate=''
         valObj.toDate=''
         this.setState({})
+        this.props.navigation.pop()
         this.setState({isApiCall: false, data: resp});
       })
       .catch(err => {
@@ -75,13 +76,15 @@ class ApplyLeave extends Component {
             <SubHeader title="Apply Leave" type={Constants.header_back} />
           </View>
         </Header>
-        <ContentContainer animation={'undefined'} style={{padding: 25}}>
+        <ContentContainer animation={'undefined'} >
+        <View style={{padding: 25,paddingTop:0,paddingBottom:0}}>
+
           <View
             style={{
               alignItems: 'center',
               flexDirection: 'row',
               width: '100%',
-              marginTop: 30,
+              marginTop: 50,
               justifyContent: 'space-between',
             }}>
             <DateSelector
@@ -118,6 +121,9 @@ class ApplyLeave extends Component {
             containerStyle={{marginVertical: 20}}
             isApiCall={this.state.isApiCall}
           />
+
+        </View>
+
         </ContentContainer>
       </Container>
     );
