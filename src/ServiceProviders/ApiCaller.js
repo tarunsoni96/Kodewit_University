@@ -1,7 +1,8 @@
 import HelperMethods from 'Helpers/Methods';
-import {AsyncStorage,Platform} from 'react-native'
+import {AsyncStorage,Platform,ToastAndroid} from 'react-native'
+import 'Helpers/global'
 import {storeToken,storeUserInfo} from 'DataManagers/UserDataManager'
-
+import AsyncStorageHandler from "StorageHelpers/AsyncStorageHandler";
 let client_id = 1;
 let client_secret = '76AAuoQVpLujL1CYCRGFGhKaPuW0FzySxBXxWmam';
 
@@ -103,31 +104,47 @@ export const forgotPassSendMail = function(email) {
 
   
 
-  export const getEvents = function(id) {
+  export const getEvents = function(refresh) {
     return new Promise(function(resolve, reject) {
-      HelperMethods.makeNetworkCall(`api/academics/schoolevent`,{},(resp, isError) => {
-          if (!isError) {
-            resolve(resp);
-          } else {
-            reject(true);
-          }
-        },
-        'GET'
-      );
+      setTimeout(() => {
+        getSavedData('events',refresh).then(resp => {
+          resolve(resp[0]);
+        }).catch(err => {
+          HelperMethods.makeNetworkCall(`api/academics/schoolevent`,{},(resp, isError) => {
+            if (!isError) {
+              saveData('events',resp)
+              resolve(resp);
+            } else {
+              reject(true);
+            }
+          },
+          'GET');
+        })
+      }, 0);
     });
   };
 
-  export const getCurriculam = function(classId,session,date = 0) {
+  export const getCurriculam = function(classId,session,refresh,date = 0) {
     return new Promise(function(resolve, reject) {
-      HelperMethods.makeNetworkCall(`api/academics/curriculam/${date}/${classId}/${session}`,{},(resp, isError) => {
-          if (!isError) {
-            resolve(resp);
-          } else {
-            reject(true);
-          }
-        },
-        'GET'
-      );
+
+      setTimeout(() => {
+              getSavedData('curriculam',refresh).then(resp => {
+                resolve(resp[0]);
+              }).catch(err => {
+                HelperMethods.makeNetworkCall(`api/academics/curriculam/${date}/${classId}/${session}`,{},(resp, isError) => {
+                  if (!isError) {
+                    saveData('curriculam',resp)
+                    resolve(resp);
+                  } else {
+                    reject(true);
+                  }
+                },
+                'GET'
+              );
+              })
+            }, 0);
+
+      
     });
   };
 
@@ -161,17 +178,27 @@ export const forgotPassSendMail = function(email) {
   };
 
 
-  export const getLeaves = function() {
+  export const getLeaves = function(refresh) {
     return new Promise(function(resolve, reject) {
-      HelperMethods.makeNetworkCall(`api/getLeaveRequests`,{},(resp, isError) => {
-          if (!isError) {
-            resolve(resp);
-          } else {
-            reject(true);
-          }
-        },
-        'GET'
-      );
+      setTimeout(() => {
+              getSavedData('leaves',refresh).then(resp => {
+                resolve(resp[0]);
+              }).catch(err => {
+
+                HelperMethods.makeNetworkCall(`api/getLeaveRequests`,{},(resp, isError) => {
+                  if (!isError) {
+                    saveData('leaves',resp)
+
+                    resolve(resp);
+                  } else {
+                    reject(true);
+                  }
+                },
+                'GET'
+              );
+              })
+            }, 0);
+     
     });
   };
 
@@ -206,17 +233,27 @@ export const forgotPassSendMail = function(email) {
   };
 
 
-  export const getCircular = function(classId,sectionId,session,date = 0) {
+  export const getCircular = function(classId,sectionId,session,refresh,date = 0) {
     return new Promise(function(resolve, reject) {
-      HelperMethods.makeNetworkCall(`api/academics/circular/${date}/${classId}/${sectionId}/${session}`,{},(resp, isError) => {
-          if (!isError) {
-            resolve(resp);
-          } else {
-            reject(true);
-          }
-        },
-        'GET'
-      );
+      setTimeout(() => {
+              getSavedData('circular',refresh).then(resp => {
+                resolve(resp[0]);
+              }).catch(err => {
+                
+                HelperMethods.makeNetworkCall(`api/academics/circular/${date}/${classId}/${sectionId}/${session}`,{},(resp, isError) => {
+                  if (!isError) {
+                      saveData('circular',resp)
+                    resolve(resp);
+                  } else {
+                    reject(true);
+                  }
+                },
+                'GET'
+              );
+
+              })
+            }, 0);
+      
     });
   };
 
@@ -277,5 +314,24 @@ export const forgotPassSendMail = function(email) {
     });
   };
 
+  const saveData = function(key,data) {
+      AsyncStorageHandler.delete(key,()=>{
+        AsyncStorageHandler.push(key,data)
+      })
+  }
+
+
+  const getSavedData = function(key,refresh){
+    return new Promise((resolve,reject)=> {
+      AsyncStorageHandler.get(key,resp => {
+        if(resp != null && !refresh){
+          resolve(resp)
+        } else {
+          ToastAndroid.show("Updating Data", 0);
+          reject('no saved data')
+        }
+      })
+    })
+  }
 
 

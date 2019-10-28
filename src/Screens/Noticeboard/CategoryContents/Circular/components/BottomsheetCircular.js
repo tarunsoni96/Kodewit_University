@@ -74,7 +74,7 @@ export default class BottomsheetCircular extends Component {
 
         </View>
          
-          <DownloadButton url={content.file_path} />
+          <DownloadButton containerStyle={{marginBottom:60}} url={content.file_path} />
         </View>
       </Bottomsheet>
     );

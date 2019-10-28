@@ -55,16 +55,14 @@ let days
             titleStyle={{padding: 0, marginBottom: 0}}
             containerStyle={{...cardStyle}}>
             <View style={styles.descContainer}>
-              <View style={{width: '81%'}}>
                 <CustomText
                   text={title}
                   singleLine
-                  style={{maxWidth: '91%'}}
+                  style={{maxWidth: '65%'}}
                   size={15}
-                  color="rgba(0,0,0,0.7)"
+                  color="rgba(0,0,0,0.8)"
                   font={Fonts.heavy}
                 />
-              </View>
               <Image
                 source={{uri: thumbnail_image_path}}
                 style={{width: 70, height: 70, borderRadius: 15}}
@@ -90,6 +88,7 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    width:'100%',
     //   width: "100%"
   },
 });

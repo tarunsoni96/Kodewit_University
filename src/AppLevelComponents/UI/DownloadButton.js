@@ -6,7 +6,6 @@ import CustomButton from 'AppLevelComponents/UI/CustomButton';
 import FileDownloader from 'ServiceProviders/FileDownloader';
 
 export default class DownloadButton extends Component {
-
   state = {
     animation: '',
   };
@@ -33,17 +32,19 @@ export default class DownloadButton extends Component {
     });
   }
   download = () => {
-    const {url, } = this.props;
-    FileDownloader(url)
+    const {url} = this.props;
+    FileDownloader(url);
   };
 
   render() {
-    const {text} = this.props;
+    const {text, containerStyle, buttonStyle, textStyle} = this.props;
     return (
       <CustomButton
+        containerStyle = {containerStyle}
+        buttonStyle = {buttonStyle}
+        textStyle = {textStyle}
         onPress={this.download}
         text={text || 'DOWNLOAD ATTACHMENT'}
-        containerStyle={{marginBottom: 60}}
       />
     );
   }

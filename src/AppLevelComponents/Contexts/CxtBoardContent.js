@@ -18,6 +18,7 @@ export class BoardContentProvider extends Component {
     contentView: null,
     categoriesData: null,
     animateContentContainer:false,
+    contentSetOnRefresh:''
   };
 
   componentWillMount() {
@@ -69,6 +70,10 @@ export class BoardContentProvider extends Component {
   pauseContentContainerAnimation = (animationState) => {
     this.setState({animateContentContainer:animationState})
   }
+
+  setContentRefresh = cat => {
+    this.setState({contentSetOnRefresh:cat})
+  }
   render() {
     return (
       <BoardContext.Provider
@@ -77,7 +82,9 @@ export class BoardContentProvider extends Component {
           categoriesData: this.state.categoriesData,
           animateContentContainer:this.state.animateContentContainer,
           pauseContentContainerAnimation:this.pauseContentContainerAnimation,
-          setContentView: this.setContentView
+          setContentView: this.setContentView,
+          setContentRefresh:this.setContentRefresh,
+          contentSetOnRefresh:this.state.contentSetOnRefresh
         }}
       >
         {this.props.children}

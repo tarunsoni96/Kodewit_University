@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, FlatList, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableWithoutFeedback, TouchableOpacity} from 'react-native';
 import Image from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Bar';
 import Container from 'AppLevelComponents/UI/Container';
@@ -9,7 +9,6 @@ import CustomText from 'AppLevelComponents/UI/CustomText'
 import SubHeader from 'AppLevelComponents/UI/SubHeader';
 import Constants from 'Helpers/Constants';
 import 'Helpers/global';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import ContentContainer from 'AppLevelComponents/UI/ContentContainer';
 import {withNavigation} from 'react-navigation';
 import {Colors} from "UIProps/Colors";
@@ -18,16 +17,19 @@ import FileDownloader from 'ServiceProviders/FileDownloader';
 class FeedImages extends Component {
   _renderItem({item, index}) {
     return (
-      <TouchableOpacity onPress={()=>FileDownloader(item)} >
-
+      <>
       <Image
-        
         indicator={ProgressBar}
         source={{uri: item}}
         resizeMode="cover"
         style={{width: '100%', height: 400}}
       />
-      </TouchableOpacity>
+      <TouchableWithoutFeedback onPress={()=>FileDownloader(item)} >
+      <View style={styles.imageDownload}>
+        <CustomText text="Download" size={15} />
+      </View>
+      </TouchableWithoutFeedback>
+      </>
     );
   }
 
@@ -68,5 +70,16 @@ class FeedImages extends Component {
     );
   }
 }
-
+const styles = {
+  imageDownload:{
+    position:'absolute',
+    bottom:0,
+    zIndex:100,
+    width:'100%',
+    padding:10,
+    backgroundColor:'rgba(0,0,0,0.7)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+}
 export default withNavigation(FeedImages);

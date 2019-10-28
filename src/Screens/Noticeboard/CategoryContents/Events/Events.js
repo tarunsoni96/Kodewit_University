@@ -14,7 +14,9 @@ import BottomsheetEvents from "./components/BottomsheetEvents";
 import EventCard from "./components/EventCard";
 import {getEvents} from 'ServiceProviders/ApiCaller'
 import NetworkAwareContent from "../../../../UniversityComponents/NetworkAwareContent";
+import { ContentConsumer } from "../../../../AppLevelComponents/Contexts/CxtBoardContent";
 
+let currentContext
 class Events extends Component {
   constructor(props) {
     super(props);
@@ -25,13 +27,16 @@ class Events extends Component {
     };
   }
 
-  componentWillMount(){
-    this.getData()
+  componentDidMount(){
+    setTimeout(() => { //wait for split second to fetch from saved data
+      this.getData()
+    }, 0);
   }
 
-  getData = () => {
+  getData = (refresh) => {
+    currentContext.setContentRefresh('')
     this.setState({isApiCall:true})
-    getEvents().then(resp => {
+    getEvents(refresh).then(resp => {
       this.setState({isApiCall:false,data:resp})
     }).catch(()=>{
       this.setState({isApiCall:'failed'})
@@ -61,6 +66,15 @@ class Events extends Component {
 
   render() {
     return (
+      <ContentConsumer>
+        {context => {
+        currentContext = context
+        if(context.contentSetOnRefresh == 'Events'){
+          this.getData(true)
+        }
+                        return(
+                            
+                      
       <NetworkAwareContent data={this.state.data} isApiCall={this.state.isApiCall} apiFunc={this.getData} >
 
       <View style={{ flex: 1, alignItems: "center" }}>
@@ -78,6 +92,9 @@ class Events extends Component {
         )}
       </View>
       </NetworkAwareContent>
+      )
+                    }}
+      </ContentConsumer>
 
     );
   }

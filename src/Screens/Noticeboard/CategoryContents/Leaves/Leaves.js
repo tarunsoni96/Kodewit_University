@@ -14,7 +14,8 @@ import {UserInfoConsumer} from '../../../../AppLevelComponents/Contexts/CxtUserI
 import EventCard from '../Events/components/EventCard';
 import LeavesList from './components/LeavesList';
 import LeavesListItem from './components/LeavesListItem';
-
+import { ContentConsumer } from '../../../../AppLevelComponents/Contexts/CxtBoardContent';
+let contentContext
 let currentContext;
 class Leaves extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class Leaves extends Component {
                   <LeavesList />
                 </View>
               </View>
-            
+             
           );
         }}
       </UserInfoConsumer>

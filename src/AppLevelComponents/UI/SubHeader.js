@@ -57,6 +57,7 @@ class SubHeader extends Component {
       <UserInfoConsumer>
         {context => {
           currentContext = context;
+          console.log(currentContext)
           return (
             <>
               <View style={styles.container}>
@@ -91,7 +92,7 @@ class SubHeader extends Component {
 
                     {unreadNotifications && (
                       <View style={{position: 'absolute', right: 0, top: 0}}>
-                        <View style={styles.bellCircle} />
+                        {/* <View style={styles.bellCircle} /> */}
                       </View>
                     )}
                   </Animatable.View>
@@ -102,7 +103,7 @@ class SubHeader extends Component {
                     <ProfilePic
                       canNavigateToProfile
                       size={25}
-                      pic="https://images.pexels.com/photos/1877913/pexels-photo-1877913.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                      
                     />
 
                     <CustomText

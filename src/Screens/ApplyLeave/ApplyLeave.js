@@ -14,11 +14,14 @@ import {applyLeave} from 'ServiceProviders/ApiCaller';
 import DateSelector from './components/DateSelector';
 import PlainText from '../../AppLevelComponents/UI/FormInputs/PlainText';
 import {checkForEmptyKeys} from 'ServiceProviders/InputsNullChecker';
+import { ContentConsumer } from '../../AppLevelComponents/Contexts/CxtBoardContent';
 let valObj = {
   fromDate: '',
   toDate: '',
   reason: '',
 };
+
+let currentContext
 
 class ApplyLeave extends Component {
   constructor(props) {
@@ -42,6 +45,7 @@ class ApplyLeave extends Component {
         valObj.fromDate=''
         valObj.toDate=''
         this.setState({})
+        currentContext.setContentRefresh('Leaves')
         this.props.navigation.pop()
         this.setState({isApiCall: false, data: resp});
       })
@@ -70,6 +74,12 @@ class ApplyLeave extends Component {
   }
   render() {
     return (
+      <ContentConsumer>
+        {context => {
+        currentContext = context
+                        return(
+                            
+                      
       <Container style={{flex: 1}} padding={0}>
         <Header>
           <View>
@@ -126,6 +136,9 @@ class ApplyLeave extends Component {
 
         </ContentContainer>
       </Container>
+      )
+                    }}
+      </ContentConsumer>
     );
   }
 }

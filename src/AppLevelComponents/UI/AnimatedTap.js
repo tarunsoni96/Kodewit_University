@@ -18,38 +18,39 @@ export default class AnimatedTap extends Component {
   };
 
   scaleInHold() {
+    const {setOnRefresh} = this.props
     Animated.spring(this.state.animatePress, {
       toValue: negativeScale - 0.1,
       duration: animDuration,
       useNativeDriver: true
     }).start(() => {
+      setOnRefresh()
       this.cutInAnimation();
+      setTimeout(() => {
+        this.animateOut();
+      }, 50);
     });
   }
 
   animateIn(isBtnToggled) {
+    this.cutInAnimation();
+    return
     Animated.timing(this.state.animatePress, {
       toValue: isBtnToggled ?  negativeScale + 0.3 : negativeScale,
       duration: animDuration,
       useNativeDriver: true
     }).start(() => {});
-    this.cutInAnimation();
+    
   }
 
   cutInAnimation() {
-    setTimeout(() => {
-      
-      
-      this.animateOut();
-    }, 100);
+    const { onPress } = this.props;
+    onPress();
+    
   }
   animateOut() {
     // this.props.pressHandler()
-    const { onPress } = this.props;
-    setTimeout(()=>{
-
-      onPress();
-    },5)
+      
     Animated.timing(this.state.animatePress, {
       toValue: defaultScale,
       friction: 2,
@@ -79,14 +80,5 @@ export default class AnimatedTap extends Component {
         </Animated.View>
       </TouchableWithoutFeedback>
     );
-  }
-}
-
-const styles = {
-  container: {
-    borderWidth: 1,
-    borderColor: global.primaryColor,
-    margin: 5,
-    borderRadius: 5
   }
 };

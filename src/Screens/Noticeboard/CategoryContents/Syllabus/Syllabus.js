@@ -10,26 +10,22 @@ import NetworkAwareContent from '../../../../UniversityComponents/NetworkAwareCo
 import {getCurriculam} from 'ServiceProviders/ApiCaller';
 import {UserInfoConsumer} from '../../../../AppLevelComponents/Contexts/CxtUserInfo';
 import NoDataView from '../../../../UniversityComponents/NoDataView';
+import {ContentConsumer} from '../../../../AppLevelComponents/Contexts/CxtBoardContent';
 
 let currentContext;
-let data = [
-  {courseNo: '342', name: 'Product design'},
-  {courseNo: '342', name: 'Product design'},
-  {courseNo: '342', name: 'Design Issues'},
-  {courseNo: '342', name: 'Natural of Materials'},
-];
+let contentContext;
 
-let numColumns = 2
+let numColumns = 2;
 
-const formatData = (data,columns) => {
-  const numberOfFullRows = Math.floor(data.length / columns)
-  let numberOfEleLastRow = data.length - (numberOfFullRows * columns)
-  while(numberOfEleLastRow !== columns && numberOfEleLastRow !== 0){
-    data.push({id:`blank`,})
-    numberOfEleLastRow +=1
+const formatData = (data, columns) => {
+  const numberOfFullRows = Math.floor(data.length / columns);
+  let numberOfEleLastRow = data.length - numberOfFullRows * columns;
+  while (numberOfEleLastRow !== columns && numberOfEleLastRow !== 0) {
+    data.push({id: `blank`});
+    numberOfEleLastRow += 1;
   }
-return data
-} 
+  return data;
+};
 
 class Syllabus extends Component {
   constructor(props) {
@@ -43,26 +39,32 @@ class Syllabus extends Component {
   componentDidMount() {
     this.getData();
   }
-  getData = () => {
+  getData = refresh => {
+    contentContext.setContentRefresh('');
+
     this.setState({isApiCall: true});
     const {class_id} = currentContext.userData.section;
     const {session} = currentContext.userData.student_info;
-    getCurriculam(class_id, session)
+    getCurriculam(class_id, session, refresh)
       .then(resp => {
-        console.log(resp);
         this.setState({isApiCall: false, data: resp});
       })
       .catch(err => {
-        this.setState({isApiCall: 'failed'})
+        this.setState({isApiCall: 'failed'});
       });
   };
 
   renderItem = ({item, index}) => {
-    if(item.id == 'blank'){
-      return <View style={styles.emptyView} />
+    if (item.id == 'blank') {
+      return <View style={styles.emptyView} />;
     } else {
-      return <ListItemSyllabus courseNo={item.id} courseName={item.title} />;
-
+      return (
+        <ListItemSyllabus
+          item={item}
+          courseNo={item.id}
+          courseName={item.title}
+        />
+      );
     }
   };
   render() {
@@ -70,38 +72,52 @@ class Syllabus extends Component {
       <UserInfoConsumer>
         {context => {
           currentContext = context;
+          console.log(context.userData);
           return (
-            <NetworkAwareContent
-            data={this.state.data}
-              isApiCall={this.state.isApiCall}
-              apiFunc={this.getData}>
-              <View style={{width: '100%', flex: 1, alignItems: 'flex-start'}}>
-              
-                <CustomText
-                  paddingHorizontal={8}
-                  size={16}
-                  font="AvenirLTStd-Heavy"
-                  style={styles.msgTitle}
-                  color={Colors.lighter}
-                  text="Semester 1"
-                />
-                <View>
-                
-                <FlatList 
-            style={{flex:1}}
-            data={formatData(this.state.data,numColumns)}
-            renderItem={this.renderItem}
-            numColumns={numColumns}
-            />
+            <ContentConsumer>
+              {context => {
+                contentContext = context;
+                if (contentContext.contentSetOnRefresh == 'Curriculum') {
+                  this.getData(true);
+                }
+                return (
+                  <NetworkAwareContent
+                    data={this.state.data}
+                    isApiCall={this.state.isApiCall}
+                    apiFunc={this.getData}>
+                    <View
+                      style={{
+                        width: '100%',
+                        flex: 1,
+                        alignItems: 'flex-start',
+                      }}>
+                      <CustomText
+                        paddingHorizontal={8}
+                        size={16}
+                        font="AvenirLTStd-Heavy"
+                        style={styles.msgTitle}
+                        color={Colors.light}
+                        text={`Class: ${currentContext.userData.section.class.class_number},  Session: ${currentContext.userData.student_info.session}`}
+                      />
+                      <View>
+                        <FlatList
+                          style={{flex: 1}}
+                          data={formatData(this.state.data, numColumns)}
+                          renderItem={this.renderItem}
+                          numColumns={numColumns}
+                        />
 
-                  {/* <FlatList
+                        {/* <FlatList
                     data={this.state.data}
                     renderItem={this.renderItem}
                     numColumns={2}
                   /> */}
-                </View>
-              </View>
-            </NetworkAwareContent>
+                      </View>
+                    </View>
+                  </NetworkAwareContent>
+                );
+              }}
+            </ContentConsumer>
           );
         }}
       </UserInfoConsumer>
@@ -136,12 +152,12 @@ const styles = EStyleSheet.create({
     fontSize: 15,
   },
 
-  emptyView:{
-      padding: 10,
-      paddingBottom: 6,
-      width: "46.4%",
-      margin: 7,
-  }
+  emptyView: {
+    padding: 10,
+    paddingBottom: 6,
+    width: '46.4%',
+    margin: 7,
+  },
 });
 
 export default withNavigation(Syllabus);

@@ -4,6 +4,7 @@ import { Card, ListItem, Button, Icon } from "react-native-elements";
 import CustomText from "AppLevelComponents/UI/CustomText";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { Colors } from "UIProps/Colors";
+import 'Helpers/global'
 import { ContentConsumer } from "../../../AppLevelComponents/Contexts/CxtBoardContent";
 import Icons from "../../../AppLevelComponents/UI/Icons";
 import AnimatedTap from "../../../AppLevelComponents/UI/AnimatedTap";
@@ -38,8 +39,13 @@ class CategoryItem extends Component {
     currentContext.setContentView(name);
   }
 
+
+  setOnRefresh(cat){
+    currentContext.setContentRefresh(cat)
+  }
+
   render() {
-    let { name, icon, isSelected } = this.props;
+    let { name, icon, isSelected, } = this.props;
     isSelected = isSelected == name;
 
     return (
@@ -48,7 +54,7 @@ class CategoryItem extends Component {
           currentContext = context;
 
           return (
-            <AnimatedTap isSelected={isSelected} onPress={() => this.handlePress()}>
+            <AnimatedTap setOnRefresh={()=>this.setOnRefresh(name)} isSelected={isSelected} onPress={() => this.handlePress()}>
               <Card containerStyle={styles.container}>
                 <View style={{ alignItems: "center" }}>
                   <View

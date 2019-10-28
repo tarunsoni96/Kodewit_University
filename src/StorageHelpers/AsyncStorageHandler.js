@@ -10,6 +10,15 @@ const AsyncStorageHandler = {
     }
   },
 
+  push: function(key, val,callback) {
+    try {
+      store.push(key, val).then(val => {callback(val)});
+    } catch (error) {
+      
+      return false;
+    }
+  },
+
   get: function(key, callback) {
     try {
       store.get(key).then(res => {

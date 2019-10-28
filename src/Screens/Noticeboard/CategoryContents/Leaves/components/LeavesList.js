@@ -12,8 +12,10 @@ import {getLeaves} from 'ServiceProviders/ApiCaller';
 import NetworkAwareContent from 'UniversityComponents/NetworkAwareContent';
 import LeavesListItem from './LeavesListItem';
 import HelperMethods from '../../../../../Helpers/Methods';
-let currentContext;
- class LeavesList extends Component {
+import {ContentConsumer} from '../../../../../AppLevelComponents/Contexts/CxtBoardContent';
+
+let contentContext;
+class LeavesList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,11 +28,12 @@ let currentContext;
     this.getData();
   }
 
-  getData = () => {
+  getData = refresh => {
+    contentContext.setContentRefresh('');
+
     this.setState({isApiCall: true});
-    getLeaves()
+    getLeaves(refresh)
       .then(resp => {
-        console.log(resp);
         this.setState({isApiCall: false, data: resp});
       })
       .catch(() => {
@@ -40,36 +43,52 @@ let currentContext;
 
   renderItems = ({item, index}) => {
     return (
-      <LeavesListItem listRefresher={id => this.removeAndRefreshList(id)} item={item} />
-
+      <LeavesListItem
+        listRefresher={id => this.removeAndRefreshList(id)}
+        item={item}
+      />
     );
   };
 
-  removeAndRefreshList(id){
-    let arr = [...this.state.data]
-    let index = arr.findIndex(v => v.id == id)
-    arr.splice(index,1)
-    HelperMethods.animateLayout()
-    this.setState({data:arr})
+  removeAndRefreshList(id) {
+    let arr = [...this.state.data];
+    let index = arr.findIndex(v => v.id == id);
+    arr.splice(index, 1);
+    HelperMethods.animateLayout();
+    this.setState({data: arr},()=>{
+      setTimeout(() => {
+        
+        this.getData(true)
+      }, 500);
+    })
   }
 
   render() {
     const {content} = this.props;
     return (
-      
-      <NetworkAwareContent
+      <ContentConsumer>
+        {context => {
+          contentContext = context;
+          if (contentContext.contentSetOnRefresh == 'Leaves') {
+            this.getData(true);
+          }
+          return (
+            <NetworkAwareContent
               data={this.state.data}
               isApiCall={this.state.isApiCall}
               apiFunc={this.getData}>
-      <FlatList
-        data={this.state.data}
-        keyExtractor={(item, index) => index + ''}
-        renderItem={this.renderItems}
-        extraData={this.state}
-      />
-        </NetworkAwareContent>
+              <FlatList
+                data={this.state.data}
+                keyExtractor={(item, index) => index + ''}
+                renderItem={this.renderItems}
+                extraData={this.state}
+              />
+            </NetworkAwareContent>
+          );
+        }}
+      </ContentConsumer>
     );
   }
 }
 
-export default withNavigation(LeavesList)
+export default withNavigation(LeavesList);

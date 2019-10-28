@@ -9,7 +9,7 @@ EStyleSheet.build({
 $rem: entireScreenWidth / 380});
 
 global.rem = EStyleSheet.value('$rem')
-
+global.contentSetOnRefresh = ''
 global.deviceWidth =  Dimensions.get('window').width
 global.deviceHeight = Dimensions.get('window').height
 global.fontFamily_regular = "proximaNova_regualr"
