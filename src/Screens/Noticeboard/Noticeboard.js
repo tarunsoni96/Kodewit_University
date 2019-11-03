@@ -78,7 +78,7 @@ class Noticeboard extends Component {
   handleActionTap(name) {
     switch (name) {
       case 'bt_hw':
-        alert('TBD');
+        this.props.navigation.navigate('homeWork');
         break;
 
       case 'bt_photos':

@@ -233,6 +233,21 @@ export const forgotPassSendMail = function(email) {
   };
 
 
+  export const getHomework = function(classId,sectionId,session) {
+    return new Promise(function(resolve, reject) {
+      HelperMethods.makeNetworkCall(`api/academics/homework/${classId}/${sectionId}/${session}`,{},(resp, isError) => {
+          if (!isError) {
+            resolve(resp);
+          } else {
+            reject(true);
+          }
+        },
+        'GET'
+      );
+    });
+  };
+
+
   export const getCircular = function(classId,sectionId,session,refresh,date = 0) {
     return new Promise(function(resolve, reject) {
       setTimeout(() => {
@@ -323,6 +338,8 @@ export const forgotPassSendMail = function(email) {
 
   const getSavedData = function(key,refresh){
     return new Promise((resolve,reject)=> {
+      reject('no')
+      return
       AsyncStorageHandler.get(key,resp => {
         if(resp != null && !refresh){
           resolve(resp)

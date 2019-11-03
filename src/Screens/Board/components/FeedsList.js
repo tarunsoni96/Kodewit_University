@@ -38,7 +38,7 @@ export class FeedsList extends Component {
   };
 
   renderItems = ({item, index}) => {
-    return <FeedsListItem item={item} />;
+    return <FeedsListItem data={this.state.data} item={item} />;
   };
 
   render() {

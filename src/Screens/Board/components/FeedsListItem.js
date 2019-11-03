@@ -18,6 +18,7 @@ import { withNavigation } from 'react-navigation';
 
 let drawItem;
 let currentTitle = '';
+let prevDate = ''
 let currentDate
 let targetDate
 let days
@@ -28,15 +29,26 @@ let days
   }
 
   navigateFeed(item){
+    let imagesArr = []
+    let thumbs = []
     const {title,image_path, thumbnail_image_path, created_at} = item;
-    this.props.navigation.navigate('feedImages',{feedTitle:title,images:[image_path]})
+    const {data} = this.props
+    data.map((item,index) => {
+      if(item.title == title  && item.created_at == created_at){
+        imagesArr.push(item.image_path)
+        thumbs.push(item.thumbnail_image_path)
+      }
+
+    })
+    this.props.navigation.navigate('feedImages',{feedTitle:title,images:imagesArr,thumbs})
   }
 
   render() {
     const {title, thumbnail_image_path, created_at} = this.props.item;
 
-    if (currentTitle != title) {
+    if (currentTitle != title && prevDate != created_at) {
       currentTitle = title;
+      prevDate = created_at
       drawItem = true;
     } else {
       drawItem = false;

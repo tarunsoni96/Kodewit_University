@@ -9,8 +9,6 @@ import {
 import {withNavigation} from 'react-navigation';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import CustomText from 'AppLevelComponents/UI/CustomText';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Entypo from 'react-native-vector-icons/Entypo';
 import Constants from 'Helpers/Constants';
 import Fonts from 'UIProps/Fonts';
 import 'Helpers/global';

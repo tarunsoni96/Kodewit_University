@@ -45,6 +45,7 @@ import ResetPassword from './Screens/ResetPassword/ResetPassword';
 import Board from './Screens/Board/Board';
 import FeedImages from './Screens/FeedImages/FeedImages';
 import ApplyLeave from './Screens/ApplyLeave/ApplyLeave';
+import Homework from './Screens/Homework/Homework';
 
 let transitionSpeed = 650;
 let tabIconSize = 18;
@@ -140,6 +141,25 @@ const sharedPhotos = FluidNavigator(
   },
 );
 
+
+const feedPhotos = createStackNavigator(
+  {
+   FeedImages:FeedImages,
+
+    photographs_FullView_feeds: {
+      screen: PhotoGraphFullView,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    
+  },
+  {
+    // initialRouteName:'resetPassword',
+    headerMode: 'none',
+  },
+);
+
 const sharedPic = FluidNavigator(
   {
     Noticeboard: {
@@ -201,7 +221,8 @@ const NoticeboardStack = createStackNavigator(
       },
     },
 
-    applyLeave:ApplyLeave
+    applyLeave:ApplyLeave,
+    homeWork:Homework
 
   },
   {
@@ -217,7 +238,7 @@ const NoticeboardStack = createStackNavigator(
 const BoardStack = createStackNavigator(
   {
     Board: Board,
-    feedImages:FeedImages
+    feedImages:feedPhotos
   },
   {
     // initialRouteName: "Profile",
